@@ -1,0 +1,21 @@
+[2016-07-01 01:45:27] /mall/s-1035-0-0-0-0-0-1-0-0.html ( app=search&wwi=index ) 
+ERR: Db Error: Unknown column 'have_gift' in 'where clause'
+SELECT COUNT(*) AS nc_count FROM `shopwwi_goods_common` WHERE ( gc_id_3 = '1035' ) AND ( have_gift = '1' ) LIMIT 1  
+[2016-07-01 01:45:33] /mall/s-1035-0-0-0-0-1-1-0-0.html ( app=search&wwi=index ) 
+ERR: Db Error: Unknown column 'have_gift' in 'where clause'
+SELECT COUNT(*) AS nc_count FROM `shopwwi_goods_common` WHERE ( gc_id_3 = '1035' ) AND ( is_own_mall = '1' ) AND ( have_gift = '1' ) LIMIT 1  
+[2016-07-01 18:54:05] /mall/s-478-115-8-0-0-0-0-0-0.html ( app=search&wwi=index ) 
+ERR: Db Error: Unknown column 'goods_id' in 'where clause'
+SELECT COUNT(*) AS nc_count FROM `shopwwi_goods_common` WHERE ( gc_id_3 = '478' ) AND ( brand_id = '115' ) AND ( goods_id IN ('100093','100094','100097','100098','100099','100100','100101','100102','100105','100109','100110','100111','100115','100116','100117','100124','100126','100128','100129','100132','100135','100140','100149','100150','100151','100152') ) LIMIT 1  
+[2016-07-01 18:54:09] /mall/s-478-115-8_13-0-0-0-0-0-0.html ( app=search&wwi=index ) 
+ERR: Db Error: Unknown column 'goods_id' in 'where clause'
+SELECT COUNT(*) AS nc_count FROM `shopwwi_goods_common` WHERE ( gc_id_3 = '478' ) AND ( brand_id = '115' ) AND ( goods_id IN ('100098','100099','100100','100101','100105','100115','100116','100117','100124','100129','100140') ) LIMIT 1  
+[2016-07-01 18:54:14] /mall/s-478-115-8_13_4-0-0-0-0-0-0.html ( app=search&wwi=index ) 
+ERR: Db Error: Unknown column 'goods_id' in 'where clause'
+SELECT COUNT(*) AS nc_count FROM `shopwwi_goods_common` WHERE ( gc_id_3 = '478' ) AND ( brand_id = '115' ) AND ( goods_id IN ('100116','100117','100129') ) LIMIT 1  
+[2016-07-01 18:54:39] /mall/s-478-115-8_13-0-0-0-0-0-0.html ( app=search&wwi=index ) 
+ERR: Db Error: Unknown column 'goods_id' in 'where clause'
+SELECT COUNT(*) AS nc_count FROM `shopwwi_goods_common` WHERE ( gc_id_3 = '478' ) AND ( brand_id = '115' ) AND ( goods_id IN ('100098','100099','100100','100101','100105','100115','100116','100117','100124','100129','100140') ) LIMIT 1  
+[2016-07-01 18:54:42] /mall/s-478-115-8-0-0-0-0-0-0.html ( app=search&wwi=index ) 
+ERR: Db Error: Unknown column 'goods_id' in 'where clause'
+SELECT COUNT(*) AS nc_count FROM `shopwwi_goods_common` WHERE ( gc_id_3 = '478' ) AND ( brand_id = '115' ) AND ( goods_id IN ('100093','100094','100097','100098','100099','100100','100101','100102','100105','100109','100110','100111','100115','100116','100117','100124','100126','100128','100129','100132','100135','100140','100149','100150','100151','100152') ) LIMIT 1  

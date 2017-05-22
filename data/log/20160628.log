@@ -1,0 +1,47 @@
+[2016-06-28 12:25:11] /mall/index.php?app=store_promotion_xianshi&wwi=xianshi_edit_save&inajax=1 ( app=store_promotion_xianshi&wwi=xianshi_edit_save ) 
+ERR: Db Error: Unknown column 'xianshi_image' in 'field list'
+UPDATE `shopwwi_p_xianshi_goods` SET xianshi_name='苏泊尔炊具专场',xianshi_title='品牌618',xianshi_explain='苏泊尔炊具专场',xianshi_image='1_05204318879905618.jpg',xianshi_image1='1_05204318920536951.jpg',xianshi_image2='1_05204318984734226.jpg',class_id='5',xianshi_intro='<div style=\"text-align:center;\">
+	<img src=\"http://s5.shopwwi.com/data/upload/mall/store/goods/1/1_05196555440964889_1280.jpg\" alt=\"image\" /><span style=\"line-height:1.5;\"></span> 
+</div>',lower_limit='1' WHERE ( xianshi_id = '3' )
+[2016-06-28 13:28:48] /tfx/index.php?app=goods ( app=goods&wwi=index ) 
+ERR: Db Error: Unknown column 'tfx_sort' in 'order clause'
+SELECT micro_goods.*,member.member_name,member.member_avatar FROM `shopwwi_micro_goods` AS `micro_goods` LEFT JOIN `shopwwi_member` AS `member` ON micro_goods.commend_member_id = member.member_id ORDER BY tfx_sort asc,commend_time desc LIMIT 0,35  
+[2016-06-28 14:09:58] /mall/s-205-0-0-0-0-0-1-0-0.html ( app=search&wwi=index ) 
+ERR: Db Error: Unknown column 'have_gift' in 'where clause'
+SELECT COUNT(*) AS nc_count FROM `shopwwi_goods_common` WHERE ( gc_id_2 = '205' ) AND ( have_gift = '1' ) LIMIT 1  
+[2016-06-28 14:12:08] /mall/s-205-0-0-0-0-0-1-5-0.html ( app=search&wwi=index ) 
+ERR: Db Error: Unknown column 'have_gift' in 'where clause'
+SELECT COUNT(*) AS nc_count FROM `shopwwi_goods_common` WHERE ( gc_id_2 = '205' ) AND ( areaid_1 = '5' ) AND ( have_gift = '1' ) LIMIT 1  
+[2016-06-28 14:20:26] /mall/s-205-0-0-3-2-0-1-5-0.html ( app=search&wwi=index ) 
+ERR: Db Error: Unknown column 'have_gift' in 'where clause'
+SELECT COUNT(*) AS nc_count FROM `shopwwi_goods_common` WHERE ( gc_id_2 = '205' ) AND ( areaid_1 = '5' ) AND ( have_gift = '1' ) LIMIT 1  
+[2016-06-28 14:27:44] /mall/s-205-0-0-3-2-0-1-9-0.html ( app=search&wwi=index ) 
+ERR: Db Error: Unknown column 'have_gift' in 'where clause'
+SELECT COUNT(*) AS nc_count FROM `shopwwi_goods_common` WHERE ( gc_id_2 = '205' ) AND ( areaid_1 = '9' ) AND ( have_gift = '1' ) LIMIT 1  
+[2016-06-28 14:29:33] /mall/s-205-0-0-3-2-0-1-4-0.html ( app=search&wwi=index ) 
+ERR: Db Error: Unknown column 'have_gift' in 'where clause'
+SELECT COUNT(*) AS nc_count FROM `shopwwi_goods_common` WHERE ( gc_id_2 = '205' ) AND ( areaid_1 = '4' ) AND ( have_gift = '1' ) LIMIT 1  
+[2016-06-28 14:32:14] /mall/s-205-0-0-3-2-1-1-9-0.html ( app=search&wwi=index ) 
+ERR: Db Error: Unknown column 'have_gift' in 'where clause'
+SELECT COUNT(*) AS nc_count FROM `shopwwi_goods_common` WHERE ( gc_id_2 = '205' ) AND ( areaid_1 = '9' ) AND ( is_own_mall = '1' ) AND ( have_gift = '1' ) LIMIT 1  
+[2016-06-28 14:34:52] /mall/s-205-0-0-3-1-0-1-4-0.html ( app=search&wwi=index ) 
+ERR: Db Error: Unknown column 'have_gift' in 'where clause'
+SELECT COUNT(*) AS nc_count FROM `shopwwi_goods_common` WHERE ( gc_id_2 = '205' ) AND ( areaid_1 = '4' ) AND ( have_gift = '1' ) LIMIT 1  
+[2016-06-28 14:38:37] /mall/s-205-0-0-3-1-0-1-2-0.html ( app=search&wwi=index ) 
+ERR: Db Error: Unknown column 'have_gift' in 'where clause'
+SELECT COUNT(*) AS nc_count FROM `shopwwi_goods_common` WHERE ( gc_id_2 = '205' ) AND ( areaid_1 = '2' ) AND ( have_gift = '1' ) LIMIT 1  
+[2016-06-28 14:50:29] /tfx/index.php?app=goods ( app=goods&wwi=index ) 
+ERR: Db Error: Unknown column 'tfx_sort' in 'order clause'
+SELECT micro_goods.*,member.member_name,member.member_avatar FROM `shopwwi_micro_goods` AS `micro_goods` LEFT JOIN `shopwwi_member` AS `member` ON micro_goods.commend_member_id = member.member_id ORDER BY tfx_sort asc,commend_time desc LIMIT 0,35  
+[2016-06-28 15:08:54] /mall/s-200-0-0-0-0-0-1-4-0.html ( app=search&wwi=index ) 
+ERR: Db Error: Unknown column 'have_gift' in 'where clause'
+SELECT COUNT(*) AS nc_count FROM `shopwwi_goods_common` WHERE ( gc_id_2 = '200' ) AND ( areaid_1 = '4' ) AND ( have_gift = '1' ) LIMIT 1  
+[2016-06-28 15:12:43] /mall/s-200-0-0-3-2-0-1-4-0.html ( app=search&wwi=index ) 
+ERR: Db Error: Unknown column 'have_gift' in 'where clause'
+SELECT COUNT(*) AS nc_count FROM `shopwwi_goods_common` WHERE ( gc_id_2 = '200' ) AND ( areaid_1 = '4' ) AND ( have_gift = '1' ) LIMIT 1  
+[2016-06-28 15:18:30] /mall/s-200-0-0-3-2-0-1-1-0.html ( app=search&wwi=index ) 
+ERR: Db Error: Unknown column 'have_gift' in 'where clause'
+SELECT COUNT(*) AS nc_count FROM `shopwwi_goods_common` WHERE ( gc_id_2 = '200' ) AND ( areaid_1 = '1' ) AND ( have_gift = '1' ) LIMIT 1  
+[2016-06-28 15:20:17] /mall/s-200-0-0-3-2-0-1-5-0.html ( app=search&wwi=index ) 
+ERR: Db Error: Unknown column 'have_gift' in 'where clause'
+SELECT COUNT(*) AS nc_count FROM `shopwwi_goods_common` WHERE ( gc_id_2 = '200' ) AND ( areaid_1 = '5' ) AND ( have_gift = '1' ) LIMIT 1  

@@ -1,0 +1,1 @@
+<?php defined('ByShopWWI') or exit('Access Invalid!');?><style type="text/css">.wwi-s-bdc-layout {display: none;}</style>

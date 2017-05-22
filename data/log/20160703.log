@@ -1,0 +1,120 @@
+[2016-07-03 08:22:32] /mall/index.php?app=pointvoucher&wwi=voucherexchange_save&inajax=1 ( app=pointvoucher&wwi=voucherexchange_save ) 
+ERR: Db Error: Unknown column 'voucher_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_voucher` (voucher_code,voucher_t_id,voucher_title,voucher_desc,voucher_start_date,voucher_end_date,voucher_price,voucher_limit,voucher_store_id,voucher_state,voucher_adtive_date,voucher_owner_id,voucher_owner_name) VALUES ('489000520849352040','1','迎圣诞大派送50','迎圣诞大派送50','1467505352','1512576000','50','100.00','1','1','1467505352','1040','wansyb1')
+[2016-07-03 08:22:44] /mall/index.php?app=pointvoucher&wwi=voucherexchange_save&inajax=1 ( app=pointvoucher&wwi=voucherexchange_save ) 
+ERR: Db Error: Unknown column 'voucher_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_voucher` (voucher_code,voucher_t_id,voucher_title,voucher_desc,voucher_start_date,voucher_end_date,voucher_price,voucher_limit,voucher_store_id,voucher_state,voucher_adtive_date,voucher_owner_id,voucher_owner_name) VALUES ('710840520849364040','1','迎圣诞大派送50','迎圣诞大派送50','1467505364','1512576000','50','100.00','1','1','1467505364','1040','wansyb1')
+[2016-07-03 08:22:49] /mall/index.php?app=pointvoucher&wwi=voucherexchange_save&inajax=1 ( app=pointvoucher&wwi=voucherexchange_save ) 
+ERR: Db Error: Unknown column 'voucher_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_voucher` (voucher_code,voucher_t_id,voucher_title,voucher_desc,voucher_start_date,voucher_end_date,voucher_price,voucher_limit,voucher_store_id,voucher_state,voucher_adtive_date,voucher_owner_id,voucher_owner_name) VALUES ('439820520849369040','1','迎圣诞大派送50','迎圣诞大派送50','1467505369','1512576000','50','100.00','1','1','1467505369','1040','wansyb1')
+[2016-07-03 08:23:38] /mall/index.php?app=pointvoucher&wwi=voucherexchange_save&inajax=1 ( app=pointvoucher&wwi=voucherexchange_save ) 
+ERR: Db Error: Unknown column 'voucher_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_voucher` (voucher_code,voucher_t_id,voucher_title,voucher_desc,voucher_start_date,voucher_end_date,voucher_price,voucher_limit,voucher_store_id,voucher_state,voucher_adtive_date,voucher_owner_id,voucher_owner_name) VALUES ('399420520849418040','1','迎圣诞大派送50','迎圣诞大派送50','1467505418','1512576000','50','100.00','1','1','1467505418','1040','wansyb1')
+[2016-07-03 08:25:44] /mall/index.php?app=pointvoucher&wwi=voucherexchange_save&inajax=1 ( app=pointvoucher&wwi=voucherexchange_save ) 
+ERR: Db Error: Unknown column 'voucher_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_voucher` (voucher_code,voucher_t_id,voucher_title,voucher_desc,voucher_start_date,voucher_end_date,voucher_price,voucher_limit,voucher_store_id,voucher_state,voucher_adtive_date,voucher_owner_id,voucher_owner_name) VALUES ('116190520849544040','1','迎圣诞大派送50','迎圣诞大派送50','1467505544','1512576000','50','100.00','1','1','1467505544','1040','wansyb1')
+[2016-07-03 08:34:26] /mall/index.php?app=pointvoucher&wwi=voucherexchange_save&inajax=1 ( app=pointvoucher&wwi=voucherexchange_save ) 
+ERR: Db Error: Unknown column 'voucher_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_voucher` (voucher_code,voucher_t_id,voucher_title,voucher_desc,voucher_start_date,voucher_end_date,voucher_price,voucher_limit,voucher_store_id,voucher_state,voucher_adtive_date,voucher_owner_id,voucher_owner_name) VALUES ('462740520850066040','1','迎圣诞大派送50','迎圣诞大派送50','1467506066','1512576000','50','100.00','1','1','1467506066','1040','wansyb1')
+[2016-07-03 08:42:40] /mall/index.php?app=pointredpacket&wwi=rptexchange_save&inajax=1 ( app=pointredpacket&wwi=rptexchange_save ) 
+ERR: Db Error: Unknown column 'rpacket_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_redpacket` (rpacket_code,rpacket_t_id,rpacket_title,rpacket_desc,rpacket_start_date,rpacket_end_date,rpacket_price,rpacket_limit,rpacket_state,rpacket_adtive_date,rpacket_owner_id,rpacket_owner_name,rpacket_customimg) VALUES ('551530520850560040','1','迎新年 大派送50','迎新年 大派送50','1450195200','1481212800','50.00','100.00','1','1467506560','1040','wansyb1','05035888200154140.jpg')
+[2016-07-03 08:42:44] /mall/index.php?app=pointredpacket&wwi=rptexchange_save&inajax=1 ( app=pointredpacket&wwi=rptexchange_save ) 
+ERR: Db Error: Unknown column 'rpacket_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_redpacket` (rpacket_code,rpacket_t_id,rpacket_title,rpacket_desc,rpacket_start_date,rpacket_end_date,rpacket_price,rpacket_limit,rpacket_state,rpacket_adtive_date,rpacket_owner_id,rpacket_owner_name,rpacket_customimg) VALUES ('255610520850564040','1','迎新年 大派送50','迎新年 大派送50','1450195200','1481212800','50.00','100.00','1','1467506564','1040','wansyb1','05035888200154140.jpg')
+[2016-07-03 08:42:52] /mall/index.php?app=pointredpacket&wwi=rptexchange_save&inajax=1 ( app=pointredpacket&wwi=rptexchange_save ) 
+ERR: Db Error: Unknown column 'rpacket_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_redpacket` (rpacket_code,rpacket_t_id,rpacket_title,rpacket_desc,rpacket_start_date,rpacket_end_date,rpacket_price,rpacket_limit,rpacket_state,rpacket_adtive_date,rpacket_owner_id,rpacket_owner_name,rpacket_customimg) VALUES ('901790520850572040','1','迎新年 大派送50','迎新年 大派送50','1450195200','1481212800','50.00','100.00','1','1467506572','1040','wansyb1','05035888200154140.jpg')
+[2016-07-03 08:43:42] /mall/index.php?app=pointredpacket&wwi=rptexchange_save&inajax=1 ( app=pointredpacket&wwi=rptexchange_save ) 
+ERR: Db Error: Unknown column 'rpacket_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_redpacket` (rpacket_code,rpacket_t_id,rpacket_title,rpacket_desc,rpacket_start_date,rpacket_end_date,rpacket_price,rpacket_limit,rpacket_state,rpacket_adtive_date,rpacket_owner_id,rpacket_owner_name,rpacket_customimg) VALUES ('617280520850622040','1','迎新年 大派送50','迎新年 大派送50','1450195200','1481212800','50.00','100.00','1','1467506622','1040','wansyb1','05035888200154140.jpg')
+[2016-07-03 08:43:53] /mall/index.php?app=pointredpacket&wwi=rptexchange_save&inajax=1 ( app=pointredpacket&wwi=rptexchange_save ) 
+ERR: Db Error: Unknown column 'rpacket_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_redpacket` (rpacket_code,rpacket_t_id,rpacket_title,rpacket_desc,rpacket_start_date,rpacket_end_date,rpacket_price,rpacket_limit,rpacket_state,rpacket_adtive_date,rpacket_owner_id,rpacket_owner_name,rpacket_customimg) VALUES ('999900520850633040','1','迎新年 大派送50','迎新年 大派送50','1450195200','1481212800','50.00','100.00','1','1467506633','1040','wansyb1','05035888200154140.jpg')
+[2016-07-03 08:46:29] /mall/index.php?app=pointredpacket&wwi=rptexchange_save&inajax=1 ( app=pointredpacket&wwi=rptexchange_save ) 
+ERR: Db Error: Unknown column 'rpacket_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_redpacket` (rpacket_code,rpacket_t_id,rpacket_title,rpacket_desc,rpacket_start_date,rpacket_end_date,rpacket_price,rpacket_limit,rpacket_state,rpacket_adtive_date,rpacket_owner_id,rpacket_owner_name,rpacket_customimg) VALUES ('329440520850789040','1','迎新年 大派送50','迎新年 大派送50','1450195200','1481212800','50.00','100.00','1','1467506789','1040','wansyb1','05035888200154140.jpg')
+[2016-07-03 08:52:07] /mall/index.php?app=pointredpacket&wwi=rptexchange_save&inajax=1 ( app=pointredpacket&wwi=rptexchange_save ) 
+ERR: Db Error: Unknown column 'rpacket_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_redpacket` (rpacket_code,rpacket_t_id,rpacket_title,rpacket_desc,rpacket_start_date,rpacket_end_date,rpacket_price,rpacket_limit,rpacket_state,rpacket_adtive_date,rpacket_owner_id,rpacket_owner_name,rpacket_customimg) VALUES ('388130520851127040','1','迎新年 大派送50','迎新年 大派送50','1450195200','1481212800','50.00','100.00','1','1467507127','1040','wansyb1','05035888200154140.jpg')
+[2016-07-03 08:52:56] /mall/index.php?app=pointredpacket&wwi=rptexchange_save&inajax=1 ( app=pointredpacket&wwi=rptexchange_save ) 
+ERR: Db Error: Unknown column 'rpacket_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_redpacket` (rpacket_code,rpacket_t_id,rpacket_title,rpacket_desc,rpacket_start_date,rpacket_end_date,rpacket_price,rpacket_limit,rpacket_state,rpacket_adtive_date,rpacket_owner_id,rpacket_owner_name,rpacket_customimg) VALUES ('230140520851176040','1','迎新年 大派送50','迎新年 大派送50','1450195200','1481212800','50.00','100.00','1','1467507176','1040','wansyb1','05035888200154140.jpg')
+[2016-07-03 08:55:44] /mall/index.php?app=pointredpacket&wwi=rptexchange_save&inajax=1 ( app=pointredpacket&wwi=rptexchange_save ) 
+ERR: Db Error: Unknown column 'rpacket_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_redpacket` (rpacket_code,rpacket_t_id,rpacket_title,rpacket_desc,rpacket_start_date,rpacket_end_date,rpacket_price,rpacket_limit,rpacket_state,rpacket_adtive_date,rpacket_owner_id,rpacket_owner_name,rpacket_customimg) VALUES ('592440520851344040','1','迎新年 大派送50','迎新年 大派送50','1450195200','1481212800','50.00','100.00','1','1467507344','1040','wansyb1','05035888200154140.jpg')
+[2016-07-03 09:00:33] /mall/index.php?app=pointvoucher&wwi=voucherexchange_save&inajax=1 ( app=pointvoucher&wwi=voucherexchange_save ) 
+ERR: Db Error: Unknown column 'voucher_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_voucher` (voucher_code,voucher_t_id,voucher_title,voucher_desc,voucher_start_date,voucher_end_date,voucher_price,voucher_limit,voucher_store_id,voucher_state,voucher_adtive_date,voucher_owner_id,voucher_owner_name) VALUES ('233710520851633040','1','迎圣诞大派送50','迎圣诞大派送50','1467507633','1512576000','50','100.00','1','1','1467507633','1040','wansyb1')
+[2016-07-03 09:00:37] /mall/index.php?app=pointredpacket&wwi=rptexchange_save&inajax=1 ( app=pointredpacket&wwi=rptexchange_save ) 
+ERR: Db Error: Unknown column 'rpacket_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_redpacket` (rpacket_code,rpacket_t_id,rpacket_title,rpacket_desc,rpacket_start_date,rpacket_end_date,rpacket_price,rpacket_limit,rpacket_state,rpacket_adtive_date,rpacket_owner_id,rpacket_owner_name,rpacket_customimg) VALUES ('1','1','迎新年 大派送50','迎新年 大派送50','1450195200','1481212800','50.00','100.00','1','1467507637','1040','wansyb1','05035888200154140.jpg')
+[2016-07-03 09:01:03] /mall/index.php?app=pointredpacket&wwi=rptexchange_save&inajax=1 ( app=pointredpacket&wwi=rptexchange_save ) 
+ERR: Db Error: Unknown column 'rpacket_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_redpacket` (rpacket_code,rpacket_t_id,rpacket_title,rpacket_desc,rpacket_start_date,rpacket_end_date,rpacket_price,rpacket_limit,rpacket_state,rpacket_adtive_date,rpacket_owner_id,rpacket_owner_name,rpacket_customimg) VALUES ('1','1','迎新年 大派送50','迎新年 大派送50','1450195200','1481212800','50.00','100.00','1','1467507663','1040','wansyb1','05035888200154140.jpg')
+[2016-07-03 09:01:36] /mall/index.php?app=pointredpacket&wwi=rptexchange_save&inajax=1 ( app=pointredpacket&wwi=rptexchange_save ) 
+ERR: Db Error: Unknown column 'rpacket_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_redpacket` (rpacket_code,rpacket_t_id,rpacket_title,rpacket_desc,rpacket_start_date,rpacket_end_date,rpacket_price,rpacket_limit,rpacket_state,rpacket_adtive_date,rpacket_owner_id,rpacket_owner_name,rpacket_customimg) VALUES ('1','1467507696','1467507696','1467507696','1467507696','1467507696','1467507696','1467507696','1','1467507696','1040','wansyb1','05035888200154140.jpg')
+[2016-07-03 09:01:51] /mall/index.php?app=pointredpacket&wwi=rptexchange_save&inajax=1 ( app=pointredpacket&wwi=rptexchange_save ) 
+ERR: Db Error: Unknown column 'rpacket_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_redpacket` (rpacket_code,rpacket_t_id,rpacket_title,rpacket_desc,rpacket_start_date,rpacket_end_date,rpacket_price,rpacket_limit,rpacket_state,rpacket_adtive_date,rpacket_owner_id,rpacket_owner_name,rpacket_customimg) VALUES ('1','1','1467507711','1467507711','1467507711','1467507711','1467507711','1467507711','1','1467507711','1040','wansyb1','05035888200154140.jpg')
+[2016-07-03 09:02:15] /mall/index.php?app=pointredpacket&wwi=rptexchange_save&inajax=1 ( app=pointredpacket&wwi=rptexchange_save ) 
+ERR: Db Error: Unknown column 'rpacket_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_redpacket` (rpacket_code,rpacket_t_id,rpacket_title,rpacket_desc,rpacket_start_date,rpacket_end_date,rpacket_price,rpacket_limit,rpacket_state,rpacket_adtive_date,rpacket_owner_id,rpacket_owner_name,rpacket_customimg) VALUES ('1','1','1467507735','1467507735','1467507735','1467507735','1467507735','1467507735','1','1467507735','1040','wansyb1','1467507735')
+[2016-07-03 09:03:39] /mall/index.php?app=pointredpacket&wwi=rptexchange_save&inajax=1 ( app=pointredpacket&wwi=rptexchange_save ) 
+ERR: Db Error: Unknown column 'rpacket_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_redpacket` (rpacket_code,rpacket_t_id,rpacket_title,rpacket_desc,rpacket_start_date,rpacket_end_date,rpacket_price,rpacket_limit,rpacket_state,rpacket_adtive_date,rpacket_owner_id,rpacket_owner_name,rpacket_customimg) VALUES ('1','1','1467507819','1467507819','1467507819','1467507819','1467507819','1467507819','1','1467507819','1040','wansyb1','1467507819')
+[2016-07-03 09:04:18] /mall/index.php?app=pointredpacket&wwi=rptexchange_save&inajax=1 ( app=pointredpacket&wwi=rptexchange_save ) 
+ERR: Db Error: Unknown column 'rpacket_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_redpacket` (rpacket_code,rpacket_t_id,rpacket_title,rpacket_desc,rpacket_start_date,rpacket_end_date,rpacket_price,rpacket_limit,rpacket_state,rpacket_adtive_date,rpacket_owner_id,rpacket_owner_name,rpacket_customimg) VALUES ('1','1','1','1','1467507858','1467507858','1','1','1','1467507858','1040','wansyb1','1467507858')
+[2016-07-03 09:05:38] /mall/index.php?app=pointredpacket&wwi=rptexchange_save&inajax=1 ( app=pointredpacket&wwi=rptexchange_save ) 
+ERR: Db Error: Unknown column 'rpacket_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_redpacket` (rpacket_code,rpacket_t_id,rpacket_title,rpacket_desc,rpacket_start_date,rpacket_end_date,rpacket_price,rpacket_limit,rpacket_state,rpacket_adtive_date,rpacket_owner_id,rpacket_owner_name,rpacket_customimg) VALUES ('1','1','1','1','1467507938','1467507938','1','1','1','1467507938','1040','wansyb1','1467507938')
+[2016-07-03 09:07:21] /mall/index.php?app=pointredpacket&wwi=rptexchange_save&inajax=1 ( app=pointredpacket&wwi=rptexchange_save ) 
+ERR: Db Error: Unknown column 'rpacket_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_redpacket` (rpacket_code,rpacket_t_id,rpacket_title,rpacket_desc,rpacket_start_date,rpacket_end_date,rpacket_price,rpacket_limit,rpacket_state,rpacket_adtive_date,rpacket_customimg) VALUES ('381140520852041040','1','迎新年 大派送50','迎新年 大派送50','1450195200','1481212800','50.00','100.00','1','1467508041','05035888200154140.jpg')
+[2016-07-03 09:08:09] /mall/index.php?app=pointredpacket&wwi=rptexchange_save&inajax=1 ( app=pointredpacket&wwi=rptexchange_save ) 
+ERR: Db Error: Unknown column 'rpacket_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_redpacket` (rpacket_code,rpacket_t_id,rpacket_title,rpacket_desc,rpacket_start_date,rpacket_end_date,rpacket_price,rpacket_limit,rpacket_state,rpacket_adtive_date,rpacket_customimg) VALUES ('913430520852089040','1','迎新年 大派送50','迎新年 大派送50','1450195200','1481212800','50.00','100.00','1','1467508089','05035888200154140.jpg')
+[2016-07-03 09:08:31] /mall/index.php?app=pointredpacket&wwi=rptexchange_save&inajax=1 ( app=pointredpacket&wwi=rptexchange_save ) 
+ERR: Db Error: Unknown column 'rpacket_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_redpacket` (rpacket_code,rpacket_t_id,rpacket_title,rpacket_desc,rpacket_start_date,rpacket_end_date,rpacket_price,rpacket_limit,rpacket_state,rpacket_adtive_date,rpacket_customimg) VALUES ('132440520852111040','1','迎新年 大派送50','迎新年 大派送50','1450195200','1481212800','50.00','100.00','1','1467508111','05035888200154140.jpg')
+[2016-07-03 09:08:46] /mall/index.php?app=pointredpacket&wwi=rptexchange_save&inajax=1 ( app=pointredpacket&wwi=rptexchange_save ) 
+ERR: Db Error: Unknown column 'rpacket_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_redpacket` (rpacket_code,rpacket_t_id,rpacket_title,rpacket_desc,rpacket_start_date,rpacket_end_date,rpacket_price,rpacket_limit,rpacket_state,rpacket_adtive_date,rpacket_owner_id,rpacket_owner_name) VALUES ('225980520852126040','1','迎新年 大派送50','迎新年 大派送50','1450195200','1481212800','50.00','100.00','1','1467508126','1040','wansyb1')
+[2016-07-03 09:09:00] /mall/index.php?app=pointredpacket&wwi=rptexchange_save&inajax=1 ( app=pointredpacket&wwi=rptexchange_save ) 
+ERR: Db Error: Unknown column 'rpacket_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_redpacket` (rpacket_code,rpacket_t_id,rpacket_title,rpacket_desc,rpacket_start_date,rpacket_end_date,rpacket_price,rpacket_limit,rpacket_state,rpacket_adtive_date) VALUES ('198420520852140040','1','迎新年 大派送50','迎新年 大派送50','1450195200','1481212800','50.00','100.00','1','1467508140')
+[2016-07-03 09:13:09] /mall/index.php?app=pointredpacket&wwi=rptexchange_save&inajax=1 ( app=pointredpacket&wwi=rptexchange_save ) 
+ERR: Db Error: Unknown column 'rpacket_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_redpacket` (rpacket_code,rpacket_t_id,rpacket_title,rpacket_desc,rpacket_start_date,rpacket_end_date,rpacket_price,rpacket_limit,rpacket_state,rpacket_adtive_date,rpacket_owner_id,rpacket_owner_name,rpacket_customimg) VALUES ('767130520852389040','1','迎新年 大派送50','迎新年 大派送50','1450195200','1481212800','50.00','100.00','1','1467508389','1040','wansyb1','05035888200154140.jpg')
+[2016-07-03 09:13:57] /mall/index.php?app=pointredpacket&wwi=rptexchange_save&inajax=1 ( app=pointredpacket&wwi=rptexchange_save ) 
+ERR: Db Error: Unknown column 'rpacket_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_redpacket` (rpacket_code,rpacket_t_id,rpacket_title,rpacket_desc,rpacket_start_date,rpacket_end_date,rpacket_price,rpacket_limit,rpacket_state,rpacket_adtive_date,rpacket_owner_id,rpacket_owner_name,rpacket_customimg) VALUES ('106460520852437040','1','迎新年 大派送50','迎新年 大派送50','1450195200','1481212800','50.00','100.00','1','1467508437','1040','wansyb1','05035888200154140.jpg')
+[2016-07-03 09:14:28] /mall/index.php?app=pointredpacket&wwi=rptexchange_save&inajax=1 ( app=pointredpacket&wwi=rptexchange_save ) 
+ERR: Db Error: Unknown column 'rpacket_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_redpacket` (rpacket_code,rpacket_t_id,rpacket_title,rpacket_desc,rpacket_start_date,rpacket_end_date,rpacket_price,rpacket_limit,rpacket_state,rpacket_adtive_date,rpacket_owner_id,rpacket_owner_name,rpacket_customimg) VALUES ('469800520852468040','1','迎新年 大派送50','迎新年 大派送50','1450195200','1481212800','50.00','100.00','1','165','1040','wansyb1','05035888200154140.jpg')
+[2016-07-03 09:16:32] /mall/index.php?app=pointvoucher&wwi=voucherexchange_save&inajax=1 ( app=pointvoucher&wwi=voucherexchange_save ) 
+ERR: Db Error: Unknown column 'voucher_adtive_date' in 'field list'
+INSERT  INTO `shopwwi_voucher` (voucher_code,voucher_t_id,voucher_title,voucher_desc,voucher_start_date,voucher_end_date,voucher_price,voucher_limit,voucher_store_id,voucher_state,voucher_adtive_date,voucher_owner_id,voucher_owner_name) VALUES ('923520520852592040','1','迎圣诞大派送50','迎圣诞大派送50','1467508592','1512576000','50','100.00','1','1','1467508592','1040','wansyb1')
+[2016-07-03 12:47:01] /admin/modules/shopwwi/index.php?app=yydb&wwi=yydblist_xml ( app=yydb&wwi=yydblist_xml ) 
+ERR: Db Error: Unknown column 'yydb_t_limit' in 'order clause'
+SELECT * FROM `shopwwi_yydb_template` ORDER BY yydb_t_limit desc LIMIT 0,15  
+[2016-07-03 12:47:02] /admin/modules/shopwwi/index.php?app=yydb&wwi=yydblist_xml ( app=yydb&wwi=yydblist_xml ) 
+ERR: Db Error: Unknown column 'yydb_t_limit' in 'order clause'
+SELECT * FROM `shopwwi_yydb_template` ORDER BY yydb_t_limit LIMIT 0,15  
+[2016-07-03 12:47:06] /admin/modules/shopwwi/index.php?app=yydb&wwi=yydblist_xml ( app=yydb&wwi=yydblist_xml ) 
+ERR: Db Error: Unknown column 'yydb_t_limit' in 'order clause'
+SELECT * FROM `shopwwi_yydb_template` ORDER BY yydb_t_limit LIMIT 0,15  
+[2016-07-03 14:45:56] /admin/modules/shopwwi/index.php?app=yydb&wwi=ydbdel&tid=3 ( app=yydb&wwi=ydbdel ) 
+ERR: Db Error: Unknown column 'yydb_t_isbuild' in 'where clause'
+SELECT * FROM `shopwwi_yydb_template` WHERE ( yydb_t_id = '3' ) AND ( yydb_t_giveout <= '0' ) AND ( yydb_t_isbuild = '0' ) LIMIT 1  
+[2016-07-03 14:46:07] /admin/modules/shopwwi/index.php?app=yydb&wwi=ydbdel&tid=3 ( app=yydb&wwi=ydbdel ) 
+ERR: Db Error: Unknown column 'yydb_t_isbuild' in 'where clause'
+SELECT * FROM `shopwwi_yydb_template` WHERE ( yydb_t_id = '3' ) AND ( yydb_t_giveout <= '0' ) AND ( yydb_t_isbuild = '0' ) LIMIT 1  
+[2016-07-03 14:46:55] /admin/modules/shopwwi/index.php?app=yydb&wwi=ydbdel&tid=2 ( app=yydb&wwi=ydbdel ) 
+ERR: Db Error: Unknown column 'yydb_t_isbuild' in 'where clause'
+SELECT * FROM `shopwwi_yydb_template` WHERE ( yydb_t_id = '2' ) AND ( yydb_t_giveout <= '0' ) AND ( yydb_t_isbuild = '0' ) LIMIT 1  
+[2016-07-03 15:39:20] /admin/modules/shopwwi/index.php?app=yydb_class&wwi=yydb_class_edit&sc_id=2 ( app=yydb_class&wwi=yydb_class_edit ) 
+ERR: Db Error: Unknown column 'sc_bail' in 'field list'
+UPDATE `shopwwi_yydb_class` SET sc_name='服装鞋包1',sc_bail='0',sc_sort='1' WHERE ( sc_id = '2' )

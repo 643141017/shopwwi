@@ -1,0 +1,30 @@
+[2016-07-10 15:02:19] /admin/modules/tfx/index.php?app=store&wwi=store_add_save&store_id=2 ( app=store&wwi=store_add_save ) 
+ERR: Db Error: Unknown column 'mall_store_id' in 'field list'
+INSERT INTO `shopwwi_micro_store` (mall_store_id,tfx_sort,tfx_commend) VALUES ('2','255','0')
+[2016-07-10 15:02:24] /admin/modules/tfx/index.php?app=store&wwi=store_add_save&store_id=1 ( app=store&wwi=store_add_save ) 
+ERR: Db Error: Unknown column 'mall_store_id' in 'field list'
+INSERT INTO `shopwwi_micro_store` (mall_store_id,tfx_sort,tfx_commend) VALUES ('1','255','0')
+[2016-07-10 15:03:54] /admin/modules/tfx/index.php?app=store&wwi=store_add_save&store_id=1 ( app=store&wwi=store_add_save ) 
+ERR: Db Error: Unknown column 'mall_store_id' in 'field list'
+INSERT INTO `shopwwi_micro_store` (mall_store_id,tfx_sort,tfx_commend) VALUES ('1','255','0')
+[2016-07-10 15:06:18] /admin/modules/tfx/index.php?app=store&wwi=store_add_save&store_id=1 ( app=store&wwi=store_add_save ) 
+ERR: Db Error: Unknown column 'mall_store_id' in 'field list'
+INSERT INTO `shopwwi_micro_store` (mall_store_id,tfx_sort,tfx_commend) VALUES ('1','255','0')
+[2016-07-10 15:07:20] /admin/modules/tfx/index.php?app=store&wwi=store_add_save&store_id=2 ( app=store&wwi=store_add_save ) 
+ERR: Db Error: Unknown column 'mall_store_id' in 'field list'
+INSERT INTO `shopwwi_micro_store` (mall_store_id,tfx_sort,tfx_commend) VALUES ('2','255','0')
+[2016-07-10 15:12:14] /admin/modules/tfx/index.php?app=store&wwi=store_drop_save&store_id= ( app=store&wwi=store_drop_save ) 
+ERR: Db Error: Unknown column 'mall_store_id' in 'where clause'
+DELETE  FROM `shopwwi_micro_store` WHERE ( mall_store_id IN('') )
+[2016-07-10 15:12:29] /admin/modules/tfx/index.php?app=store&wwi=store_add_save&store_id=3 ( app=store&wwi=store_add_save ) 
+ERR: Db Error: Unknown column 'mall_store_id' in 'field list'
+INSERT INTO `shopwwi_micro_store` (mall_store_id,tfx_sort,tfx_commend) VALUES ('3','255','0')
+[2016-07-10 15:14:27] /admin/modules/tfx/index.php?app=store&wwi=store_add_save&store_id=1 ( app=store&wwi=store_add_save ) 
+ERR: Db Error: Unknown column 'mall_store_id' in 'field list'
+INSERT INTO `shopwwi_micro_store` (mall_store_id,tfx_sort,tfx_commend) VALUES ('1','255','0')
+[2016-07-10 15:17:52] /admin/modules/tfx/index.php?app=store&wwi=store_add_save&store_id=1 ( app=store&wwi=store_add_save ) 
+ERR: Db Error: Unknown column 'mall_store_id' in 'field list'
+INSERT INTO `shopwwi_micro_store` (mall_store_id,tfx_sort,tfx_commend) VALUES ('1','255','0')
+[2016-07-10 15:17:59] /admin/modules/tfx/index.php?app=store&wwi=store_add_save&store_id=1 ( app=store&wwi=store_add_save ) 
+ERR: Db Error: Unknown column 'mall_store_id' in 'field list'
+INSERT INTO `shopwwi_micro_store` (mall_store_id,tfx_sort,tfx_commend) VALUES ('1','255','0')
