@@ -22,7 +22,8 @@ class store_bind_classModel extends Model{
      *
      */
     public function getStoreBindClassList($condition,$page='',$order='',$field='*', $limit = ''){
-        $result = $this->table('store_bind_class')->field($field)->where($condition)->page($page)->order($order)->limit($limit)->select();
+        $on = 'store_bind_class.store_id=store.store_id';
+        $result = $this->table('store_bind_class,store')->field($field)->join('left')->on($on)->where($condition)->page($page)->order($order)->limit($limit)->select();
         return $result;
     }
 

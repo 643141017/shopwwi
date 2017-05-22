@@ -83,7 +83,9 @@
         'name' => '店铺',
         'child' => 
         array (
-          'store' => '店铺管理',
+          'store' => '商家管理',
+          'servicer_store' => '服务商管理',
+          'supplier_store' => '供应商管理',
           'store_grade' => '店铺等级',
           'store_class' => '店铺分类',
           'domain' => '二级域名',

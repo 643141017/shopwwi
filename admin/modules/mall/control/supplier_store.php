@@ -12,16 +12,16 @@
 
 defined('ByShopWWI') or exit('Access Invalid!');
 
-class storeControl extends SystemControl{
+class supplier_storeControl extends SystemControl{
     const EXPORT_SIZE = 1000;
-    const STORE_TYPE  = 0;//普通商家
+    const STORE_TYPE  = 2;//供应商
 
     private $_links = array(
-        array('url'=>'app=store&wwi=store','text'=>'管理'),
-        array('url'=>'app=store&wwi=store_joinin','text'=>'开店申请'),
-        array('url'=>'app=store&wwi=reopen_list','text'=>'续签申请'),
-        array('url'=>'app=store&wwi=store_bind_class_applay_list','text'=>'经营类目申请'),
-        array('url'=>'app=store&wwi=bill_cycle','text'=>'结算周期设置')
+        array('url'=>'app=supplier_store&wwi=store','text'=>'管理'),
+        array('url'=>'app=supplier_store&wwi=store_joinin','text'=>'开店申请'),
+        array('url'=>'app=supplier_store&wwi=reopen_list','text'=>'续签申请'),
+        array('url'=>'app=supplier_store&wwi=store_bind_class_applay_list','text'=>'经营类目申请'),
+        array('url'=>'app=supplier_store&wwi=bill_cycle','text'=>'结算周期设置')
     );
 
     public function __construct(){
@@ -46,7 +46,7 @@ class storeControl extends SystemControl{
         Tpl::output('top_link',$this->sublink($this->_links,'store'));
 		Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
 
-        Tpl::showpage('store.index');
+        Tpl::showpage('supplier_store.index');
     }
 
     /**
@@ -57,7 +57,7 @@ class storeControl extends SystemControl{
         Tpl::output('top_link',$this->sublink($this->_links,'bill_cycle'));
 		Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
 
-        Tpl::showpage('store.bill_cycle');
+        Tpl::showpage('supplier_store.bill_cycle');
     }
 
     /**
@@ -67,7 +67,7 @@ class storeControl extends SystemControl{
         $model_store = Model('store');
         // 设置页码参数名称
         $condition = array();
-        $condition['store_type'] = self::STORE_TYPE;
+        $condition['store_type']  = self::STORE_TYPE;
         $condition['is_own_mall'] = 0;
         if ($_GET['store_name'] != '') {
             $condition['store_name'] = array('like', '%' . $_GET['store_name'] . '%');
@@ -124,7 +124,7 @@ class storeControl extends SystemControl{
         foreach ($store_list as $value) {
             $param = array();
             $store_state = $this->getStoreState($value);
-            $operation = "<a class='btn green' href='index.php?app=store&wwi=store_joinin_detail&member_id=".$value['member_id']."'><i class='fa fa-list-alt'></i>查看</a><span class='btn'><em><i class='fa fa-cog'></i>" . L('nc_set') . " <i class='arrow'></i></em><ul><li><a href='index.php?app=store&wwi=store_edit&store_id=" . $value['store_id'] . "'>编辑店铺信息</a></li><li><a href='index.php?app=store&wwi=store_bind_class&store_id=" . $value['store_id'] . "'>修改经营类目</a></li>";
+            $operation = "<a class='btn green' href='index.php?app=supplier_store&wwi=store_joinin_detail&member_id=".$value['member_id']."'><i class='fa fa-list-alt'></i>查看</a><span class='btn'><em><i class='fa fa-cog'></i>" . L('nc_set') . " <i class='arrow'></i></em><ul><li><a href='index.php?app=supplier_store&wwi=store_edit&store_id=" . $value['store_id'] . "'>编辑店铺信息</a></li><li><a href='index.php?app=supplier_store&wwi=store_bind_class&store_id=" . $value['store_id'] . "'>修改经营类目</a></li>";
             if (str_cut($store_state, 6) == 'expire'  && cookie('remindRenewal'.$value['store_id']) == null) {
                 $operation .= "<li><a class='expire' href=". urlAdminMall('store', 'remind_renewal', array('store_id'=>$value['store_id'])). ">提醒商家续费</a></li>";
             }
@@ -217,7 +217,7 @@ class storeControl extends SystemControl{
         foreach ($store_list as $value) {
             $param = array();
             $store_state = $this->getStoreState($value);
-            $operation = "<a class='btn blue' href='index.php?app=store&wwi=bill_cycyle_edit&store_id=".$value['store_id']."'><i class='fa fa-pencil-square-o'></i>编辑</a>";
+            $operation = "<a class='btn blue' href='index.php?app=supplier_store&wwi=bill_cycyle_edit&store_id=".$value['store_id']."'><i class='fa fa-pencil-square-o'></i>编辑</a>";
             $operation .= "</ul></span>";
             $param['operation'] = $operation;
             $param['store_id'] = $value['store_id'];
@@ -280,7 +280,7 @@ class storeControl extends SystemControl{
                     $array[$i] = $limit1.' ~ '.$limit2 ;
                 }
                 Tpl::output('list',$array);
-                Tpl::output('murl','index.php?app=store&wwi=index');
+                Tpl::output('murl','index.php?app=supplier_store&wwi=index');
 				Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
                 Tpl::showpage('export.excel');
                 exit();
@@ -431,11 +431,11 @@ class storeControl extends SystemControl{
             if ($result){
                 $url = array(
                 array(
-                'url'=>'index.php?app=store&wwi=store',
+                'url'=>'index.php?app=supplier_store&wwi=store',
                 'msg'=>$lang['back_store_list'],
                 ),
                 array(
-                'url'=>'index.php?app=store&wwi=store_edit&store_id='.intval($_POST['store_id']),
+                'url'=>'index.php?app=supplier_store&wwi=store_edit&store_id='.intval($_POST['store_id']),
                 'msg'=>$lang['countinue_add_store'],
                 ),
                 );
@@ -466,7 +466,7 @@ class storeControl extends SystemControl{
         $joinin_detail = Model('store_joinin')->getOne(array('member_id'=>$store_array['member_id']));
         Tpl::output('joinin_detail', $joinin_detail);
 		Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
-        Tpl::showpage('store.edit');
+        Tpl::showpage('supplier_store.edit');
     }
 
     /**
@@ -482,10 +482,10 @@ class storeControl extends SystemControl{
             $result = $model_store_ext->editStoreExtend(array('bill_cycle'=>intval($_POST['bill_cycle'])), array('store_id' => $_POST['store_id']));
             if ($result){
                 $this->log('设置店铺结算周期['.$_POST['store_name'].']',1);
-                showMessage($lang['nc_common_save_succ'],'index.php?app=store&wwi=bill_cycle');
+                showMessage($lang['nc_common_save_succ'],'index.php?app=supplier_store&wwi=bill_cycle');
             }else {
                 $this->log('设置店铺结算周期['.$_POST['store_name'].']',1);
-                showMessage($lang['nc_common_save_fail'],'index.php?app=store&wwi=bill_cycle');
+                showMessage($lang['nc_common_save_fail'],'index.php?app=supplier_store&wwi=bill_cycle');
             }
         }
 
@@ -501,7 +501,7 @@ class storeControl extends SystemControl{
 
         Tpl::output('store_array',$store_array);
 		Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
-        Tpl::showpage('store.bill_cycle_edit');
+        Tpl::showpage('supplier_store.bill_cycle_edit');
     }
 
     /**
@@ -559,7 +559,7 @@ class storeControl extends SystemControl{
             }
             $result = Model('store_joinin')->editStoreJoinin(array('member_id' => $member_id), $param);
             if ($result) {
-                showMessage(L('nc_common_op_succ'), 'index.php?app=store&wwi=store');
+                showMessage(L('nc_common_op_succ'), 'index.php?app=supplier_store&wwi=store');
             } else {
                 showMessage(L('nc_common_op_fail'));
             }
@@ -611,7 +611,7 @@ class storeControl extends SystemControl{
         Tpl::output('store_bind_class_list', $store_bind_class_list);
 		Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
 
-        Tpl::showpage('store.bind_class');
+        Tpl::showpage('supplier_store.bind_class');
     }
 
     /**
@@ -804,7 +804,7 @@ class storeControl extends SystemControl{
             Model('store')->dropCachedOwnMallIds();
 
             $this->log("新增外驻店铺: {$saveArray['store_name']}");
-            showMessage('操作成功','index.php?app=store&wwi=store');
+            showMessage('操作成功','index.php?app=supplier_store&wwi=store');
             return;
         }
 		Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
@@ -870,7 +870,7 @@ class storeControl extends SystemControl{
         Tpl::output('top_link',$this->sublink($this->_links,'store_joinin'));
 		Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
 
-        Tpl::showpage('store_joinin');
+        Tpl::showpage('supplier_store_joinin');
     }
 
     /**
@@ -907,9 +907,9 @@ class storeControl extends SystemControl{
         foreach ($store_list as $value) {
             $param = array();
             if(in_array(intval($value['joinin_state']), array(STORE_JOIN_STATE_NEW, STORE_JOIN_STATE_PAY))) {
-                $operation = "<a class='btn orange' href=\"index.php?app=store&wwi=store_joinin_detail&member_id=". $value['member_id'] ."\"><i class=\"fa fa-check-tyq\"></i>审核</a>";
+                $operation = "<a class='btn orange' href=\"index.php?app=supplier_store&wwi=store_joinin_detail&member_id=". $value['member_id'] ."\"><i class=\"fa fa-check-tyq\"></i>审核</a>";
             } else {
-                $operation = "<a class='btn green' href=\"index.php?app=store&wwi=store_joinin_detail&member_id=". $value['member_id'] ."\"><i class=\"fa fa-list-alt\"></i>查看</a>";
+                $operation = "<a class='btn green' href=\"index.php?app=supplier_store&wwi=store_joinin_detail&member_id=". $value['member_id'] ."\"><i class=\"fa fa-list-alt\"></i>查看</a>";
             }
             $param['operation'] = $operation;
             $param['member_id'] = $value['member_id'];
@@ -937,7 +937,7 @@ class storeControl extends SystemControl{
     public function store_bind_class_applay_listWwi(){
         Tpl::output('top_link',$this->sublink($this->_links,'store_bind_class_applay_list'));
 		Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
-        Tpl::showpage('store.bind_class_applay_list');
+        Tpl::showpage('supplier_store.bind_class_applay_list');
     }
 
     /**
@@ -946,7 +946,7 @@ class storeControl extends SystemControl{
     public function get_bind_class_applay_xmlWwi() {
         $model_store_bind_class = Model('store_bind_class');
         // 设置页码参数名称
-        $condition = array(); 
+        $condition = array();
         $condition['store_type'] = self::STORE_TYPE;
         $condition['state'] = array('in', array('0', '1'));
         if ($_GET['state'] != '') {
@@ -992,9 +992,9 @@ class storeControl extends SystemControl{
         foreach ($store_bind_class_list as $value) {
             $param = array();
             if($value['state'] == '0') {
-                $operation = "<a class='btn orange' href=\"javascript:if(confirm('确认审核吗？'))window.location = 'index.php?app=store&wwi=store_bind_class_applay_check&bid=".$value['bid']."&store_id=".$value['store_id']."'\"><i class=\"fa fa-check-tyq\"></i>审核</a>";
+                $operation = "<a class='btn orange' href=\"javascript:if(confirm('确认审核吗？'))window.location = 'index.php?app=supplier_store&wwi=store_bind_class_applay_check&bid=".$value['bid']."&store_id=".$value['store_id']."'\"><i class=\"fa fa-check-tyq\"></i>审核</a>";
             } else {
-                $operation = "<a class='btn red' href=\"javascript:if(confirm('".($value['state'] == '1' ? '该类目已经审核通过，删除它可能影响到商家的使用，' : null)."确认删除吗？'))window.location = 'index.php?app=store&wwi=store_bind_class_applay_del&bid=".$value['bid']."&store_id=".$value['store_id']."'\"><i class=\"fa fa-trash-o\"></i>删除</a>";
+                $operation = "<a class='btn red' href=\"javascript:if(confirm('".($value['state'] == '1' ? '该类目已经审核通过，删除它可能影响到商家的使用，' : null)."确认删除吗？'))window.location = 'index.php?app=supplier_store&wwi=store_bind_class_applay_del&bid=".$value['bid']."&store_id=".$value['store_id']."'\"><i class=\"fa fa-trash-o\"></i>删除</a>";
             }
             $param['operation'] = $operation;
             $param['store_id'] = $value['store_id'];
@@ -1070,7 +1070,7 @@ class storeControl extends SystemControl{
     public function reopen_listWwi(){
         Tpl::output('top_link',$this->sublink($this->_links,'reopen_list'));
 		Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
-        Tpl::showpage('store_reopen.list');
+        Tpl::showpage('supplier_store_reopen.list');
     }
 
     /**
@@ -1221,7 +1221,7 @@ class storeControl extends SystemControl{
         Tpl::output('joinin_detail_title', $joinin_detail_title);
         Tpl::output('joinin_detail', $joinin_detail);
 		Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
-        Tpl::showpage('store_joinin.detail');
+        Tpl::showpage('supplier_store_joinin.detail');
     }
 
     /**
@@ -1253,7 +1253,7 @@ class storeControl extends SystemControl{
         $model_store_joinin = Model('store_joinin');
         $model_store_joinin->modify($param, array('member_id'=>$_POST['member_id']));
         if ($param['paying_amount'] > 0) {
-            showMessage('店铺入驻申请审核完成','index.php?app=store&wwi=store_joinin');
+            showMessage('店铺入驻申请审核完成','index.php?app=supplier_store&wwi=store_joinin');
         } else {
             //如果开店支付费用为零，则审核通过后直接开通，无需再上传付款凭证
             $this->store_joinin_verify_open($joinin_detail);
@@ -1340,12 +1340,12 @@ class storeControl extends SystemControl{
                 }
                 $model_store_bind_class = Model('store_bind_class');
                 $model_store_bind_class->addStoreBindClassAll($store_bind_class_array);
-                showMessage('店铺开店成功','index.php?app=store&wwi=store_joinin');
+                showMessage('店铺开店成功','index.php?app=supplier_store&wwi=store_joinin');
             } else {
-                showMessage('店铺开店失败','index.php?app=store&wwi=store_joinin');
+                showMessage('店铺开店失败','index.php?app=supplier_store&wwi=store_joinin');
             }
         } else {
-            showMessage('店铺开店拒绝','index.php?app=store&wwi=store_joinin');
+            showMessage('店铺开店拒绝','index.php?app=supplier_store&wwi=store_joinin');
         }
     }
 
