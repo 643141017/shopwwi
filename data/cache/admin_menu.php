@@ -93,6 +93,8 @@
           'help_store' => '店铺帮助',
           'store_joinin' => '商家入驻',
           'ownmall' => '自营店铺',
+          'servicer_store_grade' => '服务商等级',
+          'supplier_store_grade' => '供应商等级',
         ),
       ),
       3 => 

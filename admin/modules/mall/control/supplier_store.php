@@ -241,6 +241,7 @@ class supplier_storeControl extends SystemControl{
     public function export_csvWwi() {
         $model_store = Model('store');
         $condition = array();
+        $condition['store_type']  = self::STORE_TYPE;
         $limit = false;
         if ($_GET['id'] != '') {
             $id_array = explode(',', $_GET['id']);
@@ -361,7 +362,7 @@ class supplier_storeControl extends SystemControl{
         array_unshift($data, $header);
         $csv = new Csv();
         $export_data = $csv->charset($data,CHARSET,'gbk');
-        $csv->filename = $csv->charset('store_list',CHARSET).$_GET['curpage'] . '-'.date('Y-m-d');
+        $csv->filename = $csv->charset('supplier_store_list',CHARSET).$_GET['curpage'] . '-'.date('Y-m-d');
         $csv->export($data);    
     }
 

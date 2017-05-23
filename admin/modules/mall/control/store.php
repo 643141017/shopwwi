@@ -241,6 +241,7 @@ class storeControl extends SystemControl{
     public function export_csvWwi() {
         $model_store = Model('store');
         $condition = array();
+        $condition['store_type']  = self::STORE_TYPE;
         $limit = false;
         if ($_GET['id'] != '') {
             $id_array = explode(',', $_GET['id']);
