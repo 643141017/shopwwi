@@ -44,7 +44,7 @@ class servicer_storeControl extends SystemControl{
 
         //输出子菜单
         Tpl::output('top_link',$this->sublink($this->_links,'store'));
-		Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
+        Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
 
         Tpl::showpage('servicer_store.index');
     }
@@ -55,7 +55,7 @@ class servicer_storeControl extends SystemControl{
     public function bill_cycleWwi(){
 
         Tpl::output('top_link',$this->sublink($this->_links,'bill_cycle'));
-		Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
+        Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
 
         Tpl::showpage('servicer_store.bill_cycle');
     }
@@ -281,7 +281,7 @@ class servicer_storeControl extends SystemControl{
                 }
                 Tpl::output('list',$array);
                 Tpl::output('murl','index.php?app=servicer_store&wwi=index');
-				Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
+                Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
                 Tpl::showpage('export.excel');
                 exit();
             }
@@ -359,10 +359,10 @@ class servicer_storeControl extends SystemControl{
                 'store_phone' => '商家电话'
         );
         array_unshift($data, $header);
-		$csv = new Csv();
-	    $export_data = $csv->charset($data,CHARSET,'gbk');
-	    $csv->filename = $csv->charset('store_list',CHARSET).$_GET['curpage'] . '-'.date('Y-m-d');
-	    $csv->export($data);	
+        $csv = new Csv();
+        $export_data = $csv->charset($data,CHARSET,'gbk');
+        $csv->filename = $csv->charset('store_list',CHARSET).$_GET['curpage'] . '-'.date('Y-m-d');
+        $csv->export($data);    
     }
 
     /**
@@ -465,7 +465,7 @@ class servicer_storeControl extends SystemControl{
 
         $joinin_detail = Model('store_joinin')->getOne(array('member_id'=>$store_array['member_id']));
         Tpl::output('joinin_detail', $joinin_detail);
-		Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
+        Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
         Tpl::showpage('servicer_store.edit');
     }
 
@@ -500,7 +500,7 @@ class servicer_storeControl extends SystemControl{
         }
 
         Tpl::output('store_array',$store_array);
-		Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
+        Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
         Tpl::showpage('servicer_store.bill_cycle_edit');
     }
 
@@ -609,7 +609,7 @@ class servicer_storeControl extends SystemControl{
             $store_bind_class_list[$i]['class_3_name'] = $goods_class[$store_bind_class_list[$i]['class_3']]['gc_name'];
         }
         Tpl::output('store_bind_class_list', $store_bind_class_list);
-		Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
+        Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
 
         Tpl::showpage('servicer_store.bind_class');
     }
@@ -763,6 +763,7 @@ class servicer_storeControl extends SystemControl{
             $saveArray['store_state'] = 1;
             $saveArray['store_time'] = time();
             $saveArray['is_own_mall'] = 0;
+            $saveArray['store_type'] = self::STORE_TYPE;
 
             $storeId = $storeModel->addStore($saveArray);
 
@@ -773,15 +774,16 @@ class servicer_storeControl extends SystemControl{
                 'seller_group_id' => 0,
                 'is_admin' => 1,
             ));
-			model('store_joinin')->save(array(
+            model('store_joinin')->save(array(
                 'seller_name' => $_POST['seller_name'],
-				'store_name'  => $_POST['store_name'],
-				'member_name' => $memberName,
+                'store_name'  => $_POST['store_name'],
+                'member_name' => $memberName,
                 'member_id' => $memberId,
-				'joinin_state' => 40,
-				'company_province_id' => 0,
-				'sc_bail' => 0,
-				'joinin_year' => 1,
+                'joinin_state' => 40,
+                'company_province_id' => 0,
+                'sc_bail' => 0,
+                'joinin_year' => 1,
+                'store_type' => self::STORE_TYPE,
             ));
 
             // 添加相册默认
@@ -807,11 +809,11 @@ class servicer_storeControl extends SystemControl{
             showMessage('操作成功','index.php?app=servicer_store&wwi=store');
             return;
         }
-		Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
+        Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
 
-        Tpl::showpage('store.add');
+        Tpl::showpage('servicer_store.add');
     }
-	 public function check_seller_nameWwi()
+     public function check_seller_nameWwi()
     {
         echo json_encode($this->checkSellerName($_GET['seller_name'], $_GET['id']));
         exit;
@@ -868,7 +870,7 @@ class servicer_storeControl extends SystemControl{
 
         //输出子菜单
         Tpl::output('top_link',$this->sublink($this->_links,'store_joinin'));
-		Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
+        Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
 
         Tpl::showpage('servicer_store_joinin');
     }
@@ -936,7 +938,7 @@ class servicer_storeControl extends SystemControl{
      */
     public function store_bind_class_applay_listWwi(){
         Tpl::output('top_link',$this->sublink($this->_links,'store_bind_class_applay_list'));
-		Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
+        Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
         Tpl::showpage('servicer_store.bind_class_applay_list');
     }
 
@@ -1069,7 +1071,7 @@ class servicer_storeControl extends SystemControl{
      */
     public function reopen_listWwi(){
         Tpl::output('top_link',$this->sublink($this->_links,'reopen_list'));
-		Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
+        Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
         Tpl::showpage('servicer_store_reopen.list');
     }
 
@@ -1220,7 +1222,7 @@ class servicer_storeControl extends SystemControl{
         }
         Tpl::output('joinin_detail_title', $joinin_detail_title);
         Tpl::output('joinin_detail', $joinin_detail);
-		Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
+        Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
         Tpl::showpage('servicer_store_joinin.detail');
     }
 

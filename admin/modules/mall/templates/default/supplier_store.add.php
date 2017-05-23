@@ -2,9 +2,9 @@
 
 <div class="page">
   <div class="fixed-bar">
-    <div class="item-title"><a class="back" href="index.php?app=store&wwi=list" title="返回列表"><i class="fa fa-arrow-tyq-o-left"></i></a>
+    <div class="item-title"><a class="back" href="index.php?app=servicer_store&wwi=list" title="返回列表"><i class="fa fa-arrow-tyq-o-left"></i></a>
       <div class="subject">
-        <h3>商家店铺 - <?php echo $lang['nc_new'];?>"</h3>
+        <h3>供应商店铺 - <?php echo $lang['nc_new'];?>"</h3>
         <h5>商城自营店铺相关设置与管理</h5>
       </div>
     </div>
