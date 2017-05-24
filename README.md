@@ -18,3 +18,10 @@ CREATE TABLE `si_supplier_store_grade` (
 #店铺供应商等级或者服务等级
 ALTER TABLE `si_store`
 ADD COLUMN `store_type_grade`  int(11) NOT NULL DEFAULT 0 COMMENT '对应服务商等级或供应商等级，具体对应取决该店铺类型' AFTER `store_type`;
+
+#订单标识
+ALTER TABLE `si_orders`
+ADD COLUMN `order_identify`  tinyint(4) NULL DEFAULT 0 COMMENT '订单标识0零售订单1供销订单（二次开发）' AFTER `trade_no`;
+
+
+
