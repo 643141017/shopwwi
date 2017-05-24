@@ -141,15 +141,15 @@ $(function(){
     $('#query_end_date').datepicker();
     // 高级搜索提交
     $('#ncsubmit').click(function(){
-        $("#flexigrid").flexOptions({url: 'index.php?app=order&wwi=get_xml&'+$("#formSearch").serialize(),query:'',qtype:''}).flexReload();
+        $("#flexigrid").flexOptions({url: 'index.php?app=order&wwi=get_supplier_xml&'+$("#formSearch").serialize(),query:'',qtype:''}).flexReload();
     });
     // 高级搜索重置
     $('#ncreset').click(function(){
-        $("#flexigrid").flexOptions({url: 'index.php?app=order&wwi=get_xml'}).flexReload();
+        $("#flexigrid").flexOptions({url: 'index.php?app=order&wwi=get_supplier_xml'}).flexReload();
         $("#formSearch")[0].reset();
     });
     $("#flexigrid").flexigrid({
-        url: 'index.php?app=order&wwi=get_xml',
+        url: 'index.php?app=order&wwi=get_supplier_xml',
         colModel : [
             {display: '操作', name : 'operation', width : 150, sortable : false, align: 'center', className: 'handle'},
             {display: '订单编号', name : 'order_sn', width : 150, sortable : false, align: 'left'}, 
@@ -198,7 +198,7 @@ function fg_operate(name, grid) {
 }
 function fg_csv(ids) {
     id = ids.join(',');
-    window.location.href = $("#flexigrid").flexSimpleSearchQueryString()+'&wwi=export_step1&order_identify=0&order_id=' + id;
+    window.location.href = $("#flexigrid").flexSimpleSearchQueryString()+'&wwi=export_step1&order_identify=1&order_id=' + id;
 }
 function fg_cancel(id) {
 	if (typeof id == 'number') {

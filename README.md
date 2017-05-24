@@ -24,4 +24,7 @@ ALTER TABLE `si_orders`
 ADD COLUMN `order_identify`  tinyint(4) NULL DEFAULT 0 COMMENT '订单标识0零售订单1供销订单（二次开发）' AFTER `trade_no`;
 
 
+ALTER TABLE `si_store`
+ADD COLUMN `store_type`  int(11) NOT NULL DEFAULT 0 COMMENT '店铺类型：0商家,1服务商,2供应商（二次开发）' AFTER `is_distribution`;
+
 

@@ -19,6 +19,13 @@ class orderControl extends SystemControl{
      * @var int
      */
     const EXPORT_SIZE = 1000;
+    const ORDER_IDENTITY_RETAIL=0;
+    const ORDER_IDENTITY_SUPPLY=1;
+
+    private $_links = array(
+        array('url'=>'app=order&wwi=index','text'=>'零售订单'),
+        array('url'=>'app=order&wwi=supplier_order','text'=>'供销订单')
+    );
 
     public function __construct(){
         parent::__construct();
@@ -33,14 +40,38 @@ class orderControl extends SystemControl{
             'payment_name' => '微信支付'
         );
         Tpl::output('payment_list',$payment_list);
+        Tpl::output('top_link',$this->sublink($this->_links,'index'));
 		Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
         Tpl::showpage('order.index');
     }
 
+    public function supplier_orderWwi(){
+        //显示支付接口列表(搜索)
+        $payment_list = Model('payment')->getPaymentOpenList();
+        $payment_list['wxpay'] = array(
+            'payment_code' => 'wxpay',
+            'payment_name' => '微信支付'
+        );
+        Tpl::output('payment_list',$payment_list);
+        Tpl::output('top_link',$this->sublink($this->_links,'supplier_order'));
+        Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
+        Tpl::showpage('supplier_order.index');
+    }
+
     public function get_xmlWwi(){
+        $this->load_xml(self::ORDER_IDENTITY_RETAIL);
+    }
+
+    public function get_supplier_xmlWwi(){
+        $this->load_xml(self::ORDER_IDENTITY_SUPPLY);
+    }
+
+
+    public function load_xml($order_identify){
+
         $model_order = Model('order');
         $condition  = array();
-
+        $condition['order_identify'] = $order_identify;
         $this->_get_condition($condition);
 
         $sort_fields = array('buyer_name','store_name','order_id','payment_code','order_state','order_amount','order_from','pay_sn','rcb_amount','pd_amount','payment_time','finnshed_time','evaluation_state','refund_amount','buyer_id','store_id');
@@ -300,10 +331,12 @@ class orderControl extends SystemControl{
      *
      */
     public function export_step1Wwi(){
+        $order_identify = intval($_GET['order_identify']);
         $lang   = Language::getLangContent();
 
         $model_order = Model('order');
         $condition  = array();
+        $condition['order_identify'] = $order_identify;
         if (preg_match('/^[\d,]+$/', $_GET['order_id'])) {
             $_GET['order_id'] = explode(',',trim($_GET['order_id'],','));
             $condition['order_id'] = array('in',$_GET['order_id']);

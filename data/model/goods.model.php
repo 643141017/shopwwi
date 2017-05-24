@@ -226,7 +226,8 @@ class goodsModel extends Model{
      */
     public function getGoodsCommonList($condition, $field = '*', $page = 10, $order = 'goods_commonid desc', $limit = '') {
         $condition = $this->_getRecursiveClass($condition);
-        return $this->table('goods_common')->field($field)->where($condition)->order($order)->limit($limit)->page($page)->select();
+        return $this->table('goods_common,store')->field($field)->join('inner')->on('goods_common.store_id = store.store_id')->where($condition)->order($order)->limit($limit)->page($page)->select();
+        // return $this->table('goods_common')->field($field)->where($condition)->order($order)->limit($limit)->page($page)->select();
     }
 
     /**

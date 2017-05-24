@@ -17,10 +17,13 @@ class goodsControl extends SystemControl{
     private $links = array(
         array('url'=>'app=goods&wwi=goods','text'=>'所有商品'),
         array('url'=>'app=goods&wwi=lockup_list','text'=>'违规下架'),
-        array('url'=>'app=goods&wwi=waitverify_list','text'=>'等待审核'),
+        array('url'=>'app=goods&wwi=waitverify_list','text'=>'商家商品审核'),
+        array('url'=>'app=goods&wwi=waitverify_supplier_list','text'=>'直销商品审核'),
         array('url'=>'app=goods&wwi=goods_set','text'=>'商品设置'),
     );
     const EXPORT_SIZE = 5000;
+    const STORE_TYPE_SUPPLIER=2;
+
     public function __construct() {
         parent::__construct ();
         Language::read('goods');
@@ -60,6 +63,17 @@ class goodsControl extends SystemControl{
         Tpl::output('top_link',$this->sublink($this->links,'waitverify_list'));
 						//网 店 运 维mall wwi.com
 		Tpl::setDirquna('mall');
+        Tpl::showpage('goods.index');
+    }
+
+    /**
+     * 等待审核商品管理
+     */
+    public function waitverify_supplier_listWwi() {
+        Tpl::output('type', 'waitverify_supplier');
+        Tpl::output('top_link',$this->sublink($this->links,'waitverify_supplier_list'));
+                        //网 店 运 维mall wwi.com
+        Tpl::setDirquna('mall');
         Tpl::showpage('goods.index');
     }
 
@@ -109,8 +123,14 @@ class goodsControl extends SystemControl{
             case 'lockup':
                 $goods_list = $model_goods->getGoodsCommonLockUpList($condition, '*', $page, $order);
                 break;
-                // 等待审核
+                // 商家商品审核
             case 'waitverify':
+                $condition['store_type']  = array('neq', self::STORE_TYPE_SUPPLIER);//非供应商
+                $goods_list = $model_goods->getGoodsCommonWaitVerifyList($condition, '*', $page, $order);
+                break;
+                // 直销商品审核
+            case 'waitverify_supplier':
+                $condition['store_type']  = array('eq', self::STORE_TYPE_SUPPLIER);//供应商
                 $goods_list = $model_goods->getGoodsCommonWaitVerifyList($condition, '*', $page, $order);
                 break;
                 // 全部商品
@@ -416,9 +436,15 @@ class goodsControl extends SystemControl{
             case 'lockup':
                 $goods_list = $model_goods->getGoodsCommonLockUpList($condition, '*', null, $order, $limit);
                 break;
-                // 等待审核
+                // 商家商品审核
             case 'waitverify':
+                $condition['store_type']  = array('neq', self::STORE_TYPE_SUPPLIER);//非供应商
                 $goods_list = $model_goods->getGoodsCommonWaitVerifyList($condition, '*', null, $order, $limit);
+                break;
+                // 直销商品审核
+            case 'waitverify_supplier':
+                $condition['store_type']  = array('eq', self::STORE_TYPE_SUPPLIER);//供应商
+                $goods_list = $model_goods->getGoodsCommonWaitVerifyList($condition, '*', $page, $order);
                 break;
                 // 全部商品
             default:
