@@ -8,11 +8,14 @@
       <dl>
         <dt><?php echo $lang['welcome_to_site'].$output['setting_config']['site_name']; ?></dt>
         <dd> 若您还没有填写入驻申请资料<br/>
-          请点击“<a href="<?php echo urlMall('store_joinin', 'step0');?>" target="_blank">我要入驻</a>”进行入驻资料填写</dd>
+          请点击“<a href="javascript:;" onclick="storeType();">我要入驻</a>”进行入驻资料填写</dd>
         <dd>若您的店铺还未开通<br/>
           请通过“<a href="<?php echo urlMall('store_joinin', 'index');?>" target="_blank">查看入驻进度</a>”了解店铺开通的最新状况 </dd>
       </dl>
-      <div class="bottom"><a href="<?php echo urlMall('store_joinin', 'step0');?>" target="_blank">我要入驻</a><a href="<?php echo urlMall('store_joinin', 'index');?>" target="_blank">查看入驻进度</a></div>
+      <div class="bottom">
+        <a href="javascript:;" onclick="storeType();">我要入驻</a>
+        <a href="<?php echo urlMall('store_joinin', 'index');?>" target="_blank">查看入驻进度</a>
+      </div>
     </div>
      <?php }else { ?>
     <div class="user-login">
@@ -272,8 +275,32 @@ $(document).ready(function(){
     	}
     }));
 });
+
 </script>
 <?php } ?>
+
+<script type="text/javascript" src="<?php echo MALL_RESOURCE_SITE_URL;?>/layer/layer.js" charset="utf-8"></script>
+<script type="text/javascript">
+function storeType(){
+  layer.open({
+    content: '请选择店铺类型'
+    ,btn: ['零售商申请', '供应商申请', '服务商申请']
+    ,yes: function(index, layero){
+      window.location.href="<?php echo urlMall('store_joinin', 'store_type0');?>";;
+    }
+    ,btn2: function(index, layero){
+      window.location.href="<?php echo urlMall('store_joinin', 'store_type1');?>";;
+    }
+    ,btn3: function(index, layero){
+      window.location.href="<?php echo urlMall('store_joinin', 'store_type2');?>";;
+    }
+    ,cancel: function(){ 
+      //右上角关闭回调
+      //return false 开启该代码可禁止点击该按钮关闭
+    }
+  }); 
+}
+</script>
 <script type="text/javascript" src="<?php echo MALL_SITE_URL;?>/img/index_introduce.js" charset="utf-8"></script>
 
 

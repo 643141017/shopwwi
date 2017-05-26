@@ -81,7 +81,23 @@ class store_joininControl extends BaseHomeControl {
         }
     }
 
+    public function store_type0Wwi(){
+        Tpl::output('store_type', '0');
+        $this->step0Wwi();
+    }
+
+    public function store_type1Wwi(){
+        Tpl::output('store_type', '1');
+        $this->step0Wwi();
+    }
+
+    public function store_type2Wwi(){
+        Tpl::output('store_type', '2');
+        $this->step0Wwi();
+    }
+
     public function indexWwi() {
+        Tpl::output('store_type', 'no');//尚无选择店铺类型
         $this->step0Wwi();
     }
 
