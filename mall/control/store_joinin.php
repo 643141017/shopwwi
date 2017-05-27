@@ -81,17 +81,24 @@ class store_joininControl extends BaseHomeControl {
         }
     }
 
-    public function store_type0Wwi(){
+    //零售商申请步骤0
+    public function retail_step0Wwi(){
+        Tpl::output('personal_step1', 'index.php?app=store_joinincc&wwi=retail_step1');//个人入驻
+        Tpl::output('company_step1', 'index.php?app=store_joinin&wwi=retail_step1');//公司入驻
         Tpl::output('store_type', '0');
         $this->step0Wwi();
     }
 
-    public function store_type1Wwi(){
+    //服务商申请步骤0
+    public function servicer_step0Wwi(){
+        Tpl::output('company_step1', 'index.php?app=store_joinin&wwi=servicer_step1');//公司入驻
         Tpl::output('store_type', '1');
         $this->step0Wwi();
     }
 
-    public function store_type2Wwi(){
+    //供应商申请步骤0
+    public function supplier_step0Wwi(){
+        Tpl::output('company_step1', 'index.php?app=store_joinin&wwi=supplier_step1');//公司入驻
         Tpl::output('store_type', '2');
         $this->step0Wwi();
     }
@@ -111,6 +118,25 @@ class store_joininControl extends BaseHomeControl {
         exit;
     }
 
+    //零售商申请步骤1
+    public function retail_step1Wwi(){
+        Tpl::output('store_type', '0');
+        $this->step1Wwi();
+    }
+
+    //服务商申请步骤1
+    public function servicer_step1Wwi(){
+        Tpl::output('store_type', '1');
+        $this->step1Wwi();
+    }
+
+    //供应商申请步骤1
+    public function supplier_step1Wwi(){
+        Tpl::output('store_type', '2');
+        $this->step1Wwi();
+    }
+
+    
     public function step1Wwi() {
         Tpl::output('step', '1');
         Tpl::output('sub_step', 'step1');
@@ -141,6 +167,9 @@ class store_joininControl extends BaseHomeControl {
             $param['organization_code'] = $_POST['organization_code'];
             $param['organization_code_electronic'] = $_POST['organization_code_electronic1'];
             $param['general_taxpayer'] = $_POST['general_taxpayer1'];
+
+            $param['store_type'] = intval($_POST['store_type']);//二次开发扩展店铺类型
+
 
             $this->step2_save_valid($param);
 

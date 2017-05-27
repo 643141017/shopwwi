@@ -15,9 +15,9 @@
       <a  href="javascript:;" class="btn" onclick="storeType();">选择店铺类型</a>
     <?php } else{?>
       <?php if($output['store_type']=='0'){?>
-      <a id="btn_apply_agreecbc_next" href="javascript:;" class="btn">个人入驻</a>
+      <a id="btn_apply_agreecbc_next" href="javascript:;" class="btn" next-url="<?php echo $output['personal_step1']?>">个人入驻</a>
       <?php }?>
-      <a style=" margin-left:15px;" id="btn_apply_agreement_next" href="javascript:;" class="btn">企业入驻</a>
+      <a style=" margin-left:15px;" id="btn_apply_agreement_next" href="javascript:;" class="btn" next-url="<?php echo $output['company_step1']?>">企业入驻</a>
     <?php }?>
   </div>
 
@@ -29,13 +29,13 @@ function storeType(){
     content: '请选择店铺类型'
     ,btn: ['零售商申请', '供应商申请', '服务商申请']
     ,yes: function(index, layero){
-      window.location.href="<?php echo urlMall('store_joinin', 'store_type0');?>";;
+      window.location.href="<?php echo urlMall('store_joinin', 'retail_step0');?>";
     }
     ,btn2: function(index, layero){
-      window.location.href="<?php echo urlMall('store_joinin', 'store_type1');?>";;
+      window.location.href="<?php echo urlMall('store_joinin', 'supplier_step0');?>";
     }
     ,btn3: function(index, layero){
-      window.location.href="<?php echo urlMall('store_joinin', 'store_type2');?>";;
+      window.location.href="<?php echo urlMall('store_joinin', 'servicer_step0');?>";
     }
     ,cancel: function(){ 
       //右上角关闭回调
@@ -49,14 +49,14 @@ function storeType(){
 $(document).ready(function(){
 	$('#btn_apply_agreecbc_next').on('click', function() {
         if($('#input_apply_agreement').prop('checked')) {
-            window.location.href = "index.php?app=store_joinincc&wwi=step1";
+            window.location.href = $(this).attr('next-url');
         } else {
             alert('请阅读并同意协议');
         }
     });
     $('#btn_apply_agreement_next').on('click', function() {
         if($('#input_apply_agreement').prop('checked')) {
-            window.location.href = "index.php?app=store_joinin&wwi=step1";
+            window.location.href = $(this).attr('next-url');
         } else {
             alert('请阅读并同意协议');
         }

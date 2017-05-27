@@ -9,6 +9,7 @@
     <h4>注意事项：</h4>
     以下所需要上传的电子版资质文件仅支持JPG\GIF\PNG格式图片，大小请控制在1M之内。</div>
   <form id="form_company_info" action="index.php?app=store_joinin&wwi=step2" method="post">
+    <input type="hidden" name="store_type" value="<?php echo $output['store_type'];?>">
     <table border="0" cellpadding="0" cellspacing="0" class="all">
       <thead>
         <tr>

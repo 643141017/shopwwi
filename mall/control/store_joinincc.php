@@ -88,6 +88,10 @@ class store_joininccControl extends BaseHomeControl {
         Tpl::showpage('store_joinincc_apply');
     }
 
+    public function retail_step1Wwi(){
+        $this->step1Wwi();
+    }
+
 	public function step1Wwi() {
         Tpl::output('step', 'step2');
         Tpl::output('sub_step', 'step1');

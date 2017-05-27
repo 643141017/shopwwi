@@ -286,13 +286,14 @@ function storeType(){
     content: '请选择店铺类型'
     ,btn: ['零售商申请', '供应商申请', '服务商申请']
     ,yes: function(index, layero){
-      window.location.href="<?php echo urlMall('store_joinin', 'store_type0');?>";;
+      window.location.href="<?php echo urlMall('store_joinin', 'retail_step0');?>";
     }
     ,btn2: function(index, layero){
-      window.location.href="<?php echo urlMall('store_joinin', 'store_type1');?>";;
+      window.location.href="<?php echo urlMall('store_joinin', 'supplier_step0');?>";
+      
     }
     ,btn3: function(index, layero){
-      window.location.href="<?php echo urlMall('store_joinin', 'store_type2');?>";;
+      window.location.href="<?php echo urlMall('store_joinin', 'servicer_step0');?>";
     }
     ,cancel: function(){ 
       //右上角关闭回调
