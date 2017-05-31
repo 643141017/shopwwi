@@ -53,4 +53,8 @@ CREATE TABLE `si_store_images` (
   PRIMARY KEY (`store_image_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='店铺图片';
 
+#服务区域
+ALTER TABLE `si_store_joinin`
+ADD COLUMN `service_area_id`  mediumint(8) UNSIGNED NOT NULL DEFAULT 0 COMMENT '服务区域（二次开发）' AFTER `legal_person_id_card_photo`;
+
 

@@ -62,34 +62,11 @@
             <p class="emphasis">请根据您所经营的内容认真选择店铺分类，注册后商家不可自行修改。</p></td>
         </tr>
         <tr>
-          <th><i>*</i>经营类目：</th>
-          <td><a href="###" id="btn_select_category" class="btn">+选择添加类目</a>
-            <div id="gcategory" style="display:none;">
-              <select id="gcategory_class1">
-                <option value="0">请选择</option>
-                <?php if(!empty($output['gc_list']) && is_array($output['gc_list']) ) {?>
-                <?php foreach ($output['gc_list'] as $gc) {?>
-                <option value="<?php echo $gc['gc_id'];?>" data-explain="<?php echo $gc['commis_rate'];?>"><?php echo $gc['gc_name'];?></option>
-                <?php }?>
-                <?php }?>
-              </select>
-              <input id="btn_add_category" type="button" value="确认" />
-              <input id="btn_cancel_category" type="button" value="取消" />
-            </div>
-            <input id="store_class" name="store_class" type="hidden" />
-            <span></span></td>
-        </tr>
-        <tr>
-          <td colspan="2"><table border="0" cellpadding="0" cellspacing="0" id="table_category" class="type">
-              <thead>
-                <tr>
-                  <th class="w120 tc">一级类目</th>
-                  <th class="w120 tc">二级类目</th>
-                  <th class="tc">三级类目</th>
-                  <th class="w50 tc">操作</th>
-                </tr>
-              </thead>
-            </table></td>
+          <th><i>*</i>服务区域：</th>
+          <td><input id="service_area" name="service_area" type="hidden" value=""/>
+            <input type="hidden" value="" name="service_area_id" id="service_area_id">
+            <span></span>
+          </td>
         </tr>
       </tbody>
       <tfoot>
@@ -105,7 +82,9 @@
 <script type="text/javascript" src="<?php echo RESOURCE_SITE_URL;?>/js/common_select.js" charset="utf-8"></script> 
 <script type="text/javascript">
 $(document).ready(function(){
-	gcategoryInit("gcategory");
+
+  $('#service_area').nc_region();
+	// gcategoryInit("gcategory");
 
     jQuery.validator.addMethod("seller_name_exist", function(value, element, params) { 
         var result = true;
@@ -238,6 +217,7 @@ $(document).ready(function(){
     });
 
     $('#btn_apply_store_next').on('click', function() {
+        $('#service_area_id').val($("#service_area").fetch('area_id'));
         $('#form_store_info').submit();
     });
 });
