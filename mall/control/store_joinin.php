@@ -127,6 +127,7 @@ class store_joininControl extends BaseHomeControl {
     //服务商申请步骤1
     public function servicer_step1Wwi(){
         Tpl::output('store_type', '1');
+        Tpl::output('tpl', 'store_joinin_apply_servicer.step1.php');
         $this->step1Wwi();
     }
 
@@ -168,8 +169,20 @@ class store_joininControl extends BaseHomeControl {
             $param['organization_code_electronic'] = $_POST['organization_code_electronic1'];
             $param['general_taxpayer'] = $_POST['general_taxpayer1'];
 
-            $param['store_type'] = intval($_POST['store_type']);//二次开发扩展店铺类型
+            $param['store_type'] = intval($_POST['store_type']);//二次开发扩展
 
+            /*服务商特有S*/
+            if($param['store_type']==1){
+                $param['store_service_hotline'] = trim($_POST['store_service_hotline']);//二次开发扩展
+                $param['store_business_hours'] = trim($_POST['store_business_hours']);//二次开发扩展
+                $param['store_service_proverbs'] = trim($_POST['store_service_proverbs']);//二次开发扩展
+                $param['store_traffic_routes'] = trim($_POST['store_traffic_routes']);//二次开发扩展
+                $param['store_exhibition_area'] = trim($_POST['store_exhibition_area']);//二次开发扩展
+                $param['legal_person'] = trim($_POST['legal_person']);//二次开发扩展
+                $param['legal_person_id_card'] = trim($_POST['legal_person_id_card']);//二次开发扩展
+                $param['legal_person_id_card_photo'] = $this->upload_image('legal_person_id_card_photo');//二次开发扩展
+            }
+            /*服务商特有E*/
 
             $this->step2_save_valid($param);
 
@@ -216,6 +229,7 @@ class store_joininControl extends BaseHomeControl {
     }
 
     public function step3Wwi() {
+        $model_store_joinin = Model('store_joinin');
         if(!empty($_POST)) {
             $param = array();
             $param['bank_account_name'] = $_POST['bank_account_name'];
@@ -246,8 +260,13 @@ class store_joininControl extends BaseHomeControl {
 
             $this->step3_save_valid($param);
 
-            $model_store_joinin = Model('store_joinin');
             $model_store_joinin->modify($param, array('member_id'=>$_SESSION['member_id']));
+        }
+
+        $joinin_info = $model_store_joinin->getOne(array('member_id' => $_SESSION['member_id']));
+
+        if($joinin_info['store_type']==1){
+            Tpl::output('tpl', 'store_joinin_apply_servicer.step3.php');
         }
 
         //商品分类

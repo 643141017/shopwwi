@@ -44,4 +44,13 @@ ADD COLUMN `legal_person`  varchar(50) NULL DEFAULT NULL COMMENT '法人（二�
 ADD COLUMN `legal_person_id_card`  varchar(50) NULL DEFAULT NULL COMMENT '法人身份证号码（二次开发）' AFTER `legal_person`,
 ADD COLUMN `legal_person_id_card_photo`  varchar(50) NULL DEFAULT NULL COMMENT '法人身份证图片（二次开发）' AFTER `legal_person_id_card`;
 
+#店铺图片
+CREATE TABLE `si_store_images` (
+  `store_image_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '店铺图片id',
+  `store_id` int(10) unsigned NOT NULL COMMENT '店铺id',
+  `store_image` varchar(1000) NOT NULL COMMENT '店铺图片',
+  `store_image_type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '图片类型，1内景，2外景，3宣传资料',
+  PRIMARY KEY (`store_image_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='店铺图片';
+
 

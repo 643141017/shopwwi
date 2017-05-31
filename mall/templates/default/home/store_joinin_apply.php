@@ -80,7 +80,8 @@
       </ul>
     </div>
     <div class="joinin-concrete">
-      <?php require('store_joinin_apply.'.$output['sub_step'].'.php'); ?>
+      <!-- 加入tpl 变量区分 服务商表单 -->
+      <?php $tpl= $output['tpl']; $tpl=$tpl?$tpl:'store_joinin_apply.'.$output['sub_step'].'.php';require($tpl); ?>
     </div>
   </div>
 </div>
