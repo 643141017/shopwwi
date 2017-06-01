@@ -1,0 +1,15 @@
+[2017-05-27 16:53:36] /mall/index.php?app=statistics_general&wwi=general ( app=statistics_general&wwi=general ) 
+ERR: Db Error: Column 'store_id' in where clause is ambiguous
+SELECT * FROM `si_store_bind_class` AS `store_bind_class` LEFT JOIN `si_store` AS `store` ON store_bind_class.store_id=store.store_id WHERE ( store_id = '12' ) LIMIT 1000  
+[2017-05-27 16:53:49] /mall/index.php?app=store_info&wwi=bind_class ( app=store_info&wwi=bind_class ) 
+ERR: Db Error: Column 'store_id' in where clause is ambiguous
+SELECT * FROM `si_store_bind_class` AS `store_bind_class` LEFT JOIN `si_store` AS `store` ON store_bind_class.store_id=store.store_id WHERE ( store_id = '12' ) LIMIT 1000  
+[2017-05-27 17:48:48] /mall/index.php?app=store_goods_add&wwi=index ( app=store_goods_add&wwi=index ) 
+ERR: Db Error: Column 'store_id' in where clause is ambiguous
+SELECT distinct class_1 FROM `si_store_bind_class` AS `store_bind_class` LEFT JOIN `si_store` AS `store` ON store_bind_class.store_id=store.store_id WHERE ( store_id = '12' ) AND ( state IN ('1','2') ) ORDER BY class_1 asc LIMIT 1000  
+[2017-05-27 17:48:51] /mall/index.php?app=store_goods_online&wwi=index ( app=store_goods_online&wwi=index ) 
+ERR: Db Error: Column 'store_id' in where clause is ambiguous
+SELECT COUNT(*) AS nc_count FROM `si_goods_common` AS `goods_common` INNER JOIN `si_store` AS `store` ON goods_common.store_id = store.store_id WHERE ( store_id = '12' ) AND ( goods_state = '1' ) AND ( goods_verify = '1' ) ORDER BY goods_commonid desc LIMIT 1  
+[2017-05-27 17:48:51] /mall/index.php?app=store_goods_online&wwi=index ( app=store_goods_online&wwi=index ) 
+ERR: Db Error: Column 'store_id' in where clause is ambiguous
+SELECT * FROM `si_goods_common` AS `goods_common` INNER JOIN `si_store` AS `store` ON goods_common.store_id = store.store_id WHERE ( store_id = '12' ) AND ( goods_state = '1' ) AND ( goods_verify = '1' ) ORDER BY goods_commonid desc LIMIT 0,10  

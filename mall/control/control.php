@@ -1388,3 +1388,103 @@ class BasePointMallControl extends Control {
         }
     }
 }
+
+
+/********************************** 服务商control父类 **********************************************/
+
+class BaseServicerControl extends Control {
+    protected $member_info = array();   // 会员信息
+    public function __construct(){
+
+        if(!C('site_status')) halt(C('closed_reason'));
+
+        Language::read('common,member_layout');
+
+        if ($_GET['column'] && strtoupper(CHARSET) == 'GBK'){
+            $_GET = Language::getGBK($_GET);
+        }
+        //会员验证
+        $this->checkLogin();
+        //输出头部的公用信息
+        $this->showLayout();
+        Tpl::setDir('servicer');
+        Tpl::setLayout('servicer_layout');
+
+        //获得会员信息
+        $this->member_info = $this->getMemberAndGradeInfo(true);
+        $this->member_info['voucher_count'] = Model('voucher')->getCurrentAvailableVoucherCount($_SESSION['member_id']);
+        $this->member_info['redpacket_count'] = Model('redpacket')->getCurrentAvailableRedpacketCount($_SESSION['member_id']);
+        Tpl::output('member_info', $this->member_info);
+
+        // 常用操作及导航
+        $menu_list = $this->_getNavLink();
+
+        //系统公告
+        $this->system_notice();
+        
+        // 交易数量提示
+        $this->order_tip();
+        
+        // 页面高亮
+        Tpl::output('app', $_GET['app']);
+    }
+    
+    /**
+     * 交易数量提示
+     */
+    private function order_tip() {
+        $model_order = Model('order');
+        //交易提醒 - 显示数量
+        $order_tip['order_nopay_count'] = $model_order->getOrderCountByID('buyer',$_SESSION['member_id'],'NewCount');
+        $order_tip['order_noreceipt_count'] = $model_order->getOrderCountByID('buyer',$_SESSION['member_id'],'SendCount');
+        $order_tip['order_noeval_count'] = $model_order->getOrderCountByID('buyer',$_SESSION['member_id'],'EvalCount');
+        $order_tip['order_notakes_count'] = $model_order->getOrderCountByID('buyer',$_SESSION['member_id'],'TakesCount');
+        Tpl::output('order_tip', $order_tip);
+    }
+
+    /**
+     * 系统公告
+     */
+    private function system_notice() {
+        $model_message  = Model('article');
+        $condition = array();
+        $condition['ac_id'] = 1;
+        $condition['article_position_in'] = ARTICLE_POSIT_ALL.','.ARTICLE_POSIT_BUYER;
+        $condition['limit'] = 5;
+        $article_list  = $model_message->getArticleList($condition);
+        Tpl::output('system_notice',$article_list);
+    }
+
+    /**
+     * 常用操作
+     *
+     * @param string $app
+     * 如果菜单中的切换卡不在一个菜单中添加$app参数，值为当前菜单的下标
+     *
+     */
+    protected function _getNavLink ($app = '') {
+        // 左侧导航
+        $menu_list = $this->_getMenuList();
+        Tpl::output('menu_list', $menu_list);
+    }
+
+    /**
+     * 左侧导航
+     * 菜单数组中child的下标要和其链接的act对应。否则面包屑不能正常显示
+     * @return array
+     */
+    private function _getMenuList() {
+        $menu_list = array(
+            'order' => array('name' => '订单', 'child' => array(
+                'servicer_order' => array('name' => '实物交易订单', 'url' => urlMall('servicer_order', 'index')),
+                'servicer_vr_order' => array('name' => '虚拟兑码订单', 'url' => urlMall('servicer_vr_order', 'index')),
+                'servicer_deliver' => array('name' => '发货', 'url' => urlMall('servicer_deliver', 'index')),
+                'servicer_deliver_set' => array('name' => '发货设置', 'url' => urlMall('servicer_deliver_set', 'index')),
+                'servicer_waybill' => array('name' => '运单模板', 'url' => urlMall('servicer_waybill', 'index')),
+                'servicer_evaluate' => array('name' => '评价管理', 'url' => urlMall('servicer_evaluate', 'index')),
+                'servicer_call' => array('name' => '来单提醒', 'url' => urlMall('servicer_call', 'index')),
+            )),
+        );
+        return $menu_list;
+    }
+}

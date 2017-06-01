@@ -292,7 +292,7 @@ $(function(){
                      <a href="<?php echo urlMall('special', 'special_detail',array('special_id'=>'1'));?>">运维保障</a>
                 </div>
             </div>
-            <a href="<?php echo urlMall('consult', 'index');?>" <?php if($output['index_sign'] == 'consult' && $output['index_sign'] != '0') {echo 'class="now"';} ?>>商家应答</a>
+<!--             <a href="<?php echo urlMall('consult', 'index');?>" <?php if($output['index_sign'] == 'consult' && $output['index_sign'] != '0') {echo 'class="now"';} ?>>商家应答</a>
             <a href="<?php echo urlMall('search', 'index');?>" <?php if($output['index_sign'] == 'search' && $output['index_sign'] != '0') {echo 'class="now"';} ?>>淘产品</a>
             <a href="<?php echo urlMall('store_list', 'index');?>" <?php if($output['index_sign'] == 'store_list' && $output['index_sign'] != '0') {echo 'class="now"';} ?>>淘店铺</a>
                         <?php if (C('tzx_isuse')){ ?>
@@ -300,7 +300,7 @@ $(function(){
             	<?php if (C('tyq_isuse')){ ?>
             <a href="<?php echo TYQ_SITE_URL;?>" <?php if($output['index_sign'] == 'tyq' && $output['index_sign'] != '0') {echo 'class="now"';} ?>>淘友圈</a><?php } ?>
             	 <?php if (C('tfx_isuse')){ ?>
-            <a href="<?php echo TFX_SITE_URL;?>" <?php if($output['index_sign'] == 'tfx' && $output['index_sign'] != '0') {echo 'class="now"';} ?>>淘分享</a><?php } ?>
+            <a href="<?php echo TFX_SITE_URL;?>" <?php if($output['index_sign'] == 'tfx' && $output['index_sign'] != '0') {echo 'class="now"';} ?>>淘分享</a><?php } ?> -->
             <?php if(!empty($output['nav_list']) && is_array($output['nav_list'])){?>
       <?php foreach($output['nav_list'] as $nav){?>
       <?php if($nav['nav_location'] == '1'){?> <a
