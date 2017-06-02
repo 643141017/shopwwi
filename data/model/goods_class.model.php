@@ -257,8 +257,8 @@ class goods_classModel extends Model
             $gc_list = array_under_reset($gc_list, 'gc_id');
             $model_storebindclass = Model('store_bind_class');
             $gcid_array = $model_storebindclass->getStoreBindClassList(array(
-                'store_id' => $store_id,
-                'state' => array('in', array(1, 2)),
+                'store_bind_class.store_id' => $store_id,
+                'store_bind_class.state' => array('in', array(1, 2)),
             ), '', "class_{$deep} asc", "distinct class_{$deep}");
 
             if (!empty($gcid_array)) {
