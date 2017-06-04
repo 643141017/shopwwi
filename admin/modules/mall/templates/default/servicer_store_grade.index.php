@@ -26,7 +26,7 @@
           <th width="150" class="handle" align="center"><?php echo $lang['nc_handle'];?></th>
           <th width="120" align="center"><?php echo $lang['servicer_store_grade_id'];?></th>
           <th width="120" align="center"><?php echo $lang['servicer_store_grade_name'];?></th>
-          <th width="120" align="center"><?php echo $lang['servicer_store_grade_discount'];?></th>
+          <th width="120" align="center"><?php echo $lang['servicer_store_grade_purchase'];?></th>
           <th></th>
         </tr>
       </thead>
@@ -47,7 +47,7 @@
             </span></td>
           <td><?php echo $v['ssg_id'];?></td>
           <td><?php echo $v['ssg_name'];?></td>
-          <td><?php echo $v['ssg_discount'];?></td>
+          <td><?php echo $lang['factory_price'].$output['grade_operator'][$v['ssg_purchase_operator']].$v['ssg_purchase_discount'];?></td>
           <td></td>
         </tr>
         <?php } ?>

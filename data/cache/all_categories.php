@@ -1595,8 +1595,8 @@
           array (
             'gc_id' => '18',
             'gc_name' => '连衣裙',
-            'type_id' => '0',
-            'type_name' => '',
+            'type_id' => '2',
+            'type_name' => '颜色',
             'gc_parent_id' => '4',
             'commis_rate' => '0',
             'gc_sort' => '255',

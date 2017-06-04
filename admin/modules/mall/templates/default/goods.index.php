@@ -214,9 +214,15 @@ function fg_del(id) {
         });
     }
 }
-// 商品审核
+// 商家商品审核
 function fg_verify(ids) {
     _uri = "index.php?app=goods&wwi=goods_verify&id=" + ids;
     CUR_DIALOG = ajax_form('goods_verify', '审核商品', _uri, 640);
+}
+
+// 直销商品审核
+function fg_supplier_verify(ids) {
+    _uri = "index.php?app=goods&wwi=goods_supplier_verify&id=" + ids;
+    CUR_DIALOG = ajax_form('goods_supplier_verify', '审核商品', _uri, 700);
 }
 </script> 

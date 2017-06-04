@@ -25,10 +25,51 @@
       </dl>
       <dl class="row">
         <dt class="tit">
-          <label for="ssg_discount"><?php echo $lang['supplier_store_grade_discount'];?></label>
+          <label for="ssg_market_operator"><em>*</em><?php echo $lang['supplier_store_grade_market_operator'];?></label>
         </dt>
         <dd class="opt">
-          <input type="text" value="<?php echo $output['grade_array']['ssg_discount'];?>" id="ssg_discount" name="ssg_discount" class="input-txt">
+          <select name="ssg_market_operator">
+             <option value="1" <?php if ($output['grade_array']['ssg_market_operator']==1) echo "selected"?>><?php echo $lang['supplier_store_grade_operator_cheng'];?></option>
+             <option value="2" <?php if ($output['grade_array']['ssg_market_operator']==2) echo "selected"?>><?php echo $lang['supplier_store_grade_operator_chu'];?></option>
+             <option value="3" <?php if ($output['grade_array']['ssg_market_operator']==3) echo "selected"?>><?php echo $lang['supplier_store_grade_operator_jia'];?></option>
+             <option value="4" <?php if ($output['grade_array']['ssg_market_operator']==4) echo "selected"?>><?php echo $lang['supplier_store_grade_operator_jian'];?></option>
+           </select>
+          <span class="err"></span>
+          <p class="notic"></p>
+        </dd>
+      </dl>
+      <dl class="row">
+        <dt class="tit">
+          <label for="ssg_market_discount"><?php echo $lang['supplier_store_grade_market_discount'];?></label>
+        </dt>
+        <dd class="opt">
+          <input type="text" value="<?php echo $output['grade_array']['ssg_market_discount'];?>" id="ssg_market_discount" name="ssg_market_discount" class="input-txt">
+          <span class="err"></span>
+          <p class="notic"></p>
+        </dd>
+      </dl>
+      <dl class="row">
+        <dt class="tit">
+          <label for="ssg_mall_operator"><em>*</em><?php echo $lang['supplier_store_grade_mall_operator'];?></label>
+        </dt>
+        <dd class="opt">
+          <select name="ssg_mall_operator">
+             <option value="1" <?php if ($output['grade_array']['ssg_mall_operator']==1) echo "selected"?>><?php echo $lang['supplier_store_grade_operator_cheng'];?></option>
+             <option value="2" <?php if ($output['grade_array']['ssg_mall_operator']==2) echo "selected"?>><?php echo $lang['supplier_store_grade_operator_chu'];?></option>
+             <option value="3" <?php if ($output['grade_array']['ssg_mall_operator']==3) echo "selected"?>><?php echo $lang['supplier_store_grade_operator_jia'];?></option>
+             <option value="4" <?php if ($output['grade_array']['ssg_mall_operator']==4) echo "selected"?>><?php echo $lang['supplier_store_grade_operator_jian'];?></option>
+           </select>
+          <span class="err"></span>
+          <p class="notic"></p>
+        </dd>
+      </dl>
+
+      <dl class="row">
+        <dt class="tit">
+          <label for="ssg_mall_discount"><em>*</em><?php echo $lang['supplier_store_grade_mall_discount'];?></label>
+        </dt>
+        <dd class="opt">
+          <input type="text" value="<?php echo $output['grade_array']['ssg_mall_discount'];?>" id="ssg_mall_discount" name="ssg_mall_discount" class="input-txt">
           <span class="err"></span>
           <p class="notic"></p>
         </dd>
@@ -67,7 +108,12 @@ $(document).ready(function(){
                     }
                 }
             },
-            ssg_discount : {
+            ssg_market_discount : {
+                required  : true,
+                number : true,
+                min : 0
+            },
+            ssg_mall_discount : {
                 required  : true,
                 number : true,
                 min : 0
@@ -78,7 +124,12 @@ $(document).ready(function(){
                 required : '<i class="fa fa-exclamation-tyq"></i><?php echo $lang['supplier_store_grade_name_no_null'];?>',
                 remote   : '<i class="fa fa-exclamation-tyq"></i><?php echo $lang['now_supplier_store_grade_name_is_there'];?>'
             },
-            ssg_discount : {
+            ssg_market_discount : {
+                required  : '<i class="fa fa-exclamation-tyq"></i><?php echo $lang['supplier_store_grade_discount_no_null'];?>',
+                number : '<i class="fa fa-exclamation-tyq"></i><?php echo $lang['supplier_store_grade_standard_no_null'];?>',
+                min : '<i class="fa fa-exclamation-tyq"></i><?php echo $lang['supplier_store_grade_standard_no_null'];?>'
+            },
+            ssg_mall_discount : {
                 required  : '<i class="fa fa-exclamation-tyq"></i><?php echo $lang['supplier_store_grade_discount_no_null'];?>',
                 number : '<i class="fa fa-exclamation-tyq"></i><?php echo $lang['supplier_store_grade_standard_no_null'];?>',
                 min : '<i class="fa fa-exclamation-tyq"></i><?php echo $lang['supplier_store_grade_standard_no_null'];?>'

@@ -21,50 +21,50 @@
     'nav_sort' => '2',
     'item_id' => '0',
   ),
-  2 => 
-  array (
-    'nav_id' => '13',
-    'nav_type' => '0',
-    'nav_title' => '淘店铺',
-    'nav_url' => '/mall/index.php?app=store_list&amp;wwi=index',
-    'nav_location' => '1',
-    'nav_new_open' => '0',
-    'nav_sort' => '3',
-    'item_id' => '0',
-  ),
-  3 => 
-  array (
-    'nav_id' => '14',
-    'nav_type' => '0',
-    'nav_title' => '淘资讯',
-    'nav_url' => '/tzx/',
-    'nav_location' => '1',
-    'nav_new_open' => '1',
-    'nav_sort' => '4',
-    'item_id' => '0',
-  ),
-  4 => 
-  array (
-    'nav_id' => '15',
-    'nav_type' => '0',
-    'nav_title' => '淘友圈',
-    'nav_url' => '/tyq/',
-    'nav_location' => '1',
-    'nav_new_open' => '1',
-    'nav_sort' => '5',
-    'item_id' => '0',
-  ),
-  5 => 
-  array (
-    'nav_id' => '16',
-    'nav_type' => '0',
-    'nav_title' => '淘分享',
-    'nav_url' => '/tfx/',
-    'nav_location' => '1',
-    'nav_new_open' => '1',
-    'nav_sort' => '6',
-    'item_id' => '0',
-  ),
+  // 2 => 
+  // array (
+  //   'nav_id' => '13',
+  //   'nav_type' => '0',
+  //   'nav_title' => '淘店铺',
+  //   'nav_url' => '/mall/index.php?app=store_list&amp;wwi=index',
+  //   'nav_location' => '1',
+  //   'nav_new_open' => '0',
+  //   'nav_sort' => '3',
+  //   'item_id' => '0',
+  // ),
+  // 3 => 
+  // array (
+  //   'nav_id' => '14',
+  //   'nav_type' => '0',
+  //   'nav_title' => '淘资讯',
+  //   'nav_url' => '/tzx/',
+  //   'nav_location' => '1',
+  //   'nav_new_open' => '1',
+  //   'nav_sort' => '4',
+  //   'item_id' => '0',
+  // ),
+  // 4 => 
+  // array (
+  //   'nav_id' => '15',
+  //   'nav_type' => '0',
+  //   'nav_title' => '淘友圈',
+  //   'nav_url' => '/tyq/',
+  //   'nav_location' => '1',
+  //   'nav_new_open' => '1',
+  //   'nav_sort' => '5',
+  //   'item_id' => '0',
+  // ),
+  // 5 => 
+  // array (
+  //   'nav_id' => '16',
+  //   'nav_type' => '0',
+  //   'nav_title' => '淘分享',
+  //   'nav_url' => '/tfx/',
+  //   'nav_location' => '1',
+  //   'nav_new_open' => '1',
+  //   'nav_sort' => '6',
+  //   'item_id' => '0',
+  // ),
   6 => 
   array (
     'nav_id' => '9',

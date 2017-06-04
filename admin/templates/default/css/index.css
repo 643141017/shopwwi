@@ -2459,3 +2459,29 @@ margin: 0 auto!important; padding: 0; zoom: 1; }
 .pagination li span.currentpage { color: #FFF; font-weight: bold; background-color: #41BEDD; border-color: #3AABC6 #3AABC6 #318EA6 #3AABC6; border-radius: 0; }
 .paixv a { text-decoration: none; color: #000 }
 .paixv a:hover { color: #06F }
+
+
+/*供销商品审核列表*/
+.ncap-form-default .ncap-goods-sku{
+  width: 100%;
+}
+.ncap-form-default .ncap-goods-sku .title{
+  border-bottom: 0px;
+}
+.ncap-form-default .ncap-goods-sku .title h4{
+  width: 14%;
+  padding: 0px;
+  text-align: center;
+}
+.ncap-form-default .ncap-goods-sku .content{
+  max-height: 180px;
+}
+.ncap-form-default .ncap-goods-sku .content li{ background-color: #fff; height: 50px;line-height: 40px;text-align: center;}
+.ncap-form-default .ncap-goods-sku .content li span{
+  width: 14%;
+  padding: 0px;  
+}
+#fwin_goods_supplier_verify .ncap-form-dialog{
+  height: auto;
+  max-height: 600px;
+}
