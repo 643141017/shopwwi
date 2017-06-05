@@ -230,32 +230,33 @@
             <?php } ?></td>
         </tr>
         <tr>
-          <th>经营类目：</th>
+          <th>服务区域：</th>
           <td colspan="2"><table border="0" cellpadding="0" cellspacing="0" id="table_category" class="type">
               <thead>
                 <tr>
-                  <th>分类1</th>
-                  <th>分类2</th>
-                  <th>分类3</th>
+                  <th>地区1</th>
+                  <th>地区2</th>
+                  <th>地区3</th>
                   <th>比例</th>
                 </tr>
               </thead>
               <tbody>
-                <?php $store_class_names = unserialize($output['joinin_detail']['store_class_names']);?>
-                <?php if(!empty($store_class_names) && is_array($store_class_names)) {?>
+                <?php $service_area_names = unserialize($output['joinin_detail']['service_area_names']);?>
+                <?php if(!empty($service_area_names) && is_array($service_area_names)) {?>
                 <?php $store_class_commis_rates = explode(',', $output['joinin_detail']['store_class_commis_rates']);?>
-                <?php for($i=0, $length = count($store_class_names); $i < $length; $i++) {?>
-                <?php list($class1, $class2, $class3) = explode(',', $store_class_names[$i]);?>
+                <?php for($i=0, $length = count($service_area_names); $i < $length; $i++) {?>
+                <?php list($name1, $name2, $name3) = explode(',', $service_area_names[$i]);?>
                 <tr>
-                  <td><?php echo $class1;?></td>
-                  <td><?php echo $class2;?></td>
-                  <td><?php echo $class3;?></td>
+                  <td><?php echo $name1;?></td>
+                  <td><?php echo $name2;?></td>
+                  <td><?php echo $name3;?></td>
                   <td><?php if(intval($output['joinin_detail']['joinin_state']) === 10) {?>
                     <input type="text" nctype="commis_rate" value="<?php echo $store_class_commis_rates[$i];?>" name="commis_rate[]" class="w100" />
                     %
                     <?php } else { ?>
                     <?php echo $store_class_commis_rates[$i];?> %
                     <?php } ?></td>
+                </tr>
                 </tr>
                 <?php } ?>
                 <?php } ?>
@@ -271,7 +272,26 @@
           <th>付款凭证说明：</th>
           <td><?php echo $output['joinin_detail']['paying_money_certif_exp'];?></td>
         </tr>
+
+        <tr>
+          <th>服务商等级：</th>
+          <td>
+            <?php if(in_array(intval($output['joinin_detail']['joinin_state']), array(STORE_JOIN_STATE_PAY))) {?>
+            <select id="ssg_id" name="ssg_id">
+              <?php if(is_array($output['servicer_grade_list'])){ ?>
+              <?php foreach($output['servicer_grade_list'] as $k => $v){ ?>
+              <option  <?php if($output['servicer_grade'] == $v['ssg_id']){ ?>selected="selected"<?php } ?> value="<?php echo $v['ssg_id']; ?>"><?php echo $v['ssg_name']; ?></option>
+              <?php } ?>
+              <?php } ?>
+            </select>
+            <?php } else{ ?>
+              <?php echo $output['servicer_grade_list'][$output['servicer_grade']]['ssg_name'];?>
+            <?php }?>
+          </td>
+        </tr>
+
         <?php } ?>
+
         <?php if(in_array(intval($output['joinin_detail']['joinin_state']), array(STORE_JOIN_STATE_NEW, STORE_JOIN_STATE_PAY))) { ?>
         <tr>
           <th>审核意见：</th>

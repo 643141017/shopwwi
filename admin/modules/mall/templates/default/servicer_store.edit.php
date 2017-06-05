@@ -87,6 +87,23 @@
         </dl>
         <dl class="row">
           <dt class="tit">
+            <label for="ssg_id"> <?php echo $lang['servicer_belongs_level'];?> </label>
+          </dt>
+          <dd class="opt">
+            <select id="ssg_id" name="ssg_id">
+              <?php if(is_array($output['servicer_grade_list'])){ ?>
+              <?php foreach($output['servicer_grade_list'] as $k => $v){ ?>
+              <option <?php if($output['servicer_grade'] == $v['ssg_id']){ ?>selected="selected"<?php } ?> value="<?php echo $v['ssg_id']; ?>"><?php echo $v['ssg_name']; ?></option>
+              <?php } ?>
+              <?php } ?>
+            </select>
+            <span class="err"></span>
+            <p class="notic"></p>
+          </dd>
+        </dl>
+
+        <dl class="row">
+          <dt class="tit">
             <label><?php echo $lang['period_to'];?></label>
           </dt>
           <dd class="opt">

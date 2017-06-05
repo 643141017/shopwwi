@@ -348,7 +348,6 @@ class store_joininControl extends BaseHomeControl {
 
     public function step4Wwi() {
 
-        var_dump($_POST);exit;
         $store_class_ids = array();
         $store_class_names = array();
         if(!empty($_POST['store_class_ids'])) {
@@ -482,7 +481,6 @@ class store_joininControl extends BaseHomeControl {
 
     private function step4() {
         $model_store_joinin = Model('store_joinin');
-        $model_area = Model('area');
         $joinin_detail = $model_store_joinin->getOne(array('member_id'=>$_SESSION['member_id']));
         $joinin_detail['store_class_ids'] = unserialize($joinin_detail['store_class_ids']);
         $joinin_detail['store_class_names'] = unserialize($joinin_detail['store_class_names']);
@@ -490,8 +488,8 @@ class store_joininControl extends BaseHomeControl {
         $joinin_detail['sg_info'] = unserialize($joinin_detail['sg_info']);
 
         //服务区域
-        $service_area_name=$model_area->getAreaInfo(array('area_id'=>$joinin_detail['service_area_id']),'area_name');
-        $joinin_detail['service_area_name']=$service_area_name['area_name'];
+        $joinin_detail['service_area_ids'] = unserialize($joinin_detail['service_area_ids']);
+        $joinin_detail['service_area_names'] = unserialize($joinin_detail['service_area_names']);
         Tpl::output('joinin_detail',$joinin_detail);
     }
 

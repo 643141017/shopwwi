@@ -36,10 +36,6 @@ CREATE TABLE `si_store_images` (
   PRIMARY KEY (`store_image_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='店铺图片';
 
-#服务区域
-ALTER TABLE `si_store_joinin`
-ADD COLUMN `service_area_id`  mediumint(8) UNSIGNED NOT NULL DEFAULT 0 COMMENT '服务区域（二次开发）' AFTER `legal_person_id_card_photo`;
-
 
 ######################################################
 
@@ -68,9 +64,11 @@ CREATE TABLE `si_servicer` (
   `ser_store_id` int(11) DEFAULT NULL COMMENT '服务商店铺ID',
   `ser_member_id` int(11) DEFAULT NULL COMMENT '服务商会员ID',
   `ssg_id` int(11) DEFAULT NULL COMMENT '服务商等级',
-  `service_area_id` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '服务区域（二次开发）',
-  PRIMARY KEY (`ser_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='服务商表';
+  `service_area_ids` varchar(100) DEFAULT NULL COMMENT '服务区域ID（二次开发）',
+  PRIMARY KEY (`ser_id`),
+  UNIQUE KEY `ser_store_id` (`ser_store_id`) USING BTREE,
+  KEY `ser_member_id` (`ser_member_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='服务商表';
 
 
 
@@ -82,4 +80,8 @@ CREATE TABLE `si_servicer_store_grade` (
   `ssg_purchase_discount` decimal(10,2) NOT NULL DEFAULT '1.00' COMMENT '服务商等级采购价计算常数',
   PRIMARY KEY (`ssg_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='服务商等级表';
+
+ALTER TABLE `si_store_joinin`
+ADD COLUMN `service_area_ids`  varchar(100) NULL DEFAULT NULL COMMENT '服务区域ID（二次开发）' AFTER `legal_person_id_card_photo`,
+ADD COLUMN `service_area_names`  varchar(100) NULL DEFAULT NULL COMMENT '服务区域名称（二次开发）' AFTER `service_area_ids`;
 

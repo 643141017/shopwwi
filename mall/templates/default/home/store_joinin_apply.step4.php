@@ -27,15 +27,6 @@
               <td>应付金额：</td>
               <td class="tl" colspan="3"><?php echo $output['joinin_detail']['paying_amount'];?> 元</td>
             </tr>
-
-            <?php if($output['joinin_detail']['store_type']==1){?>
-            <tr>
-              <td>服务区域：</td>
-              <td class="tl" colspan="3"><?php echo $output['joinin_detail']['service_area_name'];?></td>
-            </tr>
-
-            <?php }?>
-
           </tbody>
         </table></td>
     </tr>
@@ -67,6 +58,33 @@
             <?php } ?>
           </tbody>
         </table></td>
+    </tr>
+    <?php }else{?>
+    <tr>
+      <th>服务区域列表</th>
+      <td></td>
+    </tr>
+    <tr>
+      <td colspan="2"><table border="0" cellpadding="0" cellspacing="0" id="table_area" class="type">
+          <thead>
+            <tr>
+              <th class="w120 tc">一级地区</th>
+              <th class="w120 tc">二级地区 </th>
+              <th class="tc">三级地区</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach ($output['joinin_detail']['service_area_names'] as $k => $name) {?>
+            <?php $name = explode(',', $name);?>
+            <tr>
+              <td><?php echo $name[0];?></td>
+              <td><?php echo $name[1];?></td>
+              <td><?php echo $name[2];?></td>
+            </tr>
+            <?php } ?>
+          </tbody>
+        </table>
+      </td>
     </tr>
     <?php }?>
   </tbody>

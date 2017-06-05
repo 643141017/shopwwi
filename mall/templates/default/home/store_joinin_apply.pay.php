@@ -218,6 +218,8 @@
             <th>应付总金额：</th>
             <td><?php echo $output['joinin_detail']['paying_amount'];?> 元</td>
           </tr>
+
+          <?php if($output['joinin_detail']['store_type']!=1) {?>
           <tr>
             <th>经营类目：</th>
             <td><table border="0" cellpadding="0" cellspacing="0" id="table_category" class="type">
@@ -246,6 +248,38 @@
                 </tbody>
               </table></td>
           </tr>
+
+          <?php }else{?>
+          <tr>
+            <th>经营类目：</th>
+            <td><table border="0" cellpadding="0" cellspacing="0" id="table_area" class="type">
+                <thead>
+                  <tr>
+                    <th>地区1</th>
+                    <th>地区2</th>
+                    <th>地区3</th>
+                    <th>分佣比例</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php $service_area_names = unserialize($output['joinin_detail']['service_area_names']);?>
+                  <?php $store_class_commis_rates = explode(',', $output['joinin_detail']['store_class_commis_rates']);?>
+                  <?php if(!empty($service_area_names) && is_array($service_area_names)) {?>
+                  <?php for($i=0, $length = count($service_area_names); $i < $length; $i++) {?>
+                  <?php list($name1, $name2, $name3) = explode(',', $service_area_names[$i]);?>
+                  <tr>
+                    <td><?php echo $name1;?></td>
+                    <td><?php echo $name2;?></td>
+                    <td><?php echo $name3;?></td>
+                    <td><?php echo $store_class_commis_rates[$i];?>%</td>
+                  </tr>
+                  <?php } ?>
+                  <?php } ?>
+                </tbody>
+              </table></td>
+          </tr>
+          <?php }?>
+
           <tr>
             <th>审核意见：</th>
             <td colspan="2"><?php echo $output['joinin_detail']['joinin_message'];?></td>

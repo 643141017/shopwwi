@@ -429,7 +429,13 @@ class servicer_storeControl extends SystemControl{
                 $update_array['store_recommend'] = intval($_POST['store_recommend']);
             }
             $result = $model_store->editStore($update_array, array('store_id' => $_POST['store_id']));
-            if ($result){
+
+            //更新服务商等级
+            $update_array=array();
+            $update_array['ssg_id']=intval($_POST['ssg_id']);
+            $toggle=Model('servicer')->editServicer($update_array,array('ser_store_id' =>$_POST['store_id']));
+
+            if ($result&&$toggle){
                 $url = array(
                 array(
                 'url'=>'index.php?app=servicer_store&wwi=store',
@@ -460,7 +466,13 @@ class servicer_storeControl extends SystemControl{
         //店铺等级
         $model_grade = Model('store_grade');
         $grade_list = $model_grade->getGradeList();
+
+        $servicer_grade_list=Model('servicer_store_grade')->getGradeList();
+        $servicer_info=Model('servicer')->getServicerInfo(array('ser_member_id'=>$store_array['member_id']));
+        $servicer_grade=$servicer_info['ssg_id']?$servicer_info['ssg_id']:1;
         Tpl::output('grade_list',$grade_list);
+        Tpl::output('servicer_grade_list',$servicer_grade_list);
+        Tpl::output('servicer_grade',$servicer_grade);
         Tpl::output('class_list',$parent_list);
         Tpl::output('store_array',$store_array);
 
@@ -1221,8 +1233,15 @@ class servicer_storeControl extends SystemControl{
                 $joinin_detail['sg_price'] = $joinin_detail['sg_info']['sg_price'];
             }
         }
+        //获取服务商(审核完成才存在)
+        $servicer_info=Model('servicer')->getServicerInfo(array('ser_member_id'=>$joinin_detail['member_id']));
+        $servicer_grade=$servicer_info['ssg_id']?$servicer_info['ssg_id']:1;
+        //最后一次审核需要分配等级
+        $servicer_grade_list=Model('servicer_store_grade')->getGradeList();
         Tpl::output('joinin_detail_title', $joinin_detail_title);
         Tpl::output('joinin_detail', $joinin_detail);
+        Tpl::output('servicer_grade_list', $servicer_grade_list);
+        Tpl::output('servicer_grade', $servicer_grade);
         Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
         Tpl::showpage('servicer_store_joinin.detail');
     }
@@ -1295,6 +1314,7 @@ class servicer_storeControl extends SystemControl{
             $mall_array['store_state']  = 1;
             $mall_array['store_time']   = time();
             $mall_array['store_end_time'] = strtotime(date('Y-m-d 23:59:59', strtotime('+1 day'))." +".intval($joinin_detail['joinin_year'])." year");
+            $mall_array['store_type']   = $joinin_detail['store_type'];
             $store_id = $model_store->addStore($mall_array);
 
             if($store_id) {
@@ -1314,7 +1334,8 @@ class servicer_storeControl extends SystemControl{
                 $servicer_array = array();
                 $servicer_array['ser_store_id'] = $store_id;
                 $servicer_array['ser_member_id']= $joinin_detail['member_id'];
-                $servicer_array['ser_store_id'] = intval($_POST['ssg_id']);
+                $servicer_array['ssg_id'] = intval($_POST['ssg_id']);
+                $servicer_array['service_area_ids'] = $joinin_detail['service_area_ids'];
                 Model('servicer')->addServicer($servicer_array);
                 
                 // 添加相册默认
