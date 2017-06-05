@@ -15,6 +15,12 @@
 defined('ByShopWWI') or exit('Access Invalid!');
 
 class supplier_store_gradeControl extends SystemControl{
+    public $grade_operator=array(
+            1=>'*',
+            2=>'/',
+            3=>'+',
+            4=>'-',
+        );
     public function __construct(){
         parent::__construct();
         Language::read('supplier_store_grade,store');
@@ -69,6 +75,7 @@ class supplier_store_gradeControl extends SystemControl{
 
         Tpl::output('like_ssg_name',trim($_POST['like_ssg_name']));
         Tpl::output('grade_list',$grade_list);
+        Tpl::output('grade_operator',$this->grade_operator);
 		Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
         Tpl::showpage('supplier_store_grade.index');
     }
@@ -98,7 +105,10 @@ class supplier_store_gradeControl extends SystemControl{
 
                 $insert_array = array();
                 $insert_array['ssg_name'] = trim($_POST['ssg_name']);
-                $insert_array['ssg_discount'] = abs(floatval($_POST['ssg_discount']));
+                $insert_array['ssg_market_operator'] = intval($_POST['ssg_market_operator']);
+                $insert_array['ssg_market_discount'] = abs(floatval($_POST['ssg_market_discount']));
+                $insert_array['ssg_mall_operator'] = intval($_POST['ssg_mall_operator']);
+                $insert_array['ssg_mall_discount'] = abs(floatval($_POST['ssg_mall_discount']));
 
                 $result = $model_grade->add($insert_array);
                 if ($result){
@@ -143,7 +153,10 @@ class supplier_store_gradeControl extends SystemControl{
 
                 $update_array = array();
                 $update_array['ssg_name'] = trim($_POST['ssg_name']);
-                $update_array['ssg_discount'] = abs(floatval($_POST['ssg_discount']));
+                $update_array['ssg_market_operator'] = intval($_POST['ssg_market_operator']);
+                $update_array['ssg_market_discount'] = abs(floatval($_POST['ssg_market_discount']));
+                $update_array['ssg_mall_operator'] = intval($_POST['ssg_mall_operator']);
+                $update_array['ssg_mall_discount'] = abs(floatval($_POST['ssg_mall_discount']));
 
                 $result = $model_grade->where(array('ssg_id'=>intval($_POST['ssg_id'])))->update($update_array);
 

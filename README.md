@@ -57,4 +57,55 @@ CREATE TABLE `si_store_images` (
 ALTER TABLE `si_store_joinin`
 ADD COLUMN `service_area_id`  mediumint(8) UNSIGNED NOT NULL DEFAULT 0 COMMENT '服务区域（二次开发）' AFTER `legal_person_id_card_photo`;
 
+#服务商等级运算符
+ALTER TABLE `si_servicer_store_grade`
+ADD COLUMN `ssg_operator`  smallint(2) NOT NULL DEFAULT 1 COMMENT '1乘2除3加4减' AFTER `ssg_name`;
+
+#供应商等级运算符
+ALTER TABLE `si_supplier_store_grade`
+ADD COLUMN `ssg_operator1`  smallint(2) NOT NULL DEFAULT 1 COMMENT '1乘2除3加4减' AFTER `ssg_name`;
+
+
+
+
+
+######################################################
+
+CREATE TABLE `si_supplier` (
+  `sup_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `sup_store_id` int(11) DEFAULT NULL COMMENT '供应商店铺ID',
+  `sup_member_id` int(11) DEFAULT NULL COMMENT '供应商会员ID',
+  `ssg_id` int(11) DEFAULT NULL COMMENT '供应商等级',
+  PRIMARY KEY (`sup_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='供应商表';
+
+CREATE TABLE `si_supplier_store_grade` (
+  `ssg_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '等级ID',
+  `ssg_name` char(50) DEFAULT NULL COMMENT '供应商等级名称',
+  `ssg_market_operator` smallint(2) NOT NULL DEFAULT '1' COMMENT '市场价运算符：1乘2除3加4减',
+  `ssg_market_discount` decimal(10,2) NOT NULL DEFAULT '1.00' COMMENT '供应商等级市场价格计算常数',
+  `ssg_mall_operator` smallint(2) NOT NULL DEFAULT '1' COMMENT '商城售价运算符：1乘2除3加4减',
+  `ssg_mall_discount` decimal(10,2) NOT NULL DEFAULT '1.00' COMMENT '供应商等级商城价格计算常数',
+  PRIMARY KEY (`ssg_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='供应商等级表';
+
+
+
+CREATE TABLE `si_servicer` (
+  `ser_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `ser_store_id` int(11) DEFAULT NULL COMMENT '服务商店铺ID',
+  `ser_member_id` int(11) DEFAULT NULL COMMENT '服务商会员ID',
+  `ssg_id` int(11) DEFAULT NULL COMMENT '服务商等级',
+  PRIMARY KEY (`ser_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='服务商表';
+
+
+
+CREATE TABLE `si_servicer_store_grade` (
+  `ssg_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '等级ID',
+  `ssg_name` char(50) DEFAULT NULL COMMENT '服务商等级名称',
+  `ssg_purchase_operator` smallint(2) NOT NULL DEFAULT '1' COMMENT '采购价运算符：1乘2除3加4减',
+  `ssg_purchase_discount` decimal(10,2) NOT NULL DEFAULT '1.00' COMMENT '服务商等级采购价计算常数',
+  PRIMARY KEY (`ssg_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='服务商等级表';
 

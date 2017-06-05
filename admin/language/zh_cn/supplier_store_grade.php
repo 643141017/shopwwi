@@ -17,3 +17,15 @@ $lang['problem_del']                             = '您确定要删除该供应�
 $lang['del_gradehavestore'] = "请先删除该等级下的店铺信息";
 $lang['illegal_parameter']                      = '参数非法';
 $lang['grade_parameter_error'] = "参数错误";
+$lang['supplier_store_grade_market_operator'] = "市场价运算符";
+$lang['supplier_store_grade_mall_operator'] = "商城售价运算符";
+
+$lang['supplier_store_grade_operator_cheng'] = "乘";
+$lang['supplier_store_grade_operator_chu'] = "除";
+$lang['supplier_store_grade_operator_jia'] = "加";
+$lang['supplier_store_grade_operator_jian'] = "减";
+$lang['supplier_store_grade_market'] = "市场价公式";
+$lang['supplier_store_grade_mall'] = "商城价公式";
+$lang['factory_price'] = "出厂价";
+$lang['supplier_store_grade_market_discount'] = "市场价计算常数";
+$lang['supplier_store_grade_mall_discount'] = "商城售价计算常数";

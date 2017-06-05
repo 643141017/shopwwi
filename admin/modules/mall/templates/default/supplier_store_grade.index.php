@@ -26,7 +26,8 @@
           <th width="150" class="handle" align="center"><?php echo $lang['nc_handle'];?></th>
           <th width="120" align="center"><?php echo $lang['supplier_store_grade_id'];?></th>
           <th width="120" align="center"><?php echo $lang['supplier_store_grade_name'];?></th>
-          <th width="120" align="center"><?php echo $lang['supplier_store_grade_discount'];?></th>
+          <th width="120" align="center"><?php echo $lang['supplier_store_grade_market'];?></th>
+          <th width="120" align="center"><?php echo $lang['supplier_store_grade_mall'];?></th>
           <th></th>
         </tr>
       </thead>
@@ -47,7 +48,8 @@
             </span></td>
           <td><?php echo $v['ssg_id'];?></td>
           <td><?php echo $v['ssg_name'];?></td>
-          <td><?php echo $v['ssg_discount'];?></td>
+         <td><?php echo $lang['factory_price'].$output['grade_operator'][$v['ssg_market_operator']].$v['ssg_market_discount'];?></td>
+         <td><?php echo $lang['factory_price'].$output['grade_operator'][$v['ssg_mall_operator']].$v['ssg_mall_discount'];?></td>
           <td></td>
         </tr>
         <?php } ?>

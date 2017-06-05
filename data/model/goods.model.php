@@ -557,6 +557,28 @@ class goodsModel extends Model{
     }
 
     /**
+     * 更新供应商审核商品信息
+     *
+     * @param array $condition
+     * @param array $update1
+     * @param array $update2
+     * @return boolean
+     */
+    public function editSupplierProduces($condition, $update1, $update2 = array(),$update3 = array()) {
+        $goods_list = $this->getGoodsList($condition, 'goods_id');
+        foreach ($goods_list as $key => $val) {
+            $data=array();
+            $data['goods_marketprice']=floatval($update3['goods_marketprice'][$val['goods_id']]);
+            $data['goods_price']=floatval($update3['goods_price'][$val['goods_id']]);
+            $toggle=$this->editGoodsById($data,array($val['goods_id']));
+            if(!$toggle) break;//一个失败跳出
+        }
+        if($toggle){
+            $this->editProduces($condition, $update1, $update2);
+        }
+    }
+
+    /**
      * 更新商品信息（审核失败）
      *
      * @param array $condition

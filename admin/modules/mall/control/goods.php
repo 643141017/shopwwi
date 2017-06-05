@@ -159,9 +159,13 @@ class goodsControl extends SystemControl{
                 case 'lockup':
                     $operation .= "<a class='btn red' href='javascript:void(0);' onclick=\"fg_del('" . $value['goods_commonid'] . "')\"><i class='fa fa-trash-o'></i>删除</a>";
                     break;
-                    // 等待审核
+                    // 商家商品等待审核
                 case 'waitverify':
                     $operation .= "<a class='btn orange' href='javascript:void(0);' onclick=\"fg_verify('" . $value['goods_commonid'] . "')\"><i class='fa fa-check-square'></i>审核</a>";
+                    break;
+                    // 直销商品等待审核
+                case 'waitverify_supplier':
+                    $operation .= "<a class='btn orange' href='javascript:void(0);' onclick=\"fg_supplier_verify('" . $value['goods_commonid'] . "')\"><i class='fa fa-check-square'></i>审核</a>";
                     break;
                     // 全部商品
                 default:
@@ -251,7 +255,7 @@ class goodsControl extends SystemControl{
     }
 
     /**
-     * 审核商品
+     * 商家审核商品
      */
     public function goods_verifyWwi(){
         if (chksubmit()) {
@@ -281,6 +285,64 @@ class goodsControl extends SystemControl{
 						//网 店 运 维mall wwi.com
 		Tpl::setDirquna('mall');
         Tpl::showpage('goods.verify_remark', 'null_layout');
+    }
+
+
+    /**
+     * 直销审核商品
+     */
+    public function goods_supplier_verifyWwi(){
+        $model_goods = Model('goods');
+        if (chksubmit()) {
+            $commonid = intval($_POST['commonid']);
+            if ($commonid <= 0) {
+                    showDialog(L('nc_common_op_fail'), 'reload');
+            }
+            $update3=array();
+            $update3['goods_marketprice']=$_POST['goods_marketprice'];
+            $update3['goods_price']=$_POST['goods_price'];
+
+            $update2 = array();
+            $update2['goods_verify'] = intval($_POST['verify_state']);
+
+            $update1 = array();
+            $update1['goods_verifyremark'] = trim($_POST['verify_reason']);
+            $update1 = array_merge($update1, $update2);
+            $where = array();
+            $where['goods_commonid'] = $commonid;
+
+            
+            if (intval($_POST['verify_state']) == 0) {
+                $model_goods->editProducesVerifyFail($where, $update1, $update2);
+            } else {
+                $model_goods->editSupplierProduces($where, $update1, $update2,$update3);//供应商商品审核
+            }
+            showDialog(L('nc_common_op_succ'), '', 'succ', '$("#flexigrid").flexReload();CUR_DIALOG.close();');
+        }
+        $commonid=intval($_GET['id']);
+        $common_info = $model_goods->getGoodsCommonInfoByID($commonid);
+        $spec_name = array_values((array)unserialize($common_info['spec_name']));
+        $goods_list = $model_goods->getGoodsList(array('goods_commonid' => $commonid), 'goods_id,goods_name,goods_spec,store_id,goods_price,goods_marketprice,goods_serial,goods_storage,goods_image');
+        if (empty($goods_list)) {
+            showDialog('参数错误', '', '', 'CUR_DIALOG.close();');
+        }
+
+        foreach ($goods_list as $key => $val) {
+            $goods_spec = array_values((array)unserialize($val['goods_spec']));
+            $spec_array = array();
+            foreach ($goods_spec as $k => $v) {
+                $spec_array[] = '<div class="goods_spec">' . $spec_name[$k] . L('nc_colon') . '<em title="' . $v . '">' . $v .'</em>' . '</div>';
+            }
+            $goods_list[$key]['goods_image'] = thumb($val, '60');
+            $goods_list[$key]['goods_spec'] = implode('', $spec_array);
+            $goods_list[$key]['url'] = urlMall('goods', 'index', array('goods_id' => $val['goods_id']));
+        }
+
+        Tpl::output('common_info', $common_info);
+        Tpl::output('goods_list', $goods_list);
+        //网 店 运 维mall wwi.com
+        Tpl::setDirquna('mall');
+        Tpl::showpage('goods.supplier_verify_remark', 'null_layout');
     }
 
     /**
