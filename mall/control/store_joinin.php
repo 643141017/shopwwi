@@ -347,6 +347,8 @@ class store_joininControl extends BaseHomeControl {
 
 
     public function step4Wwi() {
+
+        var_dump($_POST);exit;
         $store_class_ids = array();
         $store_class_names = array();
         if(!empty($_POST['store_class_ids'])) {
@@ -377,6 +379,22 @@ class store_joininControl extends BaseHomeControl {
                 }
             }
         }
+
+        //服务商特有服务区域处理
+        $service_area_ids = array();
+        $service_area_names = array();
+        if(!empty($_POST['service_area_ids'])) {
+            foreach ($_POST['service_area_ids'] as $value) {
+                $service_area_ids[] = $value;
+            }
+        }
+
+        if(!empty($_POST['service_area_names'])) {
+            foreach ($_POST['service_area_names'] as $value) {
+                $service_area_names[] = $value;
+            }
+        }
+
         $param = array();
         $param['seller_name'] = $_POST['seller_name'];
         $param['store_name'] = $_POST['store_name'];
@@ -386,7 +404,8 @@ class store_joininControl extends BaseHomeControl {
         $param['joinin_state'] = STORE_JOIN_STATE_NEW;
         $param['store_class_commis_rates'] = implode(',', $store_class_commis_rates);
 
-        $param['service_area_id'] = intval($_POST['service_area_id']);//二次开发扩展
+        $param['service_area_ids'] = serialize($service_area_ids);//二次开发扩展
+        $param['service_area_names'] = serialize($service_area_names);//二次开发扩展
 
         //取店铺等级信息
         $grade_list = rkcache('store_grade',true);

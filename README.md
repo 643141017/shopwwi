@@ -1,21 +1,4 @@
 
-#服务商等级表
-CREATE TABLE `si_servicer_store_grade` (
-  `ssg_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '等级ID',
-  `ssg_name` char(50) DEFAULT NULL COMMENT '服务商等级名称',
-  `ssg_discount` decimal(10,2) NOT NULL DEFAULT '1.00' COMMENT '服务商等级折扣',
-  PRIMARY KEY (`ssg_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='服务商等级表（二次开发）';
-
-#供应商等级表
-CREATE TABLE `si_supplier_store_grade` (
-  `ssg_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '等级ID',
-  `ssg_name` char(50) DEFAULT NULL COMMENT '供应商等级名称',
-  `ssg_discount` decimal(10,2) NOT NULL DEFAULT '1.00' COMMENT '供应商等级折扣',
-  PRIMARY KEY (`ssg_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='供应商等级表（二次开发）';
-
-
 #订单标识
 ALTER TABLE `si_orders`
 ADD COLUMN `order_identify`  tinyint(4) NULL DEFAULT 0 COMMENT '订单标识0零售订单1供销订单（二次开发）' AFTER `trade_no`;
@@ -57,17 +40,6 @@ CREATE TABLE `si_store_images` (
 ALTER TABLE `si_store_joinin`
 ADD COLUMN `service_area_id`  mediumint(8) UNSIGNED NOT NULL DEFAULT 0 COMMENT '服务区域（二次开发）' AFTER `legal_person_id_card_photo`;
 
-#服务商等级运算符
-ALTER TABLE `si_servicer_store_grade`
-ADD COLUMN `ssg_operator`  smallint(2) NOT NULL DEFAULT 1 COMMENT '1乘2除3加4减' AFTER `ssg_name`;
-
-#供应商等级运算符
-ALTER TABLE `si_supplier_store_grade`
-ADD COLUMN `ssg_operator1`  smallint(2) NOT NULL DEFAULT 1 COMMENT '1乘2除3加4减' AFTER `ssg_name`;
-
-
-
-
 
 ######################################################
 
@@ -96,8 +68,10 @@ CREATE TABLE `si_servicer` (
   `ser_store_id` int(11) DEFAULT NULL COMMENT '服务商店铺ID',
   `ser_member_id` int(11) DEFAULT NULL COMMENT '服务商会员ID',
   `ssg_id` int(11) DEFAULT NULL COMMENT '服务商等级',
+  `service_area_id` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT '服务区域（二次开发）',
   PRIMARY KEY (`ser_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='服务商表';
+
 
 
 

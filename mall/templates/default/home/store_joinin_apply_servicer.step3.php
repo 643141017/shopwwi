@@ -63,10 +63,26 @@
         </tr>
         <tr>
           <th><i>*</i>服务区域：</th>
-          <td><input id="service_area" name="service_area" type="hidden" value=""/>
-            <input type="hidden" value="" name="service_area_id" id="service_area_id">
-            <span></span>
-          </td>
+          <td><a href="###" id="btn_select_area" class="btn">+选择添加区域</a>
+            <div id="garea" style="display:none;">
+              <input id="service_area1" name="service_area1" type="hidden" value=""/>
+              <input id="btn_add_service_area" type="button" value="确认" />
+              <input id="btn_cancel_service_area" type="button" value="取消" />
+            </div>
+            <input type="hidden" value="" name="service_area" id="service_area">
+            <span></span></td>
+        </tr>
+        <tr>
+          <td colspan="2"><table border="0" cellpadding="0" cellspacing="0" id="table_area" class="type">
+              <thead>
+                <tr>
+                  <th class="w120 tc">一级地区</th>
+                  <th class="w120 tc">二级二区</th>
+                  <th class="tc">三级地区</th>
+                  <th class="w50 tc">操作</th>
+                </tr>
+              </thead>
+            </table></td>
         </tr>
       </tbody>
       <tfoot>
@@ -83,8 +99,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
 
-  $('#service_area').nc_region();
-	// gcategoryInit("gcategory");
+  $('#service_area1').nc_region();
 
     jQuery.validator.addMethod("seller_name_exist", function(value, element, params) { 
         var result = true;
@@ -124,7 +139,7 @@ $(document).ready(function(){
             sc_id: {
                 required: true
             },
-            store_class: {
+            service_area: {
                 required: true,
                 min: 1
             }
@@ -145,79 +160,71 @@ $(document).ready(function(){
             sc_id: {
                 required: '请选择店铺分类'
             },
-            store_class: {
-                required: '请选择经营类目',
-                min: '请选择经营类目'
+            service_area: {
+                required: '请选择服务区域',
+                min: '请选择服务区域'
             }
         }
     });
 
-    $('#btn_select_category').on('click', function() {
-        $('#gcategory').show();
-        $('#btn_select_category').hide();
-        $('#gcategory_class1').val(0).nextAll("select").remove();
+    $('#btn_select_area').on('click', function() {
+        $('#garea').show();
+        $('#btn_select_area').hide();
+        $('#garea select').val(0).nextAll("select").remove();
     });
 
-    $('#btn_add_category').on('click', function() {
-        var tr_category = '<tr class="store-class-item">';
-        var category_id = '';
-        var category_name = '';
-        var class_count = 0;
-        var validation = true;
+    $('#btn_add_service_area').on('click', function() {
+        var tr_area = '<tr class="service_area-item">';
+        var area_id = '';
+        var area_name = '';
+        var area_count = 0;
+        var validation = false;
         var i = 1;
-        $('#gcategory').find('select').each(function() {
+        $('#garea').find('select').each(function() {
             if(parseInt($(this).val(), 10) > 0) {
                 var name = $(this).find('option:selected').text();
-                tr_category += '<td>';
-                tr_category += name;
-                if ($('#gcategory > select').size() == i) {
-                    //最后一级显示分佣比例
-                    tr_category += ' (分佣比例：' + $(this).find('option:selected').attr('data-explain') + '%)';
-                }
-                tr_category += '</td>';
-                category_id += $(this).val() + ',';
-                category_name += name + ',';
-                class_count++;
-            } else {
-                validation = false;
-            }
+                tr_area += '<td>';
+                tr_area += name;
+                tr_area += '</td>';
+                area_id += $(this).val() + ',';
+                area_name += name + ',';
+                area_count++;
+                validation=true;
+            } 
             i++;
         });
         if(validation) {
-            for(; class_count < 3; class_count++) {
-                tr_category += '<td></td>';
+            for(; area_count < 3; area_count++) {
+                tr_area += '<td></td>';
             }
-            tr_category += '<td><a nctype="btn_drop_category" href="javascript:;">删除</a></td>';
-            tr_category += '<input name="store_class_ids[]" type="hidden" value="' + category_id + '" />';
-            tr_category += '<input name="store_class_names[]" type="hidden" value="' + category_name + '" />';
-            tr_category += '</tr>';
-            $('#table_category').append(tr_category);
-            $('#gcategory').hide();
-            $('#btn_select_category').show();
-            select_store_class_count();
-        } else {
-            showError('请选择分类');
+            tr_area += '<td><a nctype="btn_drop_area" href="javascript:;">删除</a></td>';
+            tr_area += '<input name="service_area_ids[]" type="hidden" value="' + area_id + '" />';
+            tr_area += '<input name="service_area_names[]" type="hidden" value="' + area_name + '" />';
+            tr_area += '</tr>';
+            $('#table_area').append(tr_area);
+            $('#garea').hide();
+            $('#btn_select_area').show();
+            select_store_area_count();
         }
     });
 
-    $('#table_category').on('click', '[nctype="btn_drop_category"]', function() {
+    $('#table_area').on('click', '[nctype="btn_drop_area"]', function() {
         $(this).parent('td').parent('tr').remove();
-        select_store_class_count();
+        select_store_area_count();
     });
 
     // 统计已经选择的经营类目
-    function select_store_class_count() {
-        var store_class_count = $('#table_category').find('.store-class-item').length;
-        $('#store_class').val(store_class_count);
+    function select_store_area_count() {
+        var store_area_count = $('#table_area').find('.service_area-item').length;
+        $('#service_area').val(store_area_count);
     }
 
-    $('#btn_cancel_category').on('click', function() {
-        $('#gcategory').hide();
-        $('#btn_select_category').show();
+    $('#btn_cancel_service_area').on('click', function() {
+        $('#garea').hide();
+        $('#btn_select_area').show();
     });
 
     $('#btn_apply_store_next').on('click', function() {
-        $('#service_area_id').val($("#service_area").fetch('area_id'));
         $('#form_store_info').submit();
     });
 });

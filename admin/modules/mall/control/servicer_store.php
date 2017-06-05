@@ -1309,6 +1309,14 @@ class servicer_storeControl extends SystemControl{
             }
 
             if($state) {
+
+                //记录服务商账号
+                $servicer_array = array();
+                $servicer_array['ser_store_id'] = $store_id;
+                $servicer_array['ser_member_id']= $joinin_detail['member_id'];
+                $servicer_array['ser_store_id'] = intval($_POST['ssg_id']);
+                Model('servicer')->addServicer($servicer_array);
+                
                 // 添加相册默认
                 $album_model = Model('album');
                 $album_arr = array();
