@@ -271,6 +271,26 @@
           <th>付款凭证说明：</th>
           <td><?php echo $output['joinin_detail']['paying_money_certif_exp'];?></td>
         </tr>
+
+        <tr>
+          <th>供应商等级：</th>
+          <td>
+            <?php if(in_array(intval($output['joinin_detail']['joinin_state']), array(STORE_JOIN_STATE_PAY))) {?>
+            <select id="ssg_id" name="ssg_id">
+              <?php if(is_array($output['supplier_grade_list'])){ ?>
+              <?php foreach($output['supplier_grade_list'] as $k => $v){ ?>
+              <option  <?php if($output['supplier_grade'] == $v['ssg_id']){ ?>selected="selected"<?php } ?> value="<?php echo $v['ssg_id']; ?>"><?php echo $v['ssg_name']; ?></option>
+              <?php } ?>
+              <?php } ?>
+            </select>
+            <?php } else{ ?>
+              <?php foreach($output['supplier_grade_list'] as $k => $v){ ?>
+              <?php if($output['supplier_grade'] == $v['ssg_id']) echo $v['ssg_name'];?>
+              <?php } ?>
+            <?php }?>
+          </td>
+        </tr>
+
         <?php } ?>
         <?php if(in_array(intval($output['joinin_detail']['joinin_state']), array(STORE_JOIN_STATE_NEW, STORE_JOIN_STATE_PAY))) { ?>
         <tr>

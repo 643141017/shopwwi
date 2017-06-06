@@ -1330,7 +1330,7 @@ class servicer_storeControl extends SystemControl{
 
             if($state) {
 
-                //记录服务商账号
+                //写入服务商表
                 $servicer_array = array();
                 $servicer_array['ser_store_id'] = $store_id;
                 $servicer_array['ser_member_id']= $joinin_detail['member_id'];

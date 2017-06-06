@@ -285,7 +285,9 @@
               <?php } ?>
             </select>
             <?php } else{ ?>
-              <?php echo $output['servicer_grade_list'][$output['servicer_grade']]['ssg_name'];?>
+              <?php foreach($output['servicer_grade_list'] as $k => $v){ ?>
+              <?php if($output['servicer_grade'] == $v['ssg_id']) echo $v['ssg_name'];?>
+              <?php } ?>
             <?php }?>
           </td>
         </tr>

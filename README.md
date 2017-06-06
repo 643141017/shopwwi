@@ -8,9 +8,11 @@ ALTER TABLE `si_store`
 ADD COLUMN `store_type`  int(11) NOT NULL DEFAULT 0 COMMENT '店铺类型：0商家,1服务商,2供应商（二次开发）' AFTER `is_distribution`;
 
 #店铺供应商等级或者服务等级
-ALTER TABLE `si_store`
-ADD COLUMN `store_type_grade`  int(11) NOT NULL DEFAULT 0 COMMENT '对应服务商等级或供应商等级，具体对应取决该店铺类型（二次开发）' AFTER `store_type`;
+#ALTER TABLE `si_store`
+#ADD COLUMN `store_type_grade`  int(11) NOT NULL DEFAULT 0 COMMENT '对应服务商等级或供应商等级，具体对应取决该店铺类型（二次开发）' AFTER `store_type`;
 
+ALTER TABLE `si_store_joinin`
+ADD COLUMN `store_type`  int NOT NULL DEFAULT 0 COMMENT '店铺类型：0商家,1服务商,2供应商（二次开发）' AFTER `paying_amount`;
 #店铺扩展信息
 ALTER TABLE `si_store_joinin`
 ADD COLUMN `store_service_hotline`  varchar(20) NULL DEFAULT NULL COMMENT '店铺服务热线（二次开发）' AFTER `store_type`,

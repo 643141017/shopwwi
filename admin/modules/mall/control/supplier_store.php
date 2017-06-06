@@ -1221,8 +1221,15 @@ class supplier_storeControl extends SystemControl{
                 $joinin_detail['sg_price'] = $joinin_detail['sg_info']['sg_price'];
             }
         }
+        //获取服务商(审核完成才存在)
+        $supplier_info=Model('supplier')->getSupplierInfo(array('sup_member_id'=>$joinin_detail['member_id']));
+        $supplier_grade=$supplier_info['ssg_id']?$supplier_info['ssg_id']:1;
+        //最后一次审核需要分配等级
+        $supplier_grade_list=Model('supplier_store_grade')->getGradeList();
         Tpl::output('joinin_detail_title', $joinin_detail_title);
         Tpl::output('joinin_detail', $joinin_detail);
+        Tpl::output('supplier_grade_list', $supplier_grade_list);
+        Tpl::output('supplier_grade', $supplier_grade);
         Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
         Tpl::showpage('supplier_store_joinin.detail');
     }
@@ -1309,6 +1316,13 @@ class supplier_storeControl extends SystemControl{
             }
 
             if($state) {
+                //写入供应商表
+                $supplier_array = array();
+                $supplier_array['sup_store_id'] = $store_id;
+                $supplier_array['sup_member_id']= $joinin_detail['member_id'];
+                $supplier_array['ssg_id'] = intval($_POST['ssg_id']);
+                Model('supplier')->addSupplier($supplier_array);
+
                 // 添加相册默认
                 $album_model = Model('album');
                 $album_arr = array();
