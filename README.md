@@ -66,7 +66,6 @@ CREATE TABLE `si_servicer` (
   `ser_store_id` int(11) DEFAULT NULL COMMENT '服务商店铺ID',
   `ser_member_id` int(11) DEFAULT NULL COMMENT '服务商会员ID',
   `ssg_id` int(11) DEFAULT NULL COMMENT '服务商等级',
-  `service_area_ids` varchar(100) DEFAULT NULL COMMENT '服务区域ID（二次开发）',
   PRIMARY KEY (`ser_id`),
   UNIQUE KEY `ser_store_id` (`ser_store_id`) USING BTREE,
   KEY `ser_member_id` (`ser_member_id`) USING BTREE
@@ -86,4 +85,16 @@ CREATE TABLE `si_servicer_store_grade` (
 ALTER TABLE `si_store_joinin`
 ADD COLUMN `service_area_ids`  varchar(100) NULL DEFAULT NULL COMMENT '服务区域ID（二次开发）' AFTER `legal_person_id_card_photo`,
 ADD COLUMN `service_area_names`  varchar(100) NULL DEFAULT NULL COMMENT '服务区域名称（二次开发）' AFTER `service_area_ids`;
+
+#服务商区域表
+CREATE TABLE `si_store_bind_area` (
+  `bid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) unsigned DEFAULT '0' COMMENT '店铺ID',
+  `area_1` mediumint(9) unsigned DEFAULT '0' COMMENT '一级地区',
+  `area_2` mediumint(9) unsigned DEFAULT '0' COMMENT '二级地区',
+  `area_3` mediumint(9) unsigned DEFAULT '0' COMMENT '三级地区',
+  `state` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '状态0审核中1已审核',
+  PRIMARY KEY (`bid`),
+  KEY `store_id` (`store_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='服务商服务区域表';
 

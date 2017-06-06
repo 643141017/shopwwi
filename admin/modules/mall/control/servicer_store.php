@@ -20,7 +20,7 @@ class servicer_storeControl extends SystemControl{
         array('url'=>'app=servicer_store&wwi=store','text'=>'管理'),
         array('url'=>'app=servicer_store&wwi=store_joinin','text'=>'开店申请'),
         array('url'=>'app=servicer_store&wwi=reopen_list','text'=>'续签申请'),
-        array('url'=>'app=servicer_store&wwi=store_bind_class_applay_list','text'=>'经营类目申请'),
+        array('url'=>'app=servicer_store&wwi=store_bind_area_applay_list','text'=>'服务区域申请'),
         array('url'=>'app=servicer_store&wwi=bill_cycle','text'=>'结算周期设置')
     );
 
@@ -124,7 +124,7 @@ class servicer_storeControl extends SystemControl{
         foreach ($store_list as $value) {
             $param = array();
             $store_state = $this->getStoreState($value);
-            $operation = "<a class='btn green' href='index.php?app=servicer_store&wwi=store_joinin_detail&member_id=".$value['member_id']."'><i class='fa fa-list-alt'></i>查看</a><span class='btn'><em><i class='fa fa-cog'></i>" . L('nc_set') . " <i class='arrow'></i></em><ul><li><a href='index.php?app=servicer_store&wwi=store_edit&store_id=" . $value['store_id'] . "'>编辑店铺信息</a></li><li><a href='index.php?app=servicer_store&wwi=store_bind_class&store_id=" . $value['store_id'] . "'>修改经营类目</a></li>";
+            $operation = "<a class='btn green' href='index.php?app=servicer_store&wwi=store_joinin_detail&member_id=".$value['member_id']."'><i class='fa fa-list-alt'></i>查看</a><span class='btn'><em><i class='fa fa-cog'></i>" . L('nc_set') . " <i class='arrow'></i></em><ul><li><a href='index.php?app=servicer_store&wwi=store_edit&store_id=" . $value['store_id'] . "'>编辑店铺信息</a></li><li><a href='index.php?app=servicer_store&wwi=store_bind_area&store_id=" . $value['store_id'] . "'>修改服务区域</a></li>";
             if (str_cut($store_state, 6) == 'expire'  && cookie('remindRenewal'.$value['store_id']) == null) {
                 $operation .= "<li><a class='expire' href=". urlAdminMall('store', 'remind_renewal', array('store_id'=>$value['store_id'])). ">提醒商家续费</a></li>";
             }
@@ -596,72 +596,72 @@ class servicer_storeControl extends SystemControl{
     }
 
     /**
-     * 店铺经营类目管理
+     * 店铺服务区域
      */
-    public function store_bind_classWwi() {
+    public function store_bind_areaWwi() {
         $store_id = intval($_GET['store_id']);
-
         $model_store = Model('store');
-        $model_store_bind_class = Model('store_bind_class');
-        $model_goods_class = Model('goods_class');
+        $model_store_bind_area = Model('store_bind_area');
+        $model_area = Model('area');
 
-        $gc_list = $model_goods_class->getGoodsClassListByParentId(0);
-        Tpl::output('gc_list',$gc_list);
+        $area_list = $model_area->getTopLevelAreas(0);
+
+        Tpl::output('area_list',$area_list);
 
         $store_info = $model_store->getStoreInfoByID($store_id);
+
         if(empty($store_info)) {
             showMessage(L('param_error'),'','','error');
         }
         Tpl::output('store_info', $store_info);
 
-        $store_bind_class_list = $model_store_bind_class->getStoreBindClassList(array('store_id'=>$store_id,'state'=>array('in',array(1,2))), null);
-        $goods_class = Model('goods_class')->getGoodsClassIndexedListAll();
-        for($i = 0, $j = count($store_bind_class_list); $i < $j; $i++) {
-            $store_bind_class_list[$i]['class_1_name'] = $goods_class[$store_bind_class_list[$i]['class_1']]['gc_name'];
-            $store_bind_class_list[$i]['class_2_name'] = $goods_class[$store_bind_class_list[$i]['class_2']]['gc_name'];
-            $store_bind_class_list[$i]['class_3_name'] = $goods_class[$store_bind_class_list[$i]['class_3']]['gc_name'];
+        $store_bind_area_list = $model_store_bind_area->getStoreBindAreaList(array('store_bind_area.store_id'=>$store_id,'store_bind_area.state'=>1), null);
+        
+        $area = Model('area')->getAreaListAll();
+
+        for($i = 0, $j = count($store_bind_area_list); $i < $j; $i++) {
+            $store_bind_area_list[$i]['area_1_name'] = $area[$store_bind_area_list[$i]['area_1']];
+            $store_bind_area_list[$i]['area_2_name'] = $area[$store_bind_area_list[$i]['area_2']];
+            $store_bind_area_list[$i]['area_3_name'] = $area[$store_bind_area_list[$i]['area_3']];
         }
-        Tpl::output('store_bind_class_list', $store_bind_class_list);
+        Tpl::output('store_bind_area_list', $store_bind_area_list);
         Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
 
-        Tpl::showpage('servicer_store.bind_class');
+        Tpl::showpage('servicer_store.bind_area');
     }
 
     /**
-     * 添加经营类目
+     * 添加服务区域
      */
-    public function store_bind_class_addWwi() {
-        $store_id = intval($_POST['store_id']);
-        $commis_rate = intval($_POST['commis_rate']);
-        if($commis_rate < 0 || $commis_rate > 100) {
-            showMessage(L('param_error'), '');
-        }
-        list($class_1, $class_2, $class_3) = explode(',', $_POST['goods_class']);
+    public function store_bind_area_addWwi() {
 
-        $model_store_bind_class = Model('store_bind_class');
+        $store_id = intval($_POST['store_id']);
+
+        list($area_1, $area_2, $area_3) = explode(',', $_POST['servicer_area']);
+
+        $model_store_bind_area = Model('store_bind_area');
 
         $param = array();
         $param['store_id'] = $store_id;
-        $param['class_1'] = $class_1;
+        $param['area_1'] = $area_1;
         $param['state'] = 1;
-        if(!empty($class_2)) {
-            $param['class_2'] = $class_2;
+        if(!empty($area_2)) {
+            $param['area_2'] = $area_2;
         }
-        if(!empty($class_3)) {
-            $param['class_3'] = $class_3;
+        if(!empty($area_3)) {
+            $param['area_3'] = $area_3;
         }
 
         // 检查类目是否已经存在
-        $store_bind_class_info = $model_store_bind_class->getStoreBindClassInfo($param);
-        if(!empty($store_bind_class_info)) {
-            showMessage('该类目已经存在','','','error');
+        $store_bind_area_info = $model_store_bind_area->getStoreBindAreaInfo($param);
+        if(!empty($store_bind_area_info)) {
+            showMessage('该区域已经存在','','','error');
         }
 
-        $param['commis_rate'] = $commis_rate;
-        $result = $model_store_bind_class->addStoreBindClass($param);
+        $result = $model_store_bind_area->addStoreBindArea($param);
 
         if($result) {
-            $this->log('删除店铺经营类目，类目编号:'.$result.',店铺编号:'.$store_id);
+            $this->log('添加服务商服务区域，编号:'.$result.',店铺编号:'.$store_id);
             showMessage(L('nc_common_save_succ'), '');
         } else {
             showMessage(L('nc_common_save_fail'), '');
@@ -669,67 +669,38 @@ class servicer_storeControl extends SystemControl{
     }
 
     /**
-     * 删除经营类目
+     * 删除服务区域
      */
-    public function store_bind_class_delWwi() {
+    public function store_bind_area_delWwi() {
         $bid = intval($_POST['bid']);
 
         $data = array();
         $data['result'] = true;
 
-        $model_store_bind_class = Model('store_bind_class');
-        $model_goods = Model('goods');
+        $model_store_bind_area = Model('store_bind_area');
 
-        $store_bind_class_info = $model_store_bind_class->getStoreBindClassInfo(array('bid' => $bid));
-        if(empty($store_bind_class_info)) {
+        $store_bind_area_info = $model_store_bind_area->getStoreBindAreaInfo(array('bid' => $bid));
+        if(empty($store_bind_area_info)) {
             $data['result'] = false;
-            $data['message'] = '经营类目删除失败';
+            $data['message'] = '服务区域删除失败';
             echo json_encode($data);die;
         }
 
-        // 商品下架
-        $condition = array();
-        $condition['store_id'] = $store_bind_class_info['store_id'];
-        $gc_id = $store_bind_class_info['class_1'].','.$store_bind_class_info['class_2'].','.$store_bind_class_info['class_3'];
-        $update = array();
-        $update['goods_stateremark'] = '管理员删除经营类目';
-        $condition['gc_id'] = array('in', rtrim($gc_id, ','));
-        $model_goods->editProducesLockUp($update, $condition);
 
-        $result = $model_store_bind_class->delStoreBindClass(array('bid'=>$bid));
+        $result = $model_store_bind_area->delStoreBindArea(array('bid'=>$bid));
 
         if(!$result) {
             $data['result'] = false;
-            $data['message'] = '经营类目删除失败';
+            $data['message'] = '服务区域删除失败';
         }
-        $this->log('删除店铺经营类目，类目编号:'.$bid.',店铺编号:'.$store_bind_class_info['store_id']);
+        $this->log('删除服务商服务区域，编号:'.$bid.',店铺编号:'.$store_bind_area_info['store_id']);
         echo json_encode($data);die;
     }
 
     public function store_bind_class_updateWwi() {
-        $bid = intval($_GET['id']);
-        if($bid <= 0) {
-            echo json_encode(array('result'=>FALSE,'message'=>Language::get('param_error')));
-            die;
-        }
-        $new_commis_rate = intval($_GET['value']);
-        if ($new_commis_rate < 0 || $new_commis_rate >= 100) {
-            echo json_encode(array('result'=>FALSE,'message'=>Language::get('param_error')));
-            die;
-        } else {
-            $update = array('commis_rate' => $new_commis_rate);
-            $condition = array('bid' => $bid);
-            $model_store_bind_class = Model('store_bind_class');
-            $result = $model_store_bind_class->editStoreBindClass($update, $condition);
-            if($result) {
-                $this->log('更新店铺经营类目，类目编号:'.$bid);
-                echo json_encode(array('result'=>TRUE));
-                die;
-            } else {
-                echo json_encode(array('result'=>FALSE,'message'=>L('nc_common_op_fail')));
-                die;
-            }
-        }
+        $data['result'] = false;
+        $data['message'] = '操作无效';
+        echo json_encode($data);die;
     }
 
     public function shopwwi_addWwi()
@@ -949,17 +920,17 @@ class servicer_storeControl extends SystemControl{
     /**
      * 经营类目申请列表
      */
-    public function store_bind_class_applay_listWwi(){
-        Tpl::output('top_link',$this->sublink($this->_links,'store_bind_class_applay_list'));
+    public function store_bind_area_applay_listWwi(){
+        Tpl::output('top_link',$this->sublink($this->_links,'store_bind_area_applay_list'));
         Tpl::setDirquna('mall');/*网 店 运 维mall wwi.com*/
-        Tpl::showpage('servicer_store.bind_class_applay_list');
+        Tpl::showpage('servicer_store.bind_area_applay_list');
     }
 
     /**
      * 输出XML数据
      */
-    public function get_bind_class_applay_xmlWwi() {
-        $model_store_bind_class = Model('store_bind_class');
+    public function get_bind_area_applay_xmlWwi() {
+        $model_store_bind_area = Model('store_bind_area');
         // 设置页码参数名称
         $condition = array();
         $condition['store_type'] = self::STORE_TYPE;
@@ -975,7 +946,7 @@ class servicer_storeControl extends SystemControl{
             $condition[$_POST['qtype']] = array('like', '%' . $_POST['query'] . '%');
         }
         $order = '';
-        $param = array('bid', 'store_id', 'commis_rate', 'class_1', 'class_2', 'class_3', 'state');
+        $param = array('bid', 'store_id', 'area_1', 'area_2', 'area_3', 'state');
         if (in_array($_POST['sortname'], $param) && in_array($_POST['sortorder'], array('asc', 'desc'))) {
             $order = $_POST['sortname'] . ' ' . $_POST['sortorder'];
         }
@@ -983,9 +954,10 @@ class servicer_storeControl extends SystemControl{
         $page = $_POST['rp'];
 
         //店铺列表
-        $store_bind_class_list = $model_store_bind_class->getStoreBindClassList($condition, $page, $order);
+        $store_bind_area_list = $model_store_bind_area->getStoreBindAreaList($condition, $page, $order);
+        
         $storeid_array = array();
-        foreach ($store_bind_class_list as $value) {
+        foreach ($store_bind_area_list as $value) {
             $storeid_array[] = $value['store_id'];
         }
         $store_list = Model('store')->getStoreList(array('store_id'=>array('in', $storeid_array)));
@@ -995,56 +967,56 @@ class servicer_storeControl extends SystemControl{
             $store_array[$value['store_id']]['seller_name'] = $value['seller_name'];
         }
 
-        //商品分类
-        $goods_class = Model('goods_class')->getGoodsClassIndexedListAll();
+        //地区
+        $area = Model('area')->getAreaListAll();
 
         // 申请类目状态
-        $apply_state = $this->getClassApplyState();
+        $apply_state = $this->getAreaApplyState();
 
         $data = array();
-        $data['now_page'] = $model_store_bind_class->shownowpage();
-        $data['total_num'] = $model_store_bind_class->gettotalnum();
-        foreach ($store_bind_class_list as $value) {
+        $data['now_page'] = $model_store_bind_area->shownowpage();
+        $data['total_num'] = $model_store_bind_area->gettotalnum();
+
+        foreach ($store_bind_area_list as $value) {
             $param = array();
             if($value['state'] == '0') {
-                $operation = "<a class='btn orange' href=\"javascript:if(confirm('确认审核吗？'))window.location = 'index.php?app=servicer_store&wwi=store_bind_class_applay_check&bid=".$value['bid']."&store_id=".$value['store_id']."'\"><i class=\"fa fa-check-tyq\"></i>审核</a>";
+                $operation = "<a class='btn orange' href=\"javascript:if(confirm('确认审核吗？'))window.location = 'index.php?app=servicer_store&wwi=store_bind_area_applay_check&bid=".$value['bid']."&store_id=".$value['store_id']."'\"><i class=\"fa fa-check-tyq\"></i>审核</a>";
             } else {
-                $operation = "<a class='btn red' href=\"javascript:if(confirm('".($value['state'] == '1' ? '该类目已经审核通过，删除它可能影响到商家的使用，' : null)."确认删除吗？'))window.location = 'index.php?app=servicer_store&wwi=store_bind_class_applay_del&bid=".$value['bid']."&store_id=".$value['store_id']."'\"><i class=\"fa fa-trash-o\"></i>删除</a>";
+                $operation = "<a class='btn red' href=\"javascript:if(confirm('".($value['state'] == '1' ? '该类目已经审核通过，删除它可能影响到商家的使用，' : null)."确认删除吗？'))window.location = 'index.php?app=servicer_store&wwi=store_bind_area_applay_del&bid=".$value['bid']."&store_id=".$value['store_id']."'\"><i class=\"fa fa-trash-o\"></i>删除</a>";
             }
             $param['operation'] = $operation;
             $param['store_id'] = $value['store_id'];
             $param['store_name'] = $store_array[$value['store_id']]['store_name'];
             $param['seller_name'] = $store_array[$value['store_id']]['seller_name'];
-            $param['commis_rate'] = $value['commis_rate'] . '%';
             $param['state'] = $apply_state[$value['state']];
-            $param['class'] = $goods_class[$value['class_1']]['gc_name'] . '(ID:' . $value['class_1'] . ')';
-            if ($value['class_2'] > 0) {
-                $param['class'] .= '   > ' . $goods_class[$value['class_2']]['gc_name']. '(ID:' . $value['class_2'] . ')';
+            $param['area'] = $area[$value['area_1']] . '(ID:' . $value['area_1'] . ')';
+            if ($value['area_2'] > 0) {
+                $param['area'] .= '   > ' . $area[$value['area_2']]. '(ID:' . $value['area_2'] . ')';
             }
-            if ($value['class_3'] > 0) {
-                $param['class'] .= '   > ' . $goods_class[$value['class_3']]['gc_name']. '(ID:' . $value['class_3'] . ')';
+            if ($value['area_3'] > 0) {
+                $param['area'] .= '   > ' . $area[$value['area_3']]. '(ID:' . $value['area_3'] . ')';
             }
             $data['list'][$value['bid']] = $param;
         }
         echo Tpl::flexigridXML($data);exit();
     }
 
-    private function getClassApplyState() {
-        return array('0' => '审核中', '1' => '已审核', '2' => '自营店');
+    private function getAreaApplyState() {
+        return array('0' => '审核中', '1' => '已审核');
     }
 
 
     /**
-     * 审核经营类目申请
+     * 审核服务区域申请
      */
-    public function store_bind_class_applay_checkWwi() {
-        $model_store_bind_class = Model('store_bind_class');
+    public function store_bind_area_applay_checkWwi() {
+        $model_store_bind_area = Model('store_bind_area');
         $condition = array();
         $condition['bid'] = intval($_GET['bid']);
         $condition['state'] = 0;
-        $update = $model_store_bind_class->editStoreBindClass(array('state'=>1),$condition);
+        $update = $model_store_bind_area->editStoreBindArea(array('state'=>1),$condition);
         if ($update) {
-            $this->log('审核新经营类目申请，店铺ID：'.$_GET['store_id'],1);
+            $this->log('审核新服务区域申请，店铺ID：'.$_GET['store_id'],1);
             showMessage('审核成功',getReferer());
         } else {
             showMessage('审核失败',getReferer(),'html','error');
@@ -1054,13 +1026,13 @@ class servicer_storeControl extends SystemControl{
     /**
      * 删除经营类目申请
      */
-    public function store_bind_class_applay_delWwi() {
-        $model_store_bind_class = Model('store_bind_class');
+    public function store_bind_area_applay_delWwi() {
+        $model_store_bind_area = Model('store_bind_area');
         $condition = array();
         $condition['bid'] = intval($_GET['bid']);
-        $del = $model_store_bind_class->delStoreBindClass($condition);
+        $del = $model_store_bind_area->delStoreBindArea($condition);
         if ($del) {
-            $this->log('删除经营类目，店铺ID：'.$_GET['store_id'],1);
+            $this->log('删除服务区域，店铺ID：'.$_GET['store_id'],1);
             showMessage('删除成功',getReferer());
         } else {
             showMessage('删除失败',getReferer(),'html','error');
@@ -1335,7 +1307,6 @@ class servicer_storeControl extends SystemControl{
                 $servicer_array['ser_store_id'] = $store_id;
                 $servicer_array['ser_member_id']= $joinin_detail['member_id'];
                 $servicer_array['ssg_id'] = intval($_POST['ssg_id']);
-                $servicer_array['service_area_ids'] = $joinin_detail['service_area_ids'];
                 Model('servicer')->addServicer($servicer_array);
                 
                 // 添加相册默认

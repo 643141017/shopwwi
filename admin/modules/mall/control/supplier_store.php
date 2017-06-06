@@ -429,7 +429,12 @@ class supplier_storeControl extends SystemControl{
                 $update_array['store_recommend'] = intval($_POST['store_recommend']);
             }
             $result = $model_store->editStore($update_array, array('store_id' => $_POST['store_id']));
-            if ($result){
+            //更新服务商等级
+            $update_array=array();
+            $update_array['ssg_id']=intval($_POST['ssg_id']);
+            $toggle=Model('supplier')->editSupplier($update_array,array('sup_store_id' =>$_POST['store_id']));
+
+            if ($result&&$toggle){
                 $url = array(
                 array(
                 'url'=>'index.php?app=supplier_store&wwi=store',
@@ -460,7 +465,13 @@ class supplier_storeControl extends SystemControl{
         //店铺等级
         $model_grade = Model('store_grade');
         $grade_list = $model_grade->getGradeList();
+
+        $supplier_grade_list=Model('supplier_store_grade')->getGradeList();
+        $supplier_info=Model('supplier')->getSupplierInfo(array('sup_member_id'=>$store_array['member_id']));
+        $supplier_grade=$supplier_info['ssg_id']?$supplier_info['ssg_id']:1;
         Tpl::output('grade_list',$grade_list);
+        Tpl::output('supplier_grade_list',$supplier_grade_list);
+        Tpl::output('supplier_grade',$supplier_grade);
         Tpl::output('class_list',$parent_list);
         Tpl::output('store_array',$store_array);
 
@@ -602,7 +613,7 @@ class supplier_storeControl extends SystemControl{
         }
         Tpl::output('store_info', $store_info);
 
-        $store_bind_class_list = $model_store_bind_class->getStoreBindClassList(array('store_id'=>$store_id,'state'=>array('in',array(1,2))), null);
+        $store_bind_class_list = $model_store_bind_class->getStoreBindClassList(array('store_bind_class.store_id'=>$store_id,'store_bind_class.state'=>array('in',array(1,2))), null);
         $goods_class = Model('goods_class')->getGoodsClassIndexedListAll();
         for($i = 0, $j = count($store_bind_class_list); $i < $j; $i++) {
             $store_bind_class_list[$i]['class_1_name'] = $goods_class[$store_bind_class_list[$i]['class_1']]['gc_name'];
@@ -1302,6 +1313,7 @@ class supplier_storeControl extends SystemControl{
             $mall_array['store_state']  = 1;
             $mall_array['store_time']   = time();
             $mall_array['store_end_time'] = strtotime(date('Y-m-d 23:59:59', strtotime('+1 day'))." +".intval($joinin_detail['joinin_year'])." year");
+            $mall_array['store_type']   = $joinin_detail['store_type'];
             $store_id = $model_store->addStore($mall_array);
 
             if($store_id) {

@@ -46,6 +46,7 @@ $lang['zip']             = '邮政编码';
 $lang['tel_phone']       = '联系电话';
 $lang['belongs_level']   = '所属等级';
 $lang['servicer_belongs_level']   = '服务商等级';
+$lang['supplier_belongs_level']   = '供应商商等级';
 $lang['period_to']       = '有效期至';
 $lang['formart']         = '';
 $lang['state']           = '状态';

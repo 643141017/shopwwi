@@ -69,7 +69,7 @@
       <span id="error_message" style="color:red;"></span></dd>
     <dt class="tit">分佣比例(必须为0-100的整数)</dt>
     <dd class="opt">
-      <form id="add_form" action="<?php echo urlAdminMall('store', 'store_bind_class_add');?>" method="post">
+      <form id="add_form" action="<?php echo urlAdminMall('supplier_store', 'store_bind_class_add');?>" method="post">
         <input name="store_id" type="hidden" value="<?php echo $output['store_info']['store_id'];?>">
         <input id="goods_class" name="goods_class" type="hidden" value="">
         <input id="commis_rate" name="commis_rate" class="w60" type="text" value="" />
@@ -138,7 +138,7 @@ $(document).ready(function(){
         if(confirm('确认删除？删除后店铺对应分类商品将全部下架')) {
             var bid = $(this).attr('data-bid');
             $this = $(this);
-            $.post('<?php echo urlAdminMall('store', 'store_bind_class_del');?>', {bid: bid}, function(data) {
+            $.post('<?php echo urlAdminMall('supplier_store', 'store_bind_class_del');?>', {bid: bid}, function(data) {
                  if(data.result) {
                      $this.parents('tr').hide();
                  } else {
@@ -149,7 +149,7 @@ $(document).ready(function(){
     });
 
     // 修改分佣比例
-    $('span[nc_type="commis_rate"]').inline_edit({app: 'store',wwi: 'store_bind_class_update'});
+    $('span[nc_type="commis_rate"]').inline_edit({app: 'supplier_store',wwi: 'store_bind_class_update'});
 });
 
 </script> 

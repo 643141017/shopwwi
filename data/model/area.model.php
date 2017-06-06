@@ -211,4 +211,13 @@ class areaModel extends Model {
         }
         return $result;
     }
+
+    /**
+     * 从缓存获取全部地区
+     */
+    public function getAreaListAll() {
+        $data = $this->getCache();
+        return $data['name'];
+    }
+
 }
