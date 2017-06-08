@@ -140,6 +140,10 @@ class memberModel extends Model {
         $seller_info = Model('seller')->getSellerInfo(array('member_id'=>$_SESSION['member_id']));
         $_SESSION['store_id'] = $seller_info['store_id'];
 
+        //从服务商表查询是否服务商
+        $servicer_info=Model('servicer')->getServicerInfo(array('ser_member_id'=>$_SESSION['member_id']));
+        $_SESSION['ser_id']=(int)$servicer_info['ser_id'];//服务商记录ID(0表示不是服务商)
+
         if (trim($member_info['member_qqopenid'])){
             $_SESSION['openid']     = $member_info['member_qqopenid'];
         }

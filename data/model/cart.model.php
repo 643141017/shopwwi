@@ -111,6 +111,7 @@ class cartModel extends Model {
         $array['goods_image'] = $goods_info['goods_image'];
         $array['store_name'] = $goods_info['store_name'];
         $array['bl_id'] = isset($goods_info['bl_id']) ? $goods_info['bl_id'] : 0;
+        $array['is_purchase'] = $goods_info['is_purchase'] ? 1 : 0;
         return $this->insert($array);
     }
 
@@ -288,8 +289,11 @@ class cartModel extends Model {
         $where['goods_id'] = array('in',array_keys($cart_new_list));
         $goods_list = $model_goods->getGoodsOnlineList($where);
         if (!empty($goods_list)){
+            $logic_buy_1 = logic('buy_1');
             foreach ($goods_list as $goods_info){
                 $goods_info['buyer_id'] = $member_id;
+                //检查是否采购
+                $logic_buy_1->getPurchaseInfo($goods_info,$_SESSION['ser_id']);
                 $this->addCart($goods_info,'db',$cart_new_list[$goods_info['goods_id']]['goods_num']);
             }
         }

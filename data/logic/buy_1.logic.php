@@ -8,6 +8,8 @@
  */
 defined('ByShopWWI') or exit('Access Invalid!');
 class buy_1Logic {
+
+    private $is_purchase=false;
    /**
      * 取得商品最新的属性及促销[购物车]
      * @param unknown $cart_list
@@ -16,6 +18,10 @@ class buy_1Logic {
     public function getGoodsCartList($cart_list, \StdClass $jjgObj = null) {
 
         $cart_list = $this->_getOnlineCartList($cart_list);
+
+        //采购
+        $this->_getPurchaseCartList($cart_list);
+
         //预定
         $this->_getBookCartList($cart_list);
 
@@ -384,6 +390,7 @@ class buy_1Logic {
      * @param number $quantity 购买数量
      */
     public function getXianshiInfo( & $goods_info, $quantity) {
+        $this->isPupurchaseReturn();
         if (empty($quantity)) $quantity = 1;
         if (!C('promotion_allow') || empty($goods_info['xianshi_info']) || !empty($goods_info['groupbuy_info']) || $goods_info['ifsole']) return ;
         $goods_info['xianshi_info']['down_price'] = ncPriceFormat($goods_info['goods_price'] - $goods_info['xianshi_info']['xianshi_price']);
@@ -1216,6 +1223,7 @@ class buy_1Logic {
      * @param array $goods_info
      */
     public function getGroupbuyInfo(& $goods_info = array()) {
+        $this->isPupurchaseReturn();
         if (!C('groupbuy_allow') || empty($goods_info['groupbuy_info']) || $goods_info['ifsole']) return ;
         $groupbuy_info = $goods_info['groupbuy_info'];
         $goods_info['goods_price'] = $groupbuy_info['groupbuy_price'];
@@ -1232,6 +1240,7 @@ class buy_1Logic {
      * @param unknown $goods_info
      */
     public function getMbSoleInfo(& $goods_info = array()) {
+        $this->isPupurchaseReturn();
         if (!C('promotion_allow') || empty($goods_info['sole_info'])) return ;
         $sole_info = $goods_info['sole_info'];
         $goods_info['goods_price'] = $sole_info['sole_price'];
@@ -1357,6 +1366,7 @@ class buy_1Logic {
      * @param array $cart_list
      */
     public function getGroupbuyCartList(& $cart_list) {
+        $this->isPupurchaseReturn();
         if (!C('groupbuy_allow') || empty($cart_list)) return ;
         foreach ($cart_list as $key => $cart_info) {
             if (intval($cart_info['bl_id']) || empty($cart_info['groupbuy_info']) || $cart_info['ifsole']) continue;
@@ -1370,6 +1380,7 @@ class buy_1Logic {
      * @param unknown $cart_list
      */
     public function getMbSoleCartList(& $cart_list) {
+        $this->isPupurchaseReturn();
         foreach ($cart_list as $key => $cart_info) {
             if (intval($cart_info['bl_id']) || empty($cart_info['sole_info'])) continue;
             $this->getMbSoleInfo($cart_info);
@@ -1383,6 +1394,7 @@ class buy_1Logic {
      * @param array $cart_list
      */
     public function getXianshiCartList(& $cart_list) {
+        $this->isPupurchaseReturn();
         if (!C('promotion_allow') || empty($cart_list)) return ;
         foreach ($cart_list as $key => $cart_info) {
             if (intval($cart_info['bl_id']) || empty($cart_info['xianshi_info']) || !empty($cart_info['groupbuy_info']) || $cart_info['ifsole']) continue;
@@ -1397,6 +1409,7 @@ class buy_1Logic {
      * @param array $cart_list
      */
     private function _getGiftCartList(& $cart_list) {
+        $this->isPupurchaseReturn();
         foreach ($cart_list as $k => $cart_info) {
             if ($cart_info['bl_id']) continue;
             $this->_getGoodsGiftList($cart_info);
@@ -1409,6 +1422,7 @@ class buy_1Logic {
      * @param unknown $cart_list
      */
     private function _getBookCartList(& $cart_list) {
+        $this->isPupurchaseReturn();
         if (!C('promotion_allow') || empty($cart_list)) return ;
         foreach ($cart_list as $key => $cart_info) {
             if (intval($cart_info['bl_id'])) continue;
@@ -1423,7 +1437,8 @@ class buy_1Logic {
      * @param array $cart_list
      */
     private function _getBundlingCartList(& $cart_list) {
-        if (!C('promotion_allow') || empty($cart_list)) return ;
+        $this->isPupurchaseReturn();
+        if (!C('promotion_allow') || empty($cart_list) ) return ;
         $model_bl = Model('p_bundling');
         $model_goods = Model('goods');
         foreach ($cart_list as $key => $cart_info) {
@@ -1606,6 +1621,43 @@ class buy_1Logic {
             }
             return sprintf('满%s%s%s',$rule_info['price'],$discount_desc,$goods_desc);
         }
+    }
+
+    /**
+     * 如果购物车内的商品含有采购，价格必须为采购价
+     * @param unknown $cart_list
+     */
+    private function _getPurchaseCartList(& $cart_list) {
+        foreach ($cart_list as $key => $cart_info) {
+            $this->getPurchaseInfo($cart_info,$_SESSION['ser_id']);
+            if ($cart_info['is_purchase']) $cart_info['goods_price'] = $cart_info['goods_price'];
+            $cart_list[$key] = $cart_info;
+        }
+    }
+
+
+    /**
+     * 获取采购价
+     * @param ser_id 服务商记录id
+     * @return array
+     */
+    public function getPurchaseInfo(& $goods_info = array(),$ser_id) {
+        list($toggle,$purchase_price)=Model('servicer')->getGoodsPurchasePrice($ser_id,$goods_info['goods_id']);
+        if($toggle){
+            $goods_info['goods_price']=$purchase_price;
+        }
+        $goods_info['is_purchase']=$toggle;
+        $this->is_purchase=$toggle;
+    }
+
+    /**
+     * 检查是否采购
+     * @param ser_id 服务商记录id
+     * @return array
+     */
+
+    public function isPupurchaseReturn(){
+        if($this->is_purchase) return;
     }
 
 }

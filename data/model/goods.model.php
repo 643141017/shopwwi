@@ -1520,4 +1520,16 @@ class goodsModel extends Model{
         $goods_list = $this->table('goods')->where(array('goods_id'=> array('in', $goodsid_array)))->field($field)->key('goods_id')->select();
         return $goods_list;
     }
+
+    /**
+     * 获取商品成本价
+     *
+     * @param array $goods_commonid ID
+     * @return array
+     */
+
+    public function getGoodsCommonCostpriceById($goods_commonid){
+        $goods_info = $this->table('goods_common')->where(array('goods_commonid'=>$goods_commonid))->field('goods_costprice')->find();
+        return $goods_info['goods_costprice'];
+    }
 }

@@ -98,3 +98,8 @@ CREATE TABLE `si_store_bind_area` (
   KEY `store_id` (`store_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='服务商服务区域表';
 
+#购物车采购标识
+ALTER TABLE `si_cart`
+ADD COLUMN `is_purchase`  smallint(2) NOT NULL DEFAULT 0 COMMENT '是否采购，0否1是' AFTER `bl_id`;
+
+

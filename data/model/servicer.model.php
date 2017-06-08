@@ -78,4 +78,52 @@ class servicerModel extends Model{
         return $this->where($condition)->delete();
     }
 
+    /**
+     * 读取服务商等级
+     * @param int $ser_id
+     *
+     */
+    public function getServicerAndGradeInfo($ser_id,$field='*') {
+        $condition=array('ser_id'=>intval($ser_id));
+        return $this->table('servicer,servicer_store_grade')->field($field)->join('inner')->on('servicer.ssg_id = servicer_store_grade.ssg_id')->where($condition)->find();
+    }
+
+    /**
+     * 根据服务商ID获取产品的采购价
+     *
+     * @param int $ser_id 服务商ID
+     * @param int $goods_id 商品ID
+     * @return array
+     */
+    public function getGoodsPurchasePrice($ser_id,$goods_id){
+        $toggle=false;
+        $purchase_price=0;
+        $servicer_info=$this->getServicerAndGradeInfo($ser_id);
+
+        $goods_info=Model('goods')->getGoodsOnlineInfoAndPromotionById($goods_id);
+        $store_info=Model('store')->getStoreOnlineInfoByID($goods_info['store_id']);
+        if($servicer_info && $store_info['store_type']==2){
+            $goods_costprice=Model('goods')->getGoodsCommonCostpriceById($goods_info['goods_commonid']);
+            $toggle=true;
+            switch ((int)$servicer_info['ssg_purchase_operator']) {
+                case 2:
+                    # 除
+                    $purchase_price=round($goods_costprice/$servicer_info['ssg_purchase_discount'],1);
+                    break;   
+                case 3:
+                    # 加
+                    $purchase_price=round($goods_costprice+$servicer_info['ssg_purchase_discount'],1);
+                    break;  
+                case 4:
+                    # 减
+                    $purchase_price=round($goods_costprice-$servicer_info['ssg_purchase_discount'],1);
+                    break;              
+                default:
+                    # 乘
+                    $purchase_price=round($goods_costprice*$servicer_info['ssg_purchase_discount'],1);
+                    break;
+            }
+        }
+        return array($toggle,$purchase_price);
+    }
 }

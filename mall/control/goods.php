@@ -99,6 +99,12 @@ class goodsControl extends BaseGoodsControl {
         //处理商品消费者保障服务信息
         $goods_list = $model_goods->getGoodsContract(array(0=>$goods_info));
         $goods_info = $goods_list[0];
+
+        //获取采购价(如果是服务商并且商品属于供应商)
+        list($toggle,$purchase_price)=Model('servicer')->getGoodsPurchasePrice($_SESSION['ser_id'],$goods_info['goods_id']);
+        if($toggle) $goods_info['purchase_price']=$purchase_price;
+        
+
         Tpl::output('goods', $goods_info);
         $model_plate = Model('store_plate');
         // 顶部关联版式

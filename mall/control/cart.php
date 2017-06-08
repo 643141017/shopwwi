@@ -148,6 +148,9 @@ class cartControl extends BaseBuyControl {
             if ($goods_id <= 0) return ;
             $goods_info = $model_goods->getGoodsOnlineInfoAndPromotionById($goods_id);
 
+            //是否采购价格
+            $logic_buy_1->getPurchaseInfo($goods_info,$_SESSION['ser_id']);//调用必须放在前面
+
             //团购
             $logic_buy_1->getGroupbuyInfo($goods_info);
 
@@ -240,6 +243,9 @@ class cartControl extends BaseBuyControl {
             $this->_check_goods($goods,1);
         }
 
+        //采购价
+        $logic_buy_1->getPurchaseInfo($goods_list,$_SESSION['ser_id']);
+
         //团购
         $logic_buy_1->getGroupbuyCartList($goods_list);
 
@@ -301,6 +307,16 @@ class cartControl extends BaseBuyControl {
         if ($goods_info['is_virtual'] || $goods_info['is_fcode'] || $goods_info['is_presell']) {
             exit(json_encode(array('msg'=>'该商品不允许加入购物车，请直接购买','UTF-8')));
         }
+
+        //检查购物车是否同时存在零售商品和采购商品
+        $toggle=false;
+        $cart_list  = Model('cart')->listCart('db',array('buyer_id'=>$_SESSION['member_id']));
+        foreach ($cart_list as $key => $val) {
+            if($val['is_purchase']!=$goods_info['is_purchase']){
+                exit(json_encode(array('msg'=>'购物车不能同时含有采购商品和零售商品，请删除其一','UTF-8')));
+                break;
+            }
+        }
     }
 
     /**
@@ -334,6 +350,9 @@ class cartControl extends BaseBuyControl {
                 QueueClient::push('delCart', array('buyer_id'=>$_SESSION['member_id'],'cart_ids'=>array($cart_id)));
                 exit(json_encode($return));
             }
+
+            //采购
+            $logic_buy_1->getPurchaseInfo($goods_info,$_SESSION['ser_id']);
 
             //团购
             $logic_buy_1->getGroupbuyInfo($goods_info);
