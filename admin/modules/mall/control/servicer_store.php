@@ -1327,22 +1327,20 @@ class servicer_storeControl extends SystemControl{
                 $msg = Language::get('store_save_create_success');
 
                 //插入店铺绑定分类表
-                $store_bind_class_array = array();
-                $store_bind_class = unserialize($joinin_detail['store_class_ids']);
-                $store_bind_commis_rates = explode(',', $joinin_detail['store_class_commis_rates']);
-                for($i=0, $length=count($store_bind_class); $i<$length; $i++) {
-                    list($class1, $class2, $class3) = explode(',', $store_bind_class[$i]);
-                    $store_bind_class_array[] = array(
+                $store_bind_area_array = array();
+                $store_bind_area = unserialize($joinin_detail['service_area_ids']);
+                for($i=0, $length=count($store_bind_area); $i<$length; $i++) {
+                    list($area1, $area2, $area3) = explode(',', $store_bind_area[$i]);
+                    $store_bind_area_array[] = array(
                         'store_id' => $store_id,
-                        'commis_rate' => $store_bind_commis_rates[$i],
-                        'class_1' => $class1,
-                        'class_2' => $class2,
-                        'class_3' => $class3,
+                        'area_1' => $area1,
+                        'area_2' => $area2,
+                        'area_3' => $area3,
                         'state' => 1
                     );
                 }
-                $model_store_bind_class = Model('store_bind_class');
-                $model_store_bind_class->addStoreBindClassAll($store_bind_class_array);
+                $model_store_bind_area = Model('store_bind_area');
+                $model_store_bind_area->addStoreBindAreaAll($store_bind_area_array);
                 showMessage('店铺开店成功','index.php?app=servicer_store&wwi=store_joinin');
             } else {
                 showMessage('店铺开店失败','index.php?app=servicer_store&wwi=store_joinin');
