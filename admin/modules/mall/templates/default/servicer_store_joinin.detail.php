@@ -237,7 +237,7 @@
                   <th>地区1</th>
                   <th>地区2</th>
                   <th>地区3</th>
-                  <th>比例</th>
+                  <!-- <th>比例</th> -->
                 </tr>
               </thead>
               <tbody>
@@ -250,12 +250,14 @@
                   <td><?php echo $name1;?></td>
                   <td><?php echo $name2;?></td>
                   <td><?php echo $name3;?></td>
+                  <!--
                   <td><?php if(intval($output['joinin_detail']['joinin_state']) === 10) {?>
                     <input type="text" nctype="commis_rate" value="<?php echo $store_class_commis_rates[$i];?>" name="commis_rate[]" class="w100" />
                     %
                     <?php } else { ?>
                     <?php echo $store_class_commis_rates[$i];?> %
                     <?php } ?></td>
+                  -->
                 </tr>
                 </tr>
                 <?php } ?>
