@@ -401,7 +401,7 @@ class store_joininControl extends BaseHomeControl {
         $param['store_class_names'] = serialize($store_class_names);
         $param['joinin_year'] = intval($_POST['joinin_year']);
         $param['joinin_state'] = STORE_JOIN_STATE_NEW;
-        $param['store_class_commis_rates'] = implode(',', $store_class_commis_rates);
+        $param['store_class_commis_rates'] = $store_class_commis_rates?implode(',', $store_class_commis_rates):'';
 
         $param['service_area_ids'] = serialize($service_area_ids);//二次开发扩展
         $param['service_area_names'] = serialize($service_area_names);//二次开发扩展
