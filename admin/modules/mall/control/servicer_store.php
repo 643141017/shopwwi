@@ -1326,7 +1326,7 @@ class servicer_storeControl extends SystemControl{
                 $model->table('store_extend')->insert(array('store_id'=>$store_id));
                 $msg = Language::get('store_save_create_success');
 
-                //插入店铺绑定分类表
+                //插入店铺服务区域
                 $store_bind_area_array = array();
                 $store_bind_area = unserialize($joinin_detail['service_area_ids']);
                 for($i=0, $length=count($store_bind_area); $i<$length; $i++) {
