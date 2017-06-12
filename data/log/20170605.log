@@ -1,0 +1,21 @@
+[2017-06-05 22:31:54] /admin/modules/mall/index.php?app=servicer_store&wwi=store_bind_class&store_id=6 ( app=servicer_store&wwi=store_bind_class ) 
+ERR: Db Error: Column 'store_id' in where clause is ambiguous
+SELECT * FROM `si_store_bind_class` AS `store_bind_class` LEFT JOIN `si_store` AS `store` ON store_bind_class.store_id=store.store_id WHERE ( store_id = '6' ) AND ( state IN ('1','2') ) LIMIT 1000  
+[2017-06-05 22:43:51] /admin/modules/mall/index.php?app=supplier_store&wwi=store_bind_class&store_id=7 ( app=supplier_store&wwi=store_bind_class ) 
+ERR: Db Error: Column 'store_id' in where clause is ambiguous
+SELECT * FROM `si_store_bind_class` AS `store_bind_class` LEFT JOIN `si_store` AS `store` ON store_bind_class.store_id=store.store_id WHERE ( store_id = '7' ) AND ( state IN ('1','2') ) LIMIT 1000  
+[2017-06-05 22:44:04] /admin/modules/mall/index.php?app=supplier_store&wwi=store_bind_class&store_id=7 ( app=supplier_store&wwi=store_bind_class ) 
+ERR: Db Error: Column 'store_id' in where clause is ambiguous
+SELECT * FROM `si_store_bind_class` AS `store_bind_class` LEFT JOIN `si_store` AS `store` ON store_bind_class.store_id=store.store_id WHERE ( store_id = '7' ) AND ( state IN ('1','2') ) LIMIT 1000  
+[2017-06-05 22:45:05] /admin/modules/mall/index.php?app=supplier_store&wwi=store_bind_class&store_id=7 ( app=supplier_store&wwi=store_bind_class ) 
+ERR: Db Error: Column 'store_id' in where clause is ambiguous
+SELECT * FROM `si_store_bind_class` AS `store_bind_class` LEFT JOIN `si_store` AS `store` ON store_bind_class.store_id=store.store_id WHERE ( store_id = '7' ) AND ( state IN ('1','2') ) LIMIT 1000  
+[2017-06-05 22:45:05] /admin/modules/mall/index.php?app=supplier_store&wwi=store_bind_class&store_id=7 ( app=supplier_store&wwi=store_bind_class ) 
+ERR: Db Error: Column 'store_id' in where clause is ambiguous
+SELECT * FROM `si_store_bind_class` AS `store_bind_class` LEFT JOIN `si_store` AS `store` ON store_bind_class.store_id=store.store_id WHERE ( store_id = '7' ) AND ( state IN ('1','2') ) LIMIT 1000  
+[2017-06-05 22:45:22] /admin/modules/mall/index.php?app=supplier_store&wwi=store_bind_class&store_id=10 ( app=supplier_store&wwi=store_bind_class ) 
+ERR: Db Error: Column 'store_id' in where clause is ambiguous
+SELECT * FROM `si_store_bind_class` AS `store_bind_class` LEFT JOIN `si_store` AS `store` ON store_bind_class.store_id=store.store_id WHERE ( store_id = '10' ) AND ( state IN ('1','2') ) LIMIT 1000  
+[2017-06-05 22:45:42] /admin/modules/mall/index.php?app=supplier_store&wwi=store_bind_class&store_id=10 ( app=supplier_store&wwi=store_bind_class ) 
+ERR: Db Error: Column 'store_id' in where clause is ambiguous
+SELECT * FROM `si_store_bind_class` AS `store_bind_class` LEFT JOIN `si_store` AS `store` ON store_bind_class.store_id=store.store_id WHERE ( store_id = '10' ) AND ( state IN ('1','2') ) LIMIT 1000  

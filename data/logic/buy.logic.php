@@ -139,6 +139,7 @@ class buyLogic {
         // 计算加价购各个活动总金额
         $jjgCosts = array();
         $jjgStores = array();
+        $is_purchase=array();
         foreach ($cart_list as $cart) {
             $jjgId = (int) $cart['jjgRank'];
             if ($jjgId > 0 && isset($jjgObj->jjgPostData[$jjgId])) {
@@ -150,6 +151,14 @@ class buyLogic {
                 }
                 $jjgStores[$jjgId] = $cart['store_id'];
             }
+
+            $is_purchase[]=(int)$cart['is_purchase'];
+        }
+
+        $is_purchase=array_unique($is_purchase);
+
+        if(count($is_purchase)>1){
+            return callback(false, '购物车不能同时包含零售商品和采购商品，请删除其一');
         }
 
         // 过滤合法加价购换购商品
@@ -202,6 +211,7 @@ class buyLogic {
             'store_cart_list' => $store_cart_list,
             'jjgValidSkus' => $jjgValidSkus,
             'jjgStoreCosts' => $jjgStoreCosts,
+            'goods_purchase'=>current($is_purchase),//零售或者采购，只会存在一种
         ));
     }
 
@@ -277,7 +287,7 @@ class buyLogic {
         // 加价购
         $jjgValidSkus = $data['jjgValidSkus'];
         $jjgStoreCosts = $data['jjgStoreCosts'];
-
+        $goods_purchase = $data['goods_purchase'];
         // 加价购
         foreach ((array) $store_goods_total as $k => $v) {
             if (isset($jjgStoreCosts[$k])) {
@@ -295,6 +305,9 @@ class buyLogic {
 
         $result['store_cart_list'] = $store_cart_list;
         $result['store_goods_total'] = $store_goods_total;
+
+        //采购或者零售
+        $result['goods_purchase']=$goods_purchase;
 
         //预定商品不使用任何优惠
         if (!$data['is_book']) {

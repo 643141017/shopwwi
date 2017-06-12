@@ -101,6 +101,7 @@ $lang['cart_step1_addaddress_fail']		= '新地址添加失败';
 $lang['cart_step1_please_chooseshipping'] = '请选择配送方式';
 $lang['cart_step1_please_chooseaddress']  = '请选择收货人地址';
 $lang['cart_step1_addnewaddress_submit']  = '保存收货人信息';
+$lang['cart_step1_addnewserviceress_submit']  = '确认服务商选择';
 $lang['cart_step1_invoice_submit']        = '保存发票信息';
 $lang['cart_step1_bundling_explain1']	= '优惠套装：每套节省';
 $lang['cart_step1_bundling_explain2']	= '元；';
@@ -159,3 +160,5 @@ $lang['cart_update_buy_fail']			= '修改失败';
  * 订单支付
  */
 $lang['cart_order_pay_not_exists']		= '该订单不存在';
+
+$lang['cart_step1_input_servicer']		= '请选择服务商';

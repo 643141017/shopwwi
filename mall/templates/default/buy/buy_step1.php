@@ -108,6 +108,13 @@ function disableSubmitOrder(){
     <h5>请仔细核对填写收货、发票等信息，以确保物流快递及时准确投递。</h5>
   </div>
     <?php include template('buy/buy_address');?>
+
+    <!-- 非采购选择服务商 -->
+    <?php if ($output['goods_purchase']==0) { ?>
+        <?php include template('buy/buy_servicer');?>
+        <input value="" name="ser_id" id="ser_id" type="hidden">
+    <?php } ?>
+
     <?php include template('buy/buy_payment');?>
     <?php include template('buy/buy_invoice');?>
 
@@ -116,6 +123,7 @@ function disableSubmitOrder(){
     <?php } else { ?>
         <?php include template('buy/buy_goods_list');?>
     <?php } ?>
+
 
     <input value="buy" type="hidden" name="app">
     <input value="buy_step2" type="hidden" name="wwi">

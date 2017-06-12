@@ -101,6 +101,9 @@ class buyControl extends BaseBuyControl {
         //输出会员折扣
         Tpl::output('zk_list',$result['zk_list']);
 
+        //采购或者零售
+        Tpl::output('goods_purchase',$result['goods_purchase']);
+
         //店铺信息
         $store_list = Model('store')->getStoreMemberIDList(array_keys($result['store_cart_list']),'store_id,member_id,store_domain,is_own_mall');
         Tpl::output('store_list',$store_list);
@@ -335,6 +338,22 @@ class buyControl extends BaseBuyControl {
 
         Tpl::output('buy_step','step4');
         Tpl::showpage('buy_step3');
+    }
+
+    /**
+     * 根据收货地址加载服务商
+     *
+     */
+    public function load_servicerWwi(){
+
+        Tpl::showpage('buy_servicer.load','null_layout');
+    }
+
+    /**
+     * 选择添加服务商
+     */
+    public function add_servicerWwi(){
+        Tpl::showpage('buy_servicer.add','null_layout');
     }
 
     /**
