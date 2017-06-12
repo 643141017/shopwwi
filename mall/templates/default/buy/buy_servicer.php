@@ -25,7 +25,7 @@ $('#edit_servicer').on('click',function(){
     if(address_id>0){
       $(this).hide();
       $(this).parent().parent().addClass('current_box');
-      $('#servicer_list').load(SITEURL+'/index.php?app=buy&wwi=load_servicer');
+      $('#servicer_list').load(SITEURL+'/index.php?app=buy&wwi=load_servicer&address_id='+address_id);
     }else{
        alert('请先选择收货地址');
     }

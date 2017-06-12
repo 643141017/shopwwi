@@ -12,12 +12,10 @@
     <a id="cancel_servicer" class="ncbtn ml10" href="javascript:void(0);">退出选择</a>
 </div>
 <script type="text/javascript">
-function delservicer(id){
-    $('#servicer_list').load(SITEURL+'/index.php?app=buy&wwi=load_servicer&id='+id);
-}
+
 $(function(){
     function addservicer() {
-        $('#add_servicer_box').load(SITEURL+'/index.php?app=buy&wwi=add_servicer');
+        $('#add_servicer_box').load(SITEURL+'/index.php?app=buy&wwi=add_servicer&address_id=<?php echo $output["address_id"];?>');
     }
     $('input[nc_type="servicer"]').on('click',function(){
         $('.serviceress_item').removeClass('ncc-selected-item');

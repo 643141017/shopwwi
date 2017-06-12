@@ -345,7 +345,11 @@ class buyControl extends BaseBuyControl {
      *
      */
     public function load_servicerWwi(){
-
+        $address_id=intval($_GET['address_id']);
+        if(!$address_id){
+            exit('请选择收货地址');
+        }
+        Tpl::output('address_id',$address_id);
         Tpl::showpage('buy_servicer.load','null_layout');
     }
 
@@ -353,6 +357,33 @@ class buyControl extends BaseBuyControl {
      * 选择添加服务商
      */
     public function add_servicerWwi(){
+        $address_id=intval($_GET['address_id']);
+        $model_addr = Model('address');
+        $model_area = Model('area');
+        $model_store_bind_area = Model('store_bind_area');
+        $model_servicer = Model('servicer');
+        $address_info=$model_addr->getAddressInfo(array('address_id'=>$address_id));
+        $city_province=$model_area->getCityProvince();
+        $area_2=$address_info['city_id'];//市
+        $area_1=$city_province[$area_2];//省
+        $area_3=$address_info['area_id'];//区
+        $province_servicer=$model_store_bind_area->getStoreBindAreaList(array('area_1'=>$area_1));
+        $city_servicer=$model_store_bind_area->getStoreBindAreaList(array('area_2'=>$area_2));
+        $area_servicer=$model_store_bind_area->getStoreBindAreaList(array('area_3'=>$area_3));
+
+        $servicer_list=array();
+        if($area_servicer){
+            $servicer_list=$area_servicer;
+        }elseif($city_servicer){
+            $servicer_list=$city_servicer;
+        }else{
+            $servicer_list=$province_servicer;
+        }
+        foreach ($servicer_list as $key => $val) {
+            $servicer_info=$model_servicer->getServicerInfo(array('ser_store_id'=>$val['store_id']));
+            $servicer_list[$key]['ser_id']=$servicer_info['ser_id'];
+        }
+        Tpl::output('servicer_list',$servicer_list);
         Tpl::showpage('buy_servicer.add','null_layout');
     }
 

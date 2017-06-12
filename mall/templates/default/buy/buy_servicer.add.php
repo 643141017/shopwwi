@@ -8,10 +8,10 @@
       <dt><i class="required">*</i>可选服务商</dt>
       <dd>
         <select id="servicer_id" name="servicer_id">
-          <option value="">选择服务商</option>
-          <option value="酒">酒</option>
-          <option value="食品">食品</option>
-          <option value="饮料">饮料</option>
+          <?php if(!empty($output['servicer_list'])){?>
+          <?php foreach ($output['servicer_list'] as $key => $val) {?>
+          <option value="<?php echo $val['ser_id'];?>"><?php echo $val['store_name'];?></option>
+          <?php }}?>
         </select>
       </dd>
     </dl>
