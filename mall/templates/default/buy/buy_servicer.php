@@ -5,7 +5,7 @@
   <a href="javascript:void(0)" nc_type="buy_edit" id="edit_servicer">[修改]</a></div>
   <div id="servicer_list" class="ncc-candidate-items">
     <ul>
-      <li><?php echo $output['inv_info']['content'];?></li>
+      <li>未选服务商服务</li>
     </ul>
   </div>
 </div>
@@ -21,9 +21,14 @@ function hideServicerList(content) {
 }
 //加载发票列表
 $('#edit_servicer').on('click',function(){
-    $(this).hide();
-    disableOtherEdit('如需修改，请先保存服务商信息');
-    $(this).parent().parent().addClass('current_box');
-    $('#servicer_list').load(SITEURL+'/index.php?app=buy&wwi=load_servicer');
+    var address_id=$("#address_id").val();
+    if(address_id>0){
+      $(this).hide();
+      $(this).parent().parent().addClass('current_box');
+      $('#servicer_list').load(SITEURL+'/index.php?app=buy&wwi=load_servicer');
+    }else{
+       alert('请先选择收货地址');
+    }
+    
 });
 </script>
