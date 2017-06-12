@@ -40,10 +40,13 @@
         <!-- E 商品参考价格 --> 
         <!-- S 商品发布价格 -->
         <dl>
-          <dt><?php if (isset($output['goods']['purchase_price'])){ ?>采购价<?php } else{ ?>本站价格<?php } ?></dt>
+          <dt>本站价格</dt>
           <dd class="price">
             <?php if (isset($output['goods']['purchase_price']) && !empty($output['goods']['purchase_price'])) {?>
-            <span><i class="c"><?php echo $lang['currency'];?></i><?php echo ncPriceFormat($output['goods']['purchase_price']);?></span>
+            <em><del><?php echo $lang['currency'].ncPriceFormat($output['goods']['goods_price']);?></del></em>
+            <span>
+              <i class="a">&nbsp;&nbsp;采购价&nbsp;<?php echo $lang['currency'];?></i><i class="b"><?php echo ncPriceFormat($output['goods']['purchase_price']);?></i>
+            </span>
             <?php } else if (isset($output['goods']['promotion_price']) && !empty($output['goods']['promotion_price'])) {?>
             <span><i class="a"><?php echo $lang['currency'];?></i><i class="b"><?php echo ncPriceFormat($output['goods']['promotion_price']);?></i></span><em><del><?php echo $lang['currency'].ncPriceFormat($output['goods']['goods_price']);?></del></em>
             <?php } else {?>
