@@ -12,7 +12,7 @@
 <script type="text/javascript">
 //隐藏发票列表
 function hideServicerList(content) {
-    $('#edit_servicer').show();
+  $('#edit_servicer').show();
 	$("#servicer_list").html('<ul><li>'+content+'</li></ul>');
 	$('.current_box').removeClass('current_box');
 	ableOtherEdit();
@@ -28,8 +28,16 @@ $('#edit_servicer').on('click',function(){
       $(this).parent().parent().addClass('current_box');
       $('#servicer_list').load(SITEURL+'/index.php?app=buy&wwi=load_servicer&address_id='+address_id);
     }else{
-       alert('请先选择收货地址');
+      alert('请先选择收货地址');
     }
     
 });
+
+$(document).ready(function(){
+  var address_id=$("#address_id").val();
+  if(address_id>0){
+    $('#edit_servicer').click();//选择服务商
+  }
+  
+})
 </script>

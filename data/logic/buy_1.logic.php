@@ -9,7 +9,7 @@
 defined('ByShopWWI') or exit('Access Invalid!');
 class buy_1Logic {
 
-    private $is_purchase=false;
+    public $is_purchase=false;
    /**
      * 取得商品最新的属性及促销[购物车]
      * @param unknown $cart_list
@@ -217,7 +217,7 @@ class buy_1Logic {
      * @return array 返回扣除优惠后的店铺商品总金额
      */
     public function reCalcGoodsTotal($store_goods_total, $preferential_array = array(), $preferential_type) {
-        $deny = empty($store_goods_total) || !is_array($store_goods_total) || empty($preferential_array) || !is_array($preferential_array);
+        $deny = empty($store_goods_total) || !is_array($store_goods_total) || empty($preferential_array) || !is_array($preferential_array) || $this->is_purchase;
         if ($deny) return $store_goods_total;
 
         switch ($preferential_type) {
@@ -1642,6 +1642,8 @@ class buy_1Logic {
      * @return array
      */
     public function getPurchaseInfo(& $goods_info = array(),$ser_id) {
+        $toggle=false;
+        if($ser_id>0)
         list($toggle,$purchase_price)=Model('servicer')->getGoodsPurchasePrice($ser_id,$goods_info['goods_id']);
         if($toggle){
             $goods_info['goods_price']=$purchase_price;

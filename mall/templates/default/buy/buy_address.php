@@ -19,6 +19,8 @@ function hideAddrList(addr_id,true_name,address,phone) {
 	$('.current_box').removeClass('current_box');
 	ableOtherEdit();
 	$('#edit_payment').click();
+
+    $('#edit_servicer').click();//选择服务商
 }
 //加载收货地址列表
 $('#edit_reciver').on('click',function(){

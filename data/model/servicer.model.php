@@ -99,7 +99,7 @@ class servicerModel extends Model{
         $toggle=false;
         $purchase_price=0;
         $servicer_info=$this->getServicerAndGradeInfo($ser_id);
-
+        
         $goods_info=Model('goods')->getGoodsOnlineInfoAndPromotionById($goods_id);
         $store_info=Model('store')->getStoreOnlineInfoByID($goods_info['store_id']);
         if($servicer_info && $store_info['store_type']==2){

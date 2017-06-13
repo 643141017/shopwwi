@@ -703,6 +703,7 @@ class buyLogic {
         $this->_order_data['order_from'] = $post['order_from'] == 2 ? 2 : 1;
         $this->_order_data['orderdiscount'] = $orderdiscounts;
         $this->_order_data['input_is_book'] = $post['is_book'];
+        $this->_order_data['ser_id'] = (int)$post['ser_id'];
 
     }
 
@@ -732,6 +733,12 @@ class buyLogic {
 
             //购物车列表 [得到最新商品属性及促销信息]
             $cart_list = $this->_logic_buy_1->getGoodsCartList($cart_list, $jjgObj);
+
+            $this->_order_data['is_purchase']= $this->_logic_buy_1->is_purchase;
+           if(!$this->_order_data['is_purchase'] && !$this->_order_data['ser_id']){
+                throw new Exception('请选择服务商');//零售
+           }
+
 
             // 计算加价购各个活动总金额
             $jjgCosts = array();
@@ -856,6 +863,7 @@ class buyLogic {
         $input_city_id = $this->_order_data['input_city_id'];
         $input_rpt_info = $this->_order_data['input_rpt_info'];
         $input_is_book = $this->_order_data['input_is_book'];
+        $is_purchase = $this->_order_data['is_purchase'];
 
         //商品金额计算(分别对每个商品/优惠套装小计、每个店铺小计)
         list($store_cart_list,$store_goods_total) = $this->_logic_buy_1->calcCartList($store_cart_list);
@@ -868,8 +876,8 @@ class buyLogic {
             }
         }
 
-        //预定不享受任何优惠
-        if (!$input_is_book) {
+        //预定，采购不享受任何优惠
+        if (!$input_is_book && !$is_purchase) {
             //取得店铺优惠 - 满即送(赠品列表，店铺满送规则列表)
             list($store_premiums_list,$store_mansong_rule_list) = $this->_logic_buy_1->getMansongRuleCartListByTotal($store_goods_total);
 
@@ -1265,6 +1273,26 @@ class buyLogic {
                 throw new Exception('订单保存失败[未生成商品数据]');
             }
 
+            //如果是零售，将订单转移给服务商
+            if(!$this->_order_data['is_purchase']){
+                $ser_id=$this->_order_data['ser_id'];
+                $servicer_info=Model('servicer')->getServicerInfo(array('ser_id'=>$ser_id));
+                $servicer_store_info=Model('store')->getStoreInfoByID($servicer_info['ser_store_id']);
+                if(empty($servicer_store_info)){
+                    throw new Exception('服务商店铺信息错误,请联系客服');
+                }
+
+                $ser_order=array();
+                $ser_order['store_id']=$servicer_store_info['store_id'];
+                $toggle1=$model_order->editOrderGoods($ser_order,array('order_id'=>$order_id));
+                $toggle2=$model_order->editOrderCommon($ser_order,array('order_id'=>$order_id));
+                $ser_order['store_name']=$servicer_store_info['store_name'];
+                $toggle3=$model_order->editOrder($ser_order,array('order_id'=>$order_id));
+                if(!$toggle1 || !$toggle2 || !$toggle3){
+                    throw new Exception('服务商服务订单失败,请联系客服');
+                }
+            }
+
             //存储商家发货提醒数据
             if ($store_pay_type_list[$store_id] == 'offline') {
                 $notice_list['new_order'][$order['store_id']] = array('order_sn' => $order['order_sn']);
@@ -1277,6 +1305,8 @@ class buyLogic {
         $this->_order_data['notice_list'] = $notice_list;
         $this->_order_data['ifgroupbuy'] = $ifgroupbuy;
         $this->_order_data['ifbook'] = $goods_list[0]['is_book'] == 1 ;
+
+
     }
 
     /**

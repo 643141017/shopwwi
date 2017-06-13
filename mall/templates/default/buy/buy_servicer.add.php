@@ -20,6 +20,7 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
+    disableSubmitOrder();
     $('#servicer_form').validate({
         rules : {
             servicer_id : {
