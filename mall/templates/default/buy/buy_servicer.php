@@ -22,6 +22,7 @@ function hideServicerList(content) {
 //加载发票列表
 $('#edit_servicer').on('click',function(){
     var address_id=$("#address_id").val();
+    disableOtherEdit('如需修改，请先选择服务商 ');
     if(address_id>0){
       $(this).hide();
       $(this).parent().parent().addClass('current_box');
