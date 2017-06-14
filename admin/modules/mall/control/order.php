@@ -86,6 +86,7 @@ class orderControl extends SystemControl{
         foreach ($order_list as $order_id => $order_info) {
             $order_info['if_system_cancel'] = $model_order->getOrderOperateState('system_cancel',$order_info);
             $order_info['if_system_receive_pay'] = $model_order->getOrderOperateState('system_receive_pay',$order_info);
+            $order_info['if_system_receive_remittance_pay'] = $model_order->getOrderOperateState('system_receive_remittance_pay',$order_info);
             $order_info['state_desc'] = orderState($order_info);
 
             //取得订单其它扩展信息
@@ -98,6 +99,11 @@ class orderControl extends SystemControl{
             }
             if ($order_info['if_system_receive_pay']) {
                 $op_name = $order_info['system_receive_pay_op_name'] ? $order_info['system_receive_pay_op_name'] : '收到货款';
+                $operation_detail .= "<li><a href=\"index.php?app=order&wwi=change_state&state_type=receive_pay&order_id={$order_info['order_id']}\">{$op_name}</a></li>";
+            }
+
+            if ($order_info['if_system_receive_remittance_pay']) {
+                $op_name = '线下已汇款';
                 $operation_detail .= "<li><a href=\"index.php?app=order&wwi=change_state&state_type=receive_pay&order_id={$order_info['order_id']}\">{$op_name}</a></li>";
             }
             if ($operation_detail) {
@@ -204,8 +210,9 @@ class orderControl extends SystemControl{
         $model_order = Model('order');
         $logic_order = Logic('order');
         $order_info['if_system_receive_pay'] = $model_order->getOrderOperateState('system_receive_pay',$order_info);
-
-        if (!$order_info['if_system_receive_pay']) {
+        $order_info['if_system_receive_remittance_pay'] = $model_order->getOrderOperateState('system_receive_remittance_pay',$order_info);
+        
+        if (!$order_info['if_system_receive_pay'] && !$order_info['if_system_receive_remittance_pay']) {
             return callback(false,'无权操作');
         }
 

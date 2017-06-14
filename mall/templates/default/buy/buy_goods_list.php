@@ -263,7 +263,13 @@
                 <?php echo $output['cancel_calc_sid_list'][$store_id]['desc'];?>
                 <?php } ?>
               </dd>
-              <dd class="sum"><em nc_type="eachStoreFreight" id="eachStoreFreight_<?php echo $store_id;?>">0.00</em></dd>
+              <dd class="sum">
+                <?php if($output['goods_purchase']){?>
+                <em>0.00</em>
+                <?php } else {?>
+                <em nc_type="eachStoreFreight" id="eachStoreFreight_<?php echo $store_id;?>">0.00</em>
+                <?php }?>
+              </dd>
             </dl>
             <dl class="total">
               <dt>本店合计：</dt>

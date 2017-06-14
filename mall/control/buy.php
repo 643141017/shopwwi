@@ -181,7 +181,7 @@ class buyControl extends BaseBuyControl {
 
         //计算相关支付金额
         foreach ($order_list as $key => $order_info) {
-            if (!in_array($order_info['payment_code'],array('offline','chain'))) {
+            if (!in_array($order_info['payment_code'],array('offline','chain','remittance'))) {
                 if ($order_info['order_state'] == ORDER_STATE_NEW) {
                     $pay['pay_amount_online'] += $order_info['order_amount'];
                     $pay['payd_rcb_amount'] += $order_info['rcb_amount'];
@@ -193,7 +193,11 @@ class buyControl extends BaseBuyControl {
                 $pay['pay_amount_offline'] += $order_info['order_amount'];
             }
             //显示支付方式
-            if ($order_info['payment_code'] == 'offline') {
+
+            if ($order_info['payment_code'] == 'remittance') {
+                $order_list[$key]['payment_type'] = '线下汇款';
+            } 
+            elseif ($order_info['payment_code'] == 'offline') {
                 $order_list[$key]['payment_type'] = '货到付款';
             } elseif ($order_info['payment_code'] == 'chain') {
                 $order_list[$key]['payment_type'] = '门店支付';
@@ -236,6 +240,7 @@ class buyControl extends BaseBuyControl {
             if (!empty($payment_list)) {
                 unset($payment_list['predeposit']);
                 unset($payment_list['offline']);
+                unset($payment_list['remittance']);
             }
             if (empty($payment_list)) {
                 showMessage('暂未找到合适的支付方式','index.php?app=member_order','html','error');
