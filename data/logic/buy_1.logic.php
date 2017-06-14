@@ -89,6 +89,9 @@ class buy_1Logic {
 
         if (!$goods_info['is_book']) {
 
+            //采购
+            $this->getPurchaseInfo($goods_info,$_SESSION['ser_id']);
+
             //手机专享
             $this->getMbSoleInfo($goods_info);
 

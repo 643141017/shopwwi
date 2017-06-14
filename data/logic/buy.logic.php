@@ -267,7 +267,7 @@ class buyLogic {
         $goods_list = array();
         $goods_list[0] = $store_cart_list[$goods_info['store_id']][0] = $goods_info;
 
-        return callback(true, '', array('goods_list' => $goods_list, 'store_cart_list' => $store_cart_list,'is_book'=>$goods_info['is_book']));
+        return callback(true, '', array('goods_list' => $goods_list, 'store_cart_list' => $store_cart_list,'is_book'=>$goods_info['is_book'],'goods_purchase'=>(int)$goods_info['is_purchase']));
     }
 
     /**
@@ -734,12 +734,6 @@ class buyLogic {
             //购物车列表 [得到最新商品属性及促销信息]
             $cart_list = $this->_logic_buy_1->getGoodsCartList($cart_list, $jjgObj);
 
-            $this->_order_data['is_purchase']= $this->_logic_buy_1->is_purchase;
-           if(!$this->_order_data['is_purchase'] && !$this->_order_data['ser_id']){
-                throw new Exception('请选择服务商');//零售
-           }
-
-
             // 计算加价购各个活动总金额
             $jjgCosts = array();
             $jjgStores = array();
@@ -825,6 +819,10 @@ class buyLogic {
 
         }
 
+        $this->_order_data['is_purchase']= $this->_logic_buy_1->is_purchase;
+        if(!$this->_order_data['is_purchase'] && !$this->_order_data['ser_id']){
+            throw new Exception('请选择服务商');//零售
+        }
         //F码验证
         $fc_id = $this->_checkFcode($goods_list, $post['fcode']);
         if(!$fc_id) {
@@ -934,6 +932,10 @@ class buyLogic {
             list($store_freight_total,$no_send_tpl_ids) = $this->_logic_buy_1->calcStoreFreight($freight_list,$input_city_id);
             //计算店铺最终订单实际支付金额(加上运费)
             $store_final_order_total = $this->_logic_buy_1->reCalcGoodsTotal($store_goods_total,$store_freight_total,'freight');
+            
+            if ($is_purchase) {
+                $store_freight_total[key($store_final_order_total)] = 0;//采购不需要运费
+            }
             $store_promotion_total = $store_mansong_rule_list = $input_voucher_list = $input_rpt_info = $store_rpt_total = array();
             $goods_buy_quantity = array($goods_list[0]['goods_id'] => $goods_list[0]['goods_num']);
 
@@ -979,7 +981,10 @@ class buyLogic {
         //存储通知信息
         $notice_list = array();
         //支付方式
-        if ($input_pay_name == 'chain' && $input_chain_id) {
+        if($this->_order_data['is_purchase']){
+            $store_pay_type_list = array(key($store_cart_list)=>'remittance');
+        }
+        elseif ($input_pay_name == 'chain' && $input_chain_id) {
         	$store_pay_type_list = array(key($store_cart_list)=>'chain');
         } else {
             //每个店铺订单是货到付款还是线上支付,店铺ID=>付款方式[在线支付/货到付款]
@@ -1047,6 +1052,8 @@ class buyLogic {
             $order['order_type'] = $input_chain_id ? 3 : ($goods_list[0]['is_book'] ? 2 : 1);
             $order['chain_id'] = $input_chain_id ? $input_chain_id : 0;
             $order['rpt_amount'] = empty($store_rpt_total[$store_id]) ? 0 : $store_rpt_total[$store_id] ;
+
+            $order['order_identify'] = $this->_order_data['is_purchase'] ? 1 : 0;
 
             $order_id = $model_order->addOrder($order);
             if (!$order_id) {
@@ -1350,19 +1357,25 @@ class buyLogic {
         $pay_sn = $this->_order_data['pay_sn'];
         $input_dlyp_id = $this->_order_data['input_dlyp_id'];
         $input_chain_id = $this->_order_data['input_chain_id'];
-
+        $is_purchase = $this->_order_data['is_purchase'];
         //变更库存和销量
-        $result = Logic('queue')->createOrderUpdateStorage($goods_buy_quantity);
-        if (!$result['state']) {
-            throw new Exception('订单保存失败[变更库存销量失败]');
-        }
 
-        //门店自提订单减存
-        if ($input_chain_id) {
-            $result = Logic('queue')->createOrderUpdateChainStorage($goods_buy_quantity,$input_chain_id);
+        if($is_purchase){
+            /*采购减供应商的库存，增加服务商的商品库存*/
+            $result = Logic('queue')->createOrderUpdateStorage($goods_buy_quantity);
             if (!$result['state']) {
-                throw new Exception('订单保存失败[变更自提门店库存销量失败]');
+                throw new Exception('订单保存失败[变更库存销量失败]');
+            } 
+            //门店自提订单减存
+            if ($input_chain_id) {
+                $result = Logic('queue')->createOrderUpdateChainStorage($goods_buy_quantity,$input_chain_id);
+                if (!$result['state']) {
+                    throw new Exception('订单保存失败[变更自提门店库存销量失败]');
+                }
             }
+        }
+        else{
+            /*零售减服务商的库存，如果服务商没有商品，提示服务商采购*/
         }
 
         //更新使用的代金券状态

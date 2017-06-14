@@ -610,6 +610,12 @@ class orderModel extends Model {
                $state = $state && $order_info['payment_code'] == 'online' && $order_info['api_pay_time'];
                break;
 
+           //线下汇款成功
+           case 'system_receive_remittance_pay':
+               $state = $order_info['order_state'] == ORDER_STATE_NEW;
+               $state = $state && $order_info['payment_code'] == 'remittance';
+               break;
+
            //买家投诉
            case 'complain':
                $state = in_array($order_info['order_state'],array(ORDER_STATE_PAY,ORDER_STATE_SEND)) ||
