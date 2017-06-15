@@ -241,6 +241,11 @@ class orderControl extends SystemControl{
         }
         $result = $logic_order->changeOrderReceivePay($order_list,'admin',$this->admin_info['name'],$post);
         if ($result['state']) {
+            //如果是采购订单，增加采购者的商品库存
+            if($order_info['order_identify']==1){
+                $model_servicer_goods=Model('servicer_goods');
+                $model_servicer_goods->addServicerGoodsByOrder($order_id);
+            }
             $this->log('将订单改为已收款状态,'.L('order_number').':'.$order_info['order_sn'],1);
             //记录消费日志
             $api_pay_amount = $order_info['order_amount'] - $order_info['pd_amount'] - $order_info['rcb_amount'];

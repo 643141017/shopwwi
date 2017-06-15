@@ -102,4 +102,15 @@ CREATE TABLE `si_store_bind_area` (
 ALTER TABLE `si_cart`
 ADD COLUMN `is_purchase`  smallint(2) NOT NULL DEFAULT 0 COMMENT '是否采购，0否1是' AFTER `bl_id`;
 
+#服务商采购商品库存表
+CREATE TABLE `si_servicer_goods` (
+  `sg_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `store_id` int(11) NOT NULL DEFAULT '0' COMMENT '店铺ID',
+  `goods_id` int(11) NOT NULL DEFAULT '0' COMMENT '商品ID',
+  `goods_storage` int(11) NOT NULL DEFAULT '0' COMMENT '商品库存',
+  PRIMARY KEY (`sg_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='服务商商品采购表';
+
+
+
 

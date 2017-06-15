@@ -1376,6 +1376,10 @@ class buyLogic {
         }
         else{
             /*零售减服务商的库存，如果服务商没有商品，提示服务商采购*/
+            foreach ($order_list as $key => $val) {
+                $order_id=$key;
+                Model('servicer_goods')->reduceServicerGoodsByOrder($order_id);
+            } 
         }
 
         //更新使用的代金券状态
