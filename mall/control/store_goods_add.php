@@ -130,6 +130,7 @@ class store_goods_addControl extends BaseSellerControl {
         $supplier_list = Model('store_supplier')->getStoreSupplierList(array('sup_store_id' => $_SESSION['store_id']));
         Tpl::output('supplier_list', $supplier_list);
 
+        Tpl::output('store_type', $_SESSION['store_type']);
         Tpl::showpage('store_goods_add.step2');
     }
 
@@ -505,5 +506,16 @@ class store_goods_addControl extends BaseSellerControl {
             $brand_array = Model('brand')->getBrandPassedList($where, 'brand_id,brand_name,brand_initial', 0, 'brand_initial asc, brand_sort asc');
         }
         echo json_encode($brand_array);die();
+    }
+
+    /**
+     *ajax 计算商城价和市场价
+     */
+    public function ajax_cal_price_and_marketpriceWwi(){
+
+        $sup_id=intval($_SESSION['sup_id']);
+        $g_costprice=floatval($_POST['g_costprice']);
+        $data=Model('supplier')->getGoodsPriceAndMarketPrice($sup_id,$g_costprice);
+        echo json_encode($data);die();
     }
 }

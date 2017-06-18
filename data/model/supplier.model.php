@@ -78,4 +78,55 @@ class supplierModel extends Model{
         return $this->where($condition)->delete();
     }
 
+    /**
+     * 读取供应商等级
+     * @param int $ser_id
+     *
+     */
+    public function getSupplierAndGradeInfo($sup_id,$field='*') {
+        $condition=array('sup_id'=>intval($sup_id));
+        return $this->table('supplier,supplier_store_grade')->field($field)->join('inner')->on('supplier.ssg_id = supplier_store_grade.ssg_id')->where($condition)->find();
+    }
+    /**
+     * 根据供应商ID获取产品的商城价和市场价
+     *
+     * @param int $ser_id 服务商ID
+     * @param int $goods_id 商品ID
+     * @return array
+     */
+    public function getGoodsPriceAndMarketPrice($sup_id,$g_costprice){
+        $toggle=false;
+        $g_price=$g_marketprice=0;
+        $supplier_info=$this->getSupplierAndGradeInfo($sup_id);
+        if($supplier_info){
+           $g_price=$this->calPriceAndMarketprice($g_costprice,$supplier_info['ssg_mall_discount'],$supplier_info['ssg_mall_operator']);
+           $g_marketprice=$this->calPriceAndMarketprice($g_costprice,$supplier_info['ssg_market_discount'],$supplier_info['ssg_market_operator']);
+        }
+        $data['g_price']=$g_price;
+        $data['g_marketprice']=$g_marketprice;
+        return $data;
+    }
+
+    public function calPriceAndMarketprice($g_costprice,$discount,$operator){
+        $price=0;
+        switch ($operator) {
+            case 2:
+                # 除
+                $price=round($g_costprice/$discount,1);
+                break;   
+            case 3:
+                # 加
+                $price=round($g_costprice+$discount,1);
+                break;  
+            case 4:
+                # 减
+                $price=round($g_costprice-$discount,1);
+                break;              
+            default:
+                # 乘
+                $price=round($g_costprice*$discount,1);
+                break;
+        }
+        return $price;
+    }
 }

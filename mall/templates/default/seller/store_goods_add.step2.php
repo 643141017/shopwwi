@@ -90,6 +90,31 @@
           <p class="hint">商品卖点最长不能超过140个汉字</p>
         </dd>
       </dl>
+
+      <?php if($output['store_type']==2){?>
+      <dl>
+        <dt nc_type="no_spec"><?php echo $lang['store_goods_index_store_price'].$lang['nc_colon'];?></dt>
+        <dd nc_type="no_spec">
+          <input name="g_price" value="<?php echo ncPriceFormat($output['goods']['goods_price']); ?>" type="text"  class="text w60"  readonly style="background:#E7E7E7 none;"  /><em class="add-on"><i class="icon-renminbi"></i></em> <span></span>
+          <p class="hint">根据产品出厂价及供应商等级自动计算，不需要编辑</p>
+        </dd>
+      </dl>
+
+      <dl>
+        <dt>市场价<?php echo $lang['nc_colon'];?></dt>
+        <dd>
+          <input name="g_marketprice" value="<?php echo ncPriceFormat($output['goods']['goods_marketprice']); ?>" type="text" class="text w60"  readonly style="background:#E7E7E7 none;"/><em class="add-on"><i class="icon-renminbi"></i></em> <span></span>
+          <p class="hint">根据产品出厂价及供应商等级自动计算，不需要编辑</p>
+        </dd>
+      </dl>
+      <dl>
+        <dt><i class="required">*</i>出厂价<?php echo $lang['nc_colon'];?></dt>
+        <dd>
+          <input name="g_costprice" value="<?php echo ncPriceFormat($output['goods']['goods_costprice']); ?>" type="text" class="text w60"  onchange="calPriceAndMarketprice();"/><em class="add-on"><i class="icon-renminbi"></i></em> <span></span>
+          <p class="hint">价格必须是0.00~9999999之间的数字，此价格用于计算商品商城价合市场价，必须填写，不会在前台销售页面中显示</p>
+        </dd>
+      </dl>
+      <?php }else{?>
       <dl>
         <dt nc_type="no_spec"><i class="required">*</i><?php echo $lang['store_goods_index_store_price'].$lang['nc_colon'];?></dt>
         <dd nc_type="no_spec">
@@ -98,6 +123,7 @@
             此价格为商品实际销售价格，如果商品存在规格，该价格显示最低价格。</p>
         </dd>
       </dl>
+
       <dl>
         <dt><i class="required">*</i>市场价<?php echo $lang['nc_colon'];?></dt>
         <dd>
@@ -112,6 +138,8 @@
           <p class="hint">价格必须是0.00~9999999之间的数字，此价格为商户对所销售的商品实际成本价格进行备注记录，非必填选项，不会在前台销售页面中显示。</p>
         </dd>
       </dl>
+      <?php }?>
+
       <dl>
         <dt>折扣<?php echo $lang['nc_colon'];?></dt>
         <dd>
@@ -739,11 +767,22 @@ $(function(){
                 max         : 9999999,
                 checkPrice  : true
             },
+
+            <?php if($output['store_type']==2){?>
+            g_costprice : {
+                required    : true,
+                number      : true,
+                min         : 0.01,
+                max         : 9999999
+            },
+            <?php }else{?>
             g_costprice : {
                 number      : true,
                 min         : 0.00,
                 max         : 9999999
             },
+            <?php }?>
+
             g_storage  : {
                 required    : true,
                 digits      : true,
@@ -787,11 +826,20 @@ $(function(){
                 max         : '<i class="icon-exclamation-sign"></i>请填写0.01~9999999之间的数字',
                 checkPrice  : '<i class="icon-exclamation-sign"></i>市场价格不能低于商品价格'
             },
+            <?php if($output['store_type']==2){?>
+            g_costprice : {
+                required    : '<i class="icon-exclamation-sign"></i>请填写出厂价',
+                number      : '<i class="icon-exclamation-sign"></i>请填写正确的价格',
+                min         : '<i class="icon-exclamation-sign"></i>请填写0.01~9999999之间的数字',
+                max         : '<i class="icon-exclamation-sign"></i>请填写0.01~9999999之间的数字'
+            },
+            <?php }else{?>
             g_costprice : {
                 number      : '<i class="icon-exclamation-sign"></i>请填写正确的价格',
                 min         : '<i class="icon-exclamation-sign"></i>请填写0.00~9999999之间的数字',
                 max         : '<i class="icon-exclamation-sign"></i>请填写0.00~9999999之间的数字'
             },
+            <?php }?>
             g_storage : {
                 required    : '<i class="icon-exclamation-sign"></i><?php echo $lang['store_goods_index_goods_stock_null'];?>',
                 digits      : '<i class="icon-exclamation-sign"></i><?php echo $lang['store_goods_index_goods_stock_error'];?>',
@@ -1043,6 +1091,21 @@ $(function(){
     $('div[nctype="spec_div"]').perfectScrollbar('update');
 });
 <?php }?>
+
+function calPriceAndMarketprice(){
+  var g_costprice=$("input[name='g_costprice']").val();
+  $.ajax({
+      type:'POST',
+      url:'index.php?app=store_goods_add&wwi=ajax_cal_price_and_marketprice',
+      cache:false,
+      data:"g_costprice="+g_costprice,
+      dataType:'json',
+      success:function(data){
+        $("input[name='g_price']").val(data.g_price);
+        $("input[name='g_marketprice']").val(data.g_marketprice);
+      }
+});
+}
 </script> 
 <script src="<?php echo MALL_RESOURCE_SITE_URL;?>/js/scrolld.js"></script>
 <script type="text/javascript">$("[id*='Btn']").stop(true).on('click', function (e) {e.preventDefault();$(this).scrolld();})</script>
