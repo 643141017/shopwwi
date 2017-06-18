@@ -155,7 +155,7 @@ class goodsLogic {
             QueueClient::push('updateGoodsPromotionPriceByGoodsCommonId', $common_id);
         }
         
-        $return = $model_goods->editGoodsCommon($common_array, array('goods_commonid' => $common_id, 'store_id' => $store_id));
+        $return = $model_goods->editGoodsCommon($common_array, array('goods_commonid' => $common_id, 'store.store_id' => $store_id));
         if (!$return) {
             return callback(false, '商品编辑失败');
         }

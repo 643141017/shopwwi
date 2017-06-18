@@ -29,7 +29,7 @@ class store_goods_onlineControl extends BaseSellerControl {
         $model_goods = Model('goods');
 
         $where = array();
-        $where['store_id'] = $_SESSION['store_id'];
+        $where['store.store_id'] = $_SESSION['store_id'];
         if (intval($_GET['stc_id']) > 0) {
             $where['goods_stcids'] = array('like', '%,' . intval($_GET['stc_id']) . ',%');
         }
@@ -250,6 +250,7 @@ class store_goods_onlineControl extends BaseSellerControl {
         $supplier_list = Model('store_supplier')->getStoreSupplierList(array('sup_store_id' => $_SESSION['store_id']));
         Tpl::output('supplier_list', $supplier_list);
 
+        Tpl::output('store_type', $_SESSION['store_type']);
         $menu_promotion = array(
             'lock' => $goodscommon_info['goods_lock'] == 1 ? true : false,
             'gift' => $goodscommon_info['is_virtual'] == 1 ? false : true
