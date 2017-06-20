@@ -45,7 +45,20 @@
             </ul>
           </div><?php */?>
         <div class="goods-info clearfix">
-                   <div class="goods-price"> <em class="sale-price" title="<?php echo $lang['goods_class_index_store_goods_price'].$lang['nc_colon'].$lang['currency'].ncPriceFormat($value['goods_promotion_price']);?>"><i><?php echo '¥';?> </i><?php echo ncPriceFormat($value['goods_promotion_price']);?></em> <em class="market-price" title="市场价：<?php echo $lang['currency'].$value['goods_marketprice'];?>"><?php echo ncPriceFormatForList($value['goods_marketprice']);?></em>
+                   <div class="goods-price"> 
+                    <?php if($value['purchase_price']){?>
+                    <em class="sale-price" title="采购价：<?php echo $lang['currency'].$value['purchase_price'];?>">
+                      <i><?php echo '¥';?> </i>
+                      <?php echo ncPriceFormat($value['purchase_price']);?>
+                    </em> 
+                    <em class="market-price" title="商城价：<?php echo $lang['currency'].$value['goods_promotion_price'];?>"><?php echo ncPriceFormatForList($value['goods_promotion_price']);?></em>
+                  <?php }else{?>
+                    <em class="sale-price" title="<?php echo $lang['goods_class_index_store_goods_price'].$lang['nc_colon'].$lang['currency'].ncPriceFormat($value['goods_promotion_price']);?>">
+                      <i><?php echo '¥';?> </i>
+                      <?php echo ncPriceFormat($value['goods_promotion_price']);?>
+                    </em> 
+                    <em class="market-price" title="市场价：<?php echo $lang['currency'].$value['goods_marketprice'];?>"><?php echo ncPriceFormatForList($value['goods_marketprice']);?></em>
+                  <?php }?>
             <?php if($value["contractlist"]){?>
             <div class="goods-cti">
               <?php foreach($value["contractlist"] as $gcitem_k=>$gcitem_v){?>

@@ -63,6 +63,7 @@ class seller_loginControl extends BaseSellerControl {
                 $model_seller_group = Model('seller_group');
                 $seller_group_info = $model_seller_group->getSellerGroupInfo(array('group_id' => $seller_info['seller_group_id']));
                 $supplier_info=Model('supplier')->getSupplierInfo(array('sup_store_id'=>$seller_info['store_id']));
+                $servicer_info=Model('servicer')->getServicerInfo(array('ser_store_id'=>$seller_info['store_id']));
                 
                 $model_store = Model('store');
                 $store_info = $model_store->getStoreInfoByID($seller_info['store_id']);
@@ -88,6 +89,7 @@ class seller_loginControl extends BaseSellerControl {
                 $_SESSION['seller_gc_limits'] = $seller_group_info['gc_limits'];
                 $_SESSION['store_type'] = intval($store_info['store_type']);
                 $_SESSION['sup_id'] = intval($supplier_info['sup_id']);
+                $_SESSION['ser_id'] = intval($servicer_info['ser_id']);
                 if($seller_info['is_admin']) {
                     $_SESSION['seller_group_name'] = '管理员';
                     $_SESSION['seller_smt_limits'] = false;

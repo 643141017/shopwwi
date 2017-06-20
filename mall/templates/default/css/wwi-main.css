@@ -424,6 +424,8 @@
 .sortbar-filter li a.selected,.sortbar-filter li a:hover{color:#D93600;text-decoration:none}
 .sortbar-filter li a.selected i,.sortbar-filter li a:hover i{background:url(../images/2014mall_background_img.png) no-repeat -56px 0}
 .sortbar-location{font:12px/45px "microsoft yahei";color:#777;vertical-align:top;display:inline-block;padding:0 0 0 30px}
+.sortbar-stype{font:12px/45px "microsoft yahei";color:#777;vertical-align:top;display:inline-block;padding:0 0 0 30px}
+.sortbar-stype a{border: 1px solid #ddd; padding: 3px 5px;}
 .sort-bar .select-layer{background-color:#FFF;border:solid 1px #D6D6D6;display:inline-block;margin:8px 6px 8px 0;position:relative;z-index:19}
 .sort-bar .select-layer .holder{background-color:#FFF}
 .sort-bar .select-layer .holder em{font-style:normal;line-height:16px;white-space:nowrap;display:block;padding:2px 16px 2px 4px}

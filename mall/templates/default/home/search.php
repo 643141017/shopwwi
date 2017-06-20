@@ -180,6 +180,10 @@ body { _behavior: url(<?php echo MALL_TEMPLATES_URL;
             </ul>
           </div>
         </div>
+
+        <div class="sortbar-stype">
+          <a href="index.php?app=search&wwi=index&stype=2">工厂直销</a>
+        </div>
       </nav>
       <!-- 商品列表循环  -->
       <div>

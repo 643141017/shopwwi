@@ -128,6 +128,9 @@ class searchControl extends BaseHomeControl {
             if ($_GET['gift'] == 1) {
                 $condition['have_gift'] = 1;
             }
+            if($_GET['stype']!=''){
+                // $condition['store_type']=intval($_GET['stype']);
+            }
             //消费者保障服务
             if ($contract_item && $search_ci_arr) {
                 foreach ($search_ci_arr as $ci_val) {
@@ -177,6 +180,7 @@ class searchControl extends BaseHomeControl {
                 $goods_list = $model_goods->getGoodsContract($goods_list, $contract_item);
             }
 
+            $model_servicer=Model('servicer');
             //搜索的关键字
             $search_keyword = $_GET['keyword'];
             foreach ($goods_list as $key => $value) {
@@ -215,6 +219,12 @@ class searchControl extends BaseHomeControl {
                         QueueClient::push('updateGoodsPromotionPriceByGoodsId', $value['goods_id']);
                         $goods_list[$key]['is_book'] = 0;
                     }
+                }
+
+                //获取采购价
+                if($_SESSION['ser_id']>0){
+                    list($toggle,$purchase_price)=$model_servicer->getGoodsPurchasePrice($_SESSION['ser_id'],$value['goods_id']);
+                    if($toggle)$goods_list[$key]['purchase_price']=$purchase_price;
                 }
             }
         }

@@ -1094,6 +1094,7 @@ class BaseSellerControl extends Control {
                 array('name' => '商品发布', 'app'=>'store_goods_add', 'wwi'=>'index'),
 			    array('name' => '出售中的商品', 'app'=>'store_goods_online', 'wwi'=>'index'),
                 array('name' => '仓库中的商品', 'app'=>'store_goods_offline', 'wwi'=>'index'),
+                array('name' => '商品库存', 'app'=>'store_goods_purchase', 'wwi'=>'index'),
                 array('name' => '预约/到货通知', 'app' => 'store_appoint', 'wwi' => 'index'),
                 array('name' => '关联版式', 'app'=>'store_plate', 'wwi'=>'index'),
                 array('name' => '商品规格', 'app' => 'store_spec', 'wwi' => 'index'),

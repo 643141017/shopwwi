@@ -1532,4 +1532,17 @@ class goodsModel extends Model{
         $goods_info = $this->table('goods_common')->where(array('goods_commonid'=>$goods_commonid))->field('goods_costprice')->find();
         return $goods_info['goods_costprice'];
     }
+
+    /**
+     * 获取采购商品
+     *
+     * @param array $goods_commonid ID
+     * @return array
+     */ 
+
+    public function getGoodsPurchaseList($condition, $field = '*', $page = 10, $order = "sg_id desc") {
+        $field = 'servicer_goods.goods_storage  as g_storage,goods.*,store.*';
+        $condition = $this->_getRecursiveClass($condition);
+        return $this->table('servicer_goods,goods,store')->field($field)->join('inner')->on('servicer_goods.goods_id=goods.goods_id,goods.store_id = store.store_id')->where($condition)->order($order)->limit($limit)->page($page)->select();
+    }
 }
