@@ -129,7 +129,8 @@ class searchControl extends BaseHomeControl {
                 $condition['have_gift'] = 1;
             }
             if($_GET['stype']!=''){
-                // $condition['store_type']=intval($_GET['stype']);
+                $store_ids=Model('supplier')->getSupplierStoreId(array());
+                $condition['store_id']=array('in', implode(",", $store_ids));
             }
             //消费者保障服务
             if ($contract_item && $search_ci_arr) {

@@ -129,4 +129,13 @@ class supplierModel extends Model{
         }
         return $price;
     }
+
+    public function getSupplierStoreId($condition){
+        $list=$this->getSupplierList($condition);
+        $store_ids=array(0);
+        foreach ($list as $key => $val) {
+            $store_ids[]=$val['sup_store_id'];
+        }
+        return $store_ids;
+    }
 }
