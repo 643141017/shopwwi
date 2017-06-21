@@ -15,7 +15,9 @@
 defined('ByShopWWI') or exit('Access Invalid!');
 class goodsControl extends SystemControl{
     private $links = array(
-        array('url'=>'app=goods&wwi=goods','text'=>'所有商品'),
+        array('url'=>'app=goods&wwi=index','text'=>'所有商品'),
+        array('url'=>'app=goods&wwi=retail_goods','text'=>'零售商品'),
+        array('url'=>'app=goods&wwi=supplier_goods','text'=>'直销商品'),
         array('url'=>'app=goods&wwi=lockup_list','text'=>'违规下架'),
         array('url'=>'app=goods&wwi=waitverify_list','text'=>'商家商品审核'),
         array('url'=>'app=goods&wwi=waitverify_supplier_list','text'=>'直销商品审核'),
@@ -30,8 +32,22 @@ class goodsControl extends SystemControl{
     }
 
     public function indexWwi() {
+        Tpl::output('top_link',$this->sublink($this->links,'index'));
         $this->goodsWwi();
     }
+
+    public function retail_goodsWwi(){
+        Tpl::output('top_link',$this->sublink($this->links,'retail_goods'));
+        Tpl::output('type', 'retail_goods');
+        $this->goodsWwi();
+    }
+
+    public function supplier_goodsWwi(){
+        Tpl::output('top_link',$this->sublink($this->links,'supplier_goods'));
+        Tpl::output('type', 'supplier_goods');
+        $this->goodsWwi();
+    }
+
     /**
      * 商品管理
      */
@@ -39,9 +55,7 @@ class goodsControl extends SystemControl{
         //父类列表，只取到第二级
         $gc_list = Model('goods_class')->getGoodsClassList(array('gc_parent_id' => 0));
         Tpl::output('gc_list', $gc_list);
-
-        Tpl::output('top_link',$this->sublink($this->links,'goods'));
-						//网 店 运 维mall wwi.com
+		//网 店 运 维mall wwi.com
 		Tpl::setDirquna('mall');
         Tpl::showpage('goods.index');
     }
@@ -132,6 +146,16 @@ class goodsControl extends SystemControl{
             case 'waitverify_supplier':
                 $condition['store_type']  = array('eq', self::STORE_TYPE_SUPPLIER);//供应商
                 $goods_list = $model_goods->getGoodsCommonWaitVerifyList($condition, '*', $page, $order);
+                break;
+                // 零售商品
+            case 'retail_goods':
+                $condition['store_type']  = array('neq', self::STORE_TYPE_SUPPLIER);//供应商
+                $goods_list = $model_goods->getGoodsCommonList($condition, '*', $page, $order);
+                break;
+                // 直销商品
+            case 'supplier_goods':
+                $condition['store_type']  = array('eq', self::STORE_TYPE_SUPPLIER);//供应商
+                $goods_list = $model_goods->getGoodsCommonList($condition, '*', $page, $order);
                 break;
                 // 全部商品
             default:
@@ -295,6 +319,7 @@ class goodsControl extends SystemControl{
         $model_goods = Model('goods');
         if (chksubmit()) {
             $commonid = intval($_POST['commonid']);
+            $goods_main_price_id=intval($_POST['goods_main_price_id']);
             if ($commonid <= 0) {
                     showDialog(L('nc_common_op_fail'), 'reload');
             }
@@ -304,6 +329,12 @@ class goodsControl extends SystemControl{
 
             $update2 = array();
             $update2['goods_verify'] = intval($_POST['verify_state']);
+
+
+            $update2['goods_price']=$update3['goods_price'][$goods_main_price_id];
+            $update2['goods_marketprice']=$update3['goods_marketprice'][$goods_main_price_id];
+        
+
 
             $update1 = array();
             $update1['goods_verifyremark'] = trim($_POST['verify_reason']);

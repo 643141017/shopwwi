@@ -57,25 +57,31 @@
       <div class="title">
         <h4 style="width:10%;">SKU编号</h4>
         <h4 style="width:10%;">SKU图片</h4>
-        <h4 style="width:38%;">商品名称</h4>
+        <h4 style="width:30%;">商品名称</h4>
         <h4>市场价</h4>
         <h4>出厂价</h4>
         <h4>商城售价</h4>
+        <h4 style="width:8%;">显示价</h4>
       </div>
       <div class="content">
         <ul>
+          <?php $i=0;?>
           <?php foreach ($output['goods_list'] as $val) {?>
           <li> 
             <span style="width:10%;"><?php echo $val['goods_id'];?></span> 
             <span style="width:10%;">
               <img src="<?php echo $val['goods_image'];?>" onMouseOver="toolTip('<img src=<?php echo $val['goods_image'];?>>')" onMouseOut="toolTip()">
             </span> 
-            <span style="width:38%;"><?php echo $val['goods_name'];?></span> 
+            <span style="width:30%;"><?php echo $val['goods_name'];?></span> 
             <span><input type="text" nctype="goods_marketprice" name="goods_marketprice[<?php echo $val['goods_id'];?>]" value="<?php echo $val['goods_marketprice']; ?>" size="10" data-price="<?php echo $val['goods_marketprice']; ?>"></span> 
             <span><?php echo $output['common_info']['goods_costprice'];?></span> 
             <span><input type="text" nctype="goods_price" name="goods_price[<?php echo $val['goods_id'];?>]" value="<?php echo $val['goods_price']?>" size="10" data-price="<?php echo $val['goods_price']?>"></span> 
+            <?php if($i==0){?>
+            <input type="hidden" name="goods_main_price_id" id="goods_main_price_id" value="<?php echo $val['goods_id'];?>">
+            <?php }?>
+            <span style="width:8%;"><input type="radio" name="goods_main_price" <?php if($i==0)echo 'checked';?> data-goods_id="<?php echo $val['goods_id'];?>"></span>
           </li>
-          <?php }?>
+          <?php $i++;}?>
         </ul>
       </div>
     </div>
@@ -89,6 +95,10 @@ $(function(){
     $('a[nctype="btn_submit"]').click(function(){
         ajaxpost('form1', '', '', 'onerror');
     });
+    $('input[name="goods_main_price"]').click(function(){
+        $("#goods_main_price_id").val($(this).data('goods_id'));
+    });
+
     $('input[name="verify_state"]').click(function(){
         if ($(this).val() == 1) {
             $('dl[nctype="reason"]').hide();

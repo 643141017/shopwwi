@@ -7,6 +7,11 @@
         <h3><?php echo $lang['servicer_store_grade'];?></h3>
         <h5><?php echo $lang['servicer_store_grade_subhead'];?></h5>
       </div>
+      <ul class="tab-base nc-row">
+        <li><a href="index.php?app=store_grade&wwi=index"><span>店铺等级</span></a></li>
+        <li><a class="current"><span>服务商等级</span></a></li>
+        <li><a href="index.php?app=supplier_store_grade&wwi=index"><span>供应商等级</span></a></li>
+      </ul>
     </div>
   </div>
   <div class="flex-table-search">
