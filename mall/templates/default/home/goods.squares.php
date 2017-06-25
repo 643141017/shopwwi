@@ -46,19 +46,17 @@
           </div><?php */?>
         <div class="goods-info clearfix">
                    <div class="goods-price"> 
-                    <?php if($value['purchase_price']){?>
-                    <em class="sale-price" title="采购价：<?php echo $lang['currency'].$value['purchase_price'];?>">
-                      <i><?php echo '¥';?> </i>
-                      <?php echo ncPriceFormat($value['purchase_price']);?>
-                    </em> 
-                    <em class="market-price" title="商城价：<?php echo $lang['currency'].$value['goods_promotion_price'];?>"><?php echo ncPriceFormatForList($value['goods_promotion_price']);?></em>
-                  <?php }else{?>
                     <em class="sale-price" title="<?php echo $lang['goods_class_index_store_goods_price'].$lang['nc_colon'].$lang['currency'].ncPriceFormat($value['goods_promotion_price']);?>">
-                      <i><?php echo '¥';?> </i>
-                      <?php echo ncPriceFormat($value['goods_promotion_price']);?>
+                      <i><?php echo '¥';?> </i><?php echo ncPriceFormat($value['goods_promotion_price']);?>
                     </em> 
-                    <em class="market-price" title="市场价：<?php echo $lang['currency'].$value['goods_marketprice'];?>"><?php echo ncPriceFormatForList($value['goods_marketprice']);?></em>
-                  <?php }?>
+                    <em class="market-price" title="市场价：<?php echo $lang['currency'].$value['goods_marketprice'];?>"><?php echo ncPriceFormatForList($value['goods_marketprice']);?>
+                    </em>
+                    <?php if($value['purchase_price']){?>
+                    <em class="purchase_price" title="采购价：<?php echo ncPriceFormat($value['purchase_price']);?>">
+                      <i><?php echo '¥';?> </i><?php echo ncPriceFormat($value['purchase_price']);?>
+                    </em> 
+
+                    <?php }?>
             <?php if($value["contractlist"]){?>
             <div class="goods-cti">
               <?php foreach($value["contractlist"] as $gcitem_k=>$gcitem_v){?>
@@ -70,7 +68,12 @@
             <?php }?>
             <!--<span class="raty" data-score="<?php echo $value['evaluation_good_star'];?>"></span>--> </div>
           <div class="goods-name"><a href="<?php echo urlMall('goods','index',array('goods_id'=>$value['goods_id']));?>" target="_blank" title="<?php echo $value['goods_jingle'];?>"><?php echo $value['goods_name_highlight'];?><em><?php echo $value['goods_jingle'];?></em></a></div>
-           <div class="goodsinfo clearfix"><a href="<?php echo urlMall('goods', 'comments_list', array('goods_id' => $value['goods_id']));?>" target="_blank" class="goods-num"><em class="wwi-icon"></em><?php echo $value['evaluation_count'];?></a><a href="<?php echo urlMall('show_store','index',array('store_id'=>$value['store_id']), $value['store_domain']);?>" title="<?php echo $value['store_name'];?>" class="seller-name"><em class="wwi-icon"></em><?php echo $value['store_name'];?>&nbsp;</a></div>
+           <div class="goodsinfo clearfix"><a href="<?php echo urlMall('goods', 'comments_list', array('goods_id' => $value['goods_id']));?>" target="_blank" class="goods-num"><em class="wwi-icon"></em><?php echo $value['evaluation_count'];?></a>
+            <?php if($value['purchase_price']){?>
+            <span style="margin-left:20px;">工厂直销</span>
+            <?php }?>
+
+            <a href="<?php echo urlMall('show_store','index',array('store_id'=>$value['store_id']), $value['store_domain']);?>" title="<?php echo $value['store_name'];?>" class="seller-name"><em class="wwi-icon"></em><?php echo $value['store_name'];?>&nbsp;</a></div>
            <div class="add-cart">
             <?php if ($value['goods_storage'] == 0) {?>
             <a href="javascript:void(0);" class="ct"  onclick="<?php if ($_SESSION['is_login'] !== '1'){?>login_dialog();<?php }else{?>ajax_form('arrival_notice', '到货通知', '<?php echo urlMall('goods', 'arrival_notice', array('goods_id' => $value['goods_id'], 'type' => 2));?>', 350);<?php }?>"><i class="icon-bullhorn"></i>到货通知</a>

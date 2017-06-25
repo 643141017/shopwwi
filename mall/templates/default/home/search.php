@@ -160,6 +160,7 @@ body { _behavior: url(<?php echo MALL_TEMPLATES_URL;
         <div class="sortbar-filter" nc_type="more-filter">
         <span class="arrow"></span>
           <ul>
+            <li><a href="<?php if ($_GET['stype'] == 2) { echo dropParam(array('stype'));} else { echo replaceParam(array('stype' => '2'));}?>" <?php if ($_GET['stype'] == 2) {?>class="selected"<?php }?>><i></i>工厂直销</a></li>
             <li><a href="<?php if ($_GET['type'] == 1) { echo dropParam(array('type'));} else { echo replaceParam(array('type' => '1'));}?>" <?php if ($_GET['type'] == 1) {?>class="selected"<?php }?>><i></i>平台自营</a></li>
             <li><a href="<?php if ($_GET['gift'] == 1) { echo dropParam(array('gift'));} else { echo replaceParam(array('gift' => '1'));}?>" <?php if ($_GET['gift'] == 1) {?>class="selected"<?php }?>><i></i>赠品</a></li>
             <!-- 消费者保障服务 -->
@@ -179,10 +180,6 @@ body { _behavior: url(<?php echo MALL_TEMPLATES_URL;
               <?php require(BASE_TPL_PATH.'/home/goods_class_area.php');?>
             </ul>
           </div>
-        </div>
-
-        <div class="sortbar-stype">
-          <a href="index.php?app=search&wwi=index&stype=2">工厂直销</a>
         </div>
       </nav>
       <!-- 商品列表循环  -->
